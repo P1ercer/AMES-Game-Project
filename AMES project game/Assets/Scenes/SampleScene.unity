@@ -398,7 +398,7 @@ GameObject:
   - component: {fileID: 1437260850}
   m_Layer: 0
   m_Name: ENEMYDEMOOOOOOOOOOOOOO
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a549804793f53644dbe72fe423d45046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chaseDistance: 10
+  chaseDistance: 15
 --- !u!136 &1437260852
 CapsuleCollider:
   m_ObjectHideFlags: 0
