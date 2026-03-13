@@ -7,6 +7,7 @@ TagManager:
   - CinemachineTarget
   - Enemy
   - PlayerBullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

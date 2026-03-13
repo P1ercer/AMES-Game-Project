@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AmesGame
 {
@@ -8,19 +9,41 @@ namespace AmesGame
         public int MaxHealth = 100;
         public int CurrentHealth;
 
+        [Header("UI")]
+        public Image healthBar; // Image type should be Filled
+
+        [Header("Damage Settings")]
+        public int bulletDamage = 10;
+
+        private PlayerController controller;
+
         private void Start()
         {
+            controller = GetComponent<PlayerController>();
+
             CurrentHealth = MaxHealth;
+            UpdateHealthUI();
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.CompareTag("EnemyBullet"))
+            {
+                TakeDamage(bulletDamage);
+                Destroy(collider.gameObject);
+            }
         }
 
         public void TakeDamage(int damage)
         {
+            if (CurrentHealth <= 0) return;
+
             CurrentHealth -= damage;
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
-            Debug.Log("Player took damage: " + damage +
-                      " | Current Health: " + CurrentHealth);
+            UpdateHealthUI();
 
-            if (CurrentHealth <= 0)
+            if (CurrentHealth == 0)
             {
                 Die();
             }
@@ -28,19 +51,26 @@ namespace AmesGame
 
         public void Heal(int amount)
         {
+            if (CurrentHealth <= 0) return;
+
             CurrentHealth += amount;
             CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
 
-            Debug.Log("Player healed: " + amount +
-                      " | Current Health: " + CurrentHealth);
+            UpdateHealthUI();
+        }
+
+        private void UpdateHealthUI()
+        {
+            if (healthBar != null)
+            {
+                healthBar.fillAmount = (float)CurrentHealth / MaxHealth;
+            }
         }
 
         private void Die()
         {
             Debug.Log("Player Died");
 
-            // Disable player movement
-            PlayerController controller = GetComponent<PlayerController>();
             if (controller != null)
             {
                 controller.enabled = false;
@@ -48,4 +78,3 @@ namespace AmesGame
         }
     }
 }
- 
