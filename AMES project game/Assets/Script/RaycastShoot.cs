@@ -23,9 +23,9 @@ public class RaycastShoot : MonoBehaviour
                 if (hit.collider != null)
                 {
                     Debug.Log(hit.collider.gameObject.name);
-                    if (hit.collider.gameObject.GetComponent<EnemyHealth>() != null)
+                    if (hit.collider.gameObject.GetComponent<EnemyController>() != null)
                     {
-                        hit.collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(1);
+                        hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(1);
                     }
                 }
             }
