@@ -524,6 +524,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: action
+      value: 
+      objectReference: {fileID: -6407636032385626233, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -589,10 +593,22 @@ PrefabInstance:
       addedObject: {fileID: 8489146610735838171}
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 555102994986866089}
+      addedObject: {fileID: 400142804264693238}
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 400142804264693238}
+      addedObject: {fileID: 8996284277948031097}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7846522128696264690}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4233008378684111259}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7890977023191361733}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4060263366023275657}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1 &453084650579209855 stripped
 GameObject:
@@ -627,6 +643,11 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 5242107653240477476}
   TopClamp: 90
   BottomClamp: -90
+  MaxHealth: 100
+  CurrentHealth: 100
+  healthBar: {fileID: 3653962399901560629}
+  bulletDamage: 10
+  isImmune: 0
 --- !u!114 &8489146610735838171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -645,22 +666,6 @@ MonoBehaviour:
   analogMovement: 0
   cursorLocked: 1
   cursorInputForLook: 1
---- !u!114 &555102994986866089
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453084650579209855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f239fdcfe2b55de4e9282511123b0da1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MaxHealth: 100
-  CurrentHealth: 100
-  healthBar: {fileID: 3653962399901560629}
-  bulletDamage: 10
 --- !u!114 &400142804264693238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -674,6 +679,95 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DoubleJumpHeight: 1.5
+--- !u!114 &8996284277948031097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aca4a29900e0fc4ab03f480638006dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkSlots:
+  - perk: {fileID: 7846522128696264690}
+    activationKey: 0
+  - perk: {fileID: 4233008378684111259}
+    activationKey: 1
+  - perk: {fileID: 7890977023191361733}
+    activationKey: 2
+  - perk: {fileID: 4060263366023275657}
+    activationKey: 3
+  activePerks:
+  - {fileID: 7846522128696264690}
+  - {fileID: 4233008378684111259}
+  - {fileID: 7890977023191361733}
+  - {fileID: 4060263366023275657}
+  maxPerks: 5
+--- !u!114 &7846522128696264690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fb17bd2389bfe4b9156ca7131e4206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 15
+  cooldown: 30
+  forcefieldVfx: {fileID: 0}
+--- !u!114 &4233008378684111259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778c9ccf3663d2348b412b7f16a1404e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 20
+  cooldown: 30
+--- !u!114 &7890977023191361733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669b7e1dbadaa654bad9fb0c60f6c79d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 10
+  cooldown: 20
+  redirectedDamageMultiplier: 1
+--- !u!114 &4060263366023275657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f809899f26d82b4ea6d4d1b7cb77a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  radius: 5
+  windup: 0.25
+  cooldown: 8
+  knockbackForce: 6
+  airDropVelocity: -25
 --- !u!4 &937451010987979973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}

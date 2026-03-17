@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    // Global multiplier applied to incoming damage. Perks can modify this.
+    public static float DamageMultiplier = 1f;
+
     //Shooting
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -82,7 +85,10 @@ public class EnemyController : MonoBehaviour
     //Health
     public void TakeDamage(int damage)
     {
-        health -= damage;
+        // Apply global damage multiplier from perks
+        float adjusted = damage * DamageMultiplier;
+        int applied = Mathf.Max(1, Mathf.RoundToInt(adjusted));
+        health -= applied;
 
         if (healthBar != null)
         {
@@ -99,7 +105,10 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            TakeDamage(1);
+            // try to get damage from a ProjectileDamage component if present
+            var pd = other.gameObject.GetComponent<ProjectileDamage>();
+            int dmg = pd != null ? pd.damage : 1;
+            TakeDamage(dmg);
             Destroy(other.gameObject);
         }
     }

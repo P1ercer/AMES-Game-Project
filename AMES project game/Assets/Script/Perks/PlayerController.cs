@@ -1,7 +1,12 @@
+using System.Collections;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
+
 #endif
+using UnityEngine.UI;
+
 
 namespace AmesGame
 {
@@ -48,7 +53,34 @@ namespace AmesGame
         public float TopClamp = 90.0f;
         [Tooltip("How far in degrees can you move the camera down")]
         public float BottomClamp = -90.0f;
+        [Header("Health Settings")]
+        public int MaxHealth = 100;
+        public int CurrentHealth;
 
+        [Header("UI")]
+        public Image healthBar; // Image type should be Filled
+
+        [Header("Damage Settings")]
+        public int bulletDamage = 10;
+
+        [Header("Immunity")]
+        [SerializeField]
+        private bool isImmune = false;
+
+        public bool IsImmune => isImmune;
+
+        public void SetTemporaryImmunity(float seconds)
+        {
+            if (seconds <= 0f) return;
+            StartCoroutine(TemporaryImmunityCoroutine(seconds));
+        }
+
+        private System.Collections.IEnumerator TemporaryImmunityCoroutine(float seconds)
+        {
+            isImmune = true;
+            yield return new WaitForSeconds(seconds);
+            isImmune = false;
+        }
         // cinemachine
         private float _cinemachineTargetPitch;
 
@@ -106,6 +138,8 @@ namespace AmesGame
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+            CurrentHealth = MaxHealth;
+            UpdateHealthUI();
         }
 
         private void Update()
@@ -261,6 +295,54 @@ namespace AmesGame
 
             // when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+        }
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.CompareTag("EnemyBullet"))
+            {
+                TakeDamage(bulletDamage);
+                Destroy(collider.gameObject);
+            }
+        }
+
+        public void TakeDamage(int damage)
+        {
+            if (CurrentHealth <= 0) return;
+
+            if (isImmune) return;
+
+            CurrentHealth -= damage;
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+
+            UpdateHealthUI();
+
+            if (CurrentHealth == 0)
+            {
+                Die();
+            }
+        }
+
+        public void Heal(int amount)
+        {
+            if (CurrentHealth <= 0) return;
+
+            CurrentHealth += amount;
+            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+
+            UpdateHealthUI();
+        }
+
+        private void UpdateHealthUI()
+        {
+            if (healthBar != null)
+            {
+                healthBar.fillAmount = (float)CurrentHealth / MaxHealth;
+            }
+        }
+
+        private void Die()
+        {
+ 
         }
     }
 }

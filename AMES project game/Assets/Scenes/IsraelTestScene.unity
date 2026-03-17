@@ -755,6 +755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ENEMYDEMOOOOOOOOOOOOOO (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4407617122669306856, guid: ca43d323ddf819a4d96c8c5de744f776, type: 3}
+      propertyPath: health
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
