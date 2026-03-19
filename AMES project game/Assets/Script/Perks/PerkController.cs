@@ -7,9 +7,7 @@ namespace AmesGame
     {
         Shift,
         Ctrl,
-        Q,
-        E,
-        R
+        Q
     }
 
     public abstract class Perk : MonoBehaviour
@@ -34,9 +32,6 @@ namespace AmesGame
         // Set up perks and their keybinds in the inspector using these slots
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
 
-        // Runtime list of active perk instances (populated from slots)
-        public List<Perk> activePerks = new List<Perk>();
-
         // Maximum number of perks that can be active at once
         [SerializeField]
         private int maxPerks = 3;
@@ -52,10 +47,7 @@ namespace AmesGame
                 if (slot == null || slot.perk == null)
                     continue;
 
-                if (!activePerks.Contains(slot.perk))
-                    continue;
-
-                if (IsKeyPressed(slot.activationKey))
+                if (slot.chosen && IsKeyPressed(slot.activationKey))
                 {
                     slot.perk.Activate();
                 }
@@ -64,30 +56,12 @@ namespace AmesGame
 
         private void Start()
         {
-            // populate activePerks from inspector slots and ensure each slot's key is applied
-            activePerks.Clear();
-
+            // validate slots
             foreach (var slot in perkSlots)
             {
                 if (slot == null || slot.perk == null)
                 {
                     Debug.LogWarning("PerkController: Empty perk slot detected in inspector.");
-                    continue;
-                }
-
-                // Only add perks that have been chosen in the inspector
-                if (!slot.chosen)
-                    continue;
-
-                if (!activePerks.Contains(slot.perk))
-                {
-                    if (activePerks.Count >= maxPerks)
-                    {
-                        Debug.LogWarning($"Cannot add chosen perk '{slot.perk.name}': maximum of {maxPerks} perks reached.");
-                        continue;
-                    }
-
-                    activePerks.Add(slot.perk);
                 }
             }
         }
@@ -105,12 +79,6 @@ namespace AmesGame
                 case ActivationKey.Q:
                     return Input.GetKeyDown(KeyCode.Q);
 
-                case ActivationKey.E:
-                    return Input.GetKeyDown(KeyCode.E);
-
-                case ActivationKey.R:
-                    return Input.GetKeyDown(KeyCode.R);
-
                 default:
                     return false;
             }
@@ -120,23 +88,50 @@ namespace AmesGame
         {
             if (perk == null)
                 return;
+            // find the slot for this perk
+            PerkSlot found = null;
+            foreach (var s in perkSlots)
+            {
+                if (s != null && s.perk == perk)
+                {
+                    found = s;
+                    break;
+                }
+            }
 
-            if (activePerks.Contains(perk))
+            if (found == null)
+            {
+                Debug.LogWarning($"PerkController: Tried to add a perk that is not in slots: {perk.name}");
                 return;
+            }
 
-            if (activePerks.Count >= maxPerks)
+            int chosenCount = 0;
+            foreach (var s in perkSlots)
+                if (s != null && s.chosen) chosenCount++;
+
+            if (found.chosen)
+                return; // already chosen
+
+            if (chosenCount >= maxPerks)
             {
                 Debug.LogWarning($"Cannot add perk '{perk.name}': maximum of {maxPerks} perks reached.");
                 return;
             }
 
-            activePerks.Add(perk);
+            found.chosen = true;
         }
 
         public void RemovePerk(Perk perk)
         {
-            if (activePerks.Contains(perk))
-                activePerks.Remove(perk);
+            if (perk == null) return;
+            foreach (var s in perkSlots)
+            {
+                if (s != null && s.perk == perk)
+                {
+                    s.chosen = false;
+                    break;
+                }
+            }
         }
     }
 }

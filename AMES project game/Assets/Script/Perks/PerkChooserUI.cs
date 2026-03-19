@@ -9,33 +9,33 @@ namespace AmesGame
     {
         public PerkController perkController;
 
-        // The random button was removed. Selection will be performed automatically or via the public API.
+        [Tooltip("Button that triggers random selection")]
+        public Button randomButton;
 
         [Tooltip("Text field to show selected perk name")]
         public Text selectedPerkText;
 
-        [Tooltip("Optional: Text to show current active perks count")]
+        [Tooltip("Optional: Text to show current chosen perks count")]
         public Text activeCountText;
 
         private void Start()
         {
-            // Choose a random available perk on start
+            if (randomButton != null)
+                randomButton.onClick.AddListener(OnRandomButton);
+
             UpdateActiveCount();
-            ChooseRandomPerk();
         }
 
-        // Public API to pick a random available perk from the player's perk slots
-        public void ChooseRandomPerk()
+        private void OnRandomButton()
         {
             if (perkController == null) return;
 
-            // pick random from available slots that are not already active and not null
-            // pick random from all player's perk slots that are not already active and not null
+            // pick random from available slots that are not already chosen and not null
             List<PerkController.PerkSlot> candidates = new List<PerkController.PerkSlot>();
             foreach (var slot in perkController.perkSlots)
             {
                 if (slot == null || slot.perk == null) continue;
-                if (perkController.activePerks.Contains(slot.perk)) continue;
+                if (slot.chosen) continue;
                 candidates.Add(slot);
             }
 
@@ -47,11 +47,17 @@ namespace AmesGame
 
             var choice = candidates[Random.Range(0, candidates.Count)];
 
-            // mark chosen and add to active perks (respect maxPerks)
-            choice.chosen = true;
+            // request controller to add the perk (will respect maxPerks)
             perkController.AddPerk(choice.perk);
 
-            if (selectedPerkText != null) selectedPerkText.text = "Selected: " + choice.perk.name;
+            if (choice.chosen)
+            {
+                if (selectedPerkText != null) selectedPerkText.text = "Already chosen: " + choice.perk.name;
+            }
+            else
+            {
+                if (selectedPerkText != null) selectedPerkText.text = "Selected: " + choice.perk.name;
+            }
 
             UpdateActiveCount();
         }
@@ -59,7 +65,11 @@ namespace AmesGame
         private void UpdateActiveCount()
         {
             if (activeCountText == null || perkController == null) return;
-            activeCountText.text = $"Active: {perkController.activePerks.Count}/{perkController.MaxPerks}";
+            int chosenCount = 0;
+            foreach (var s in perkController.perkSlots)
+                if (s != null && s.chosen) chosenCount++;
+
+            activeCountText.text = $"Chosen: {chosenCount}/{perkController.MaxPerks}";
         }
     }
 }

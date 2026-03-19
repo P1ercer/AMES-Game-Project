@@ -536,6 +536,14 @@ PrefabInstance:
       propertyPath: damage
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: shootAction
+      value: 
+      objectReference: {fileID: -6407636032385626233, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: shotCooldown
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -613,9 +621,6 @@ PrefabInstance:
       addedObject: {fileID: 4233008378684111259}
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7890977023191361733}
-    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 4060263366023275657}
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
@@ -632,6 +637,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1928333426134004302}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 599323796292585090}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1 &453084650579209855 stripped
 GameObject:
@@ -717,21 +725,14 @@ MonoBehaviour:
   perkSlots:
   - perk: {fileID: 4771270695249019530}
     activationKey: 0
-  - perk: {fileID: 8103561806774133589}
-    activationKey: 1
-  - perk: {fileID: 4075656279119246074}
-    activationKey: 2
-  - perk: {fileID: 1928333426134004302}
-    activationKey: 3
+    chosen: 1
   - perk: {fileID: 8704756568086924236}
-    activationKey: 4
-  activePerks:
-  - {fileID: 4771270695249019530}
-  - {fileID: 8103561806774133589}
-  - {fileID: 4075656279119246074}
-  - {fileID: 1928333426134004302}
-  - {fileID: 8704756568086924236}
-  maxPerks: 5
+    activationKey: 1
+    chosen: 1
+  - perk: {fileID: 599323796292585090}
+    activationKey: 2
+    chosen: 1
+  maxPerks: 3
 --- !u!114 &7846522128696264690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -761,21 +762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 20
   cooldown: 30
---- !u!114 &7890977023191361733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 453084650579209855}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 669b7e1dbadaa654bad9fb0c60f6c79d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  duration: 10
-  cooldown: 20
-  redirectedDamageMultiplier: 1
 --- !u!114 &4060263366023275657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,11 +873,38 @@ MonoBehaviour:
   speedMultiplier: 3
   duration: 5
   cooldown: 10
+--- !u!114 &599323796292585090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2adf66754ce890343b08bf29ffc29498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fireSpeedMultiplier: 3
+  duration: 6
+  cooldown: 12
+  shooter: {fileID: 1503704226533128505}
 --- !u!4 &937451010987979973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   m_PrefabInstance: {fileID: 8204767106804910123}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1503704226533128505 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 8204767106804910123}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a00e9a543c0bb174baa4780776229bd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &5242107653240477475 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4135013735270702856, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}

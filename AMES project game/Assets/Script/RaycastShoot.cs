@@ -1,55 +1,90 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class RaycastShoot : MonoBehaviour
 {
-    public InputActionReference action;
+    public InputActionReference shootAction;
+
     public bool projectileShoot = true;
     public GameObject prefab;
     public Transform spawnPosition;
     public float shootSpeed = 60f;
     public float bulletLifetime = 10;
+
+    [Tooltip("Minimum time between shots (seconds).")]
+    public float shotCooldown = 0.2f;
+
+    private float _cooldownMultiplier = 1f;
+    private float _lastShotTime = -999f;
+
     [Tooltip("Damage dealt by this weapon / projectile")]
     public int damage = 1;
-    //I want this function to run whenever I push the shoot button (defined in the input system)
-    public void OnShoot(InputValue value)
-    {
-        if (value.isPressed)
-        {
-            //first cast the ray out from the camera, in the way it is looking
-            //this variable will store info of what we hit, if anything
-            RaycastHit hit;
-            Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-            //if we hit something, tell me what we hit
-            if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
-            {
-                if (hit.collider != null)
-                {
-                    Debug.Log(hit.collider.gameObject.name);
-                    if (hit.collider.gameObject.GetComponent<EnemyController>() != null)
-                    {
-                        hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
-                    }
-                }
-            }
-            else
-            {
-                //this is where we want to spawn the projectile
-                //our preferred destination will be the point where our raycast hits
-                Vector3 dest = hit.point;
-                if (hit.collider == null)
-                {
-                    dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
-                }
-                GameObject bullet = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
-                Vector3 velocity = dest - spawnPosition.position;
-                velocity.Normalize();
-                bullet.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
 
-                // ensure the bullet carries damage info
-                var pd = bullet.GetComponent<ProjectileDamage>() ?? bullet.AddComponent<ProjectileDamage>();
-                pd.damage = damage;
-                Destroy(bullet, bulletLifetime);
-            }
+    private void OnEnable()
+    {
+        shootAction.action.Enable();
+    }
+
+    private void OnDisable()
+    {
+        shootAction.action.Disable();
+    }
+
+    private void Update()
+    {
+        if (!shootAction.action.IsPressed())
+            return;
+
+        float cooldown = shotCooldown * _cooldownMultiplier;
+
+        if (Time.time >= _lastShotTime + cooldown)
+        {
+            _lastShotTime = Time.time;
+            ShootOnce();
         }
+    }
+
+    private void ShootOnce()
+    {
+        RaycastHit hit;
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
+        {
+            var enemy = hit.collider?.GetComponent<EnemyController>();
+            if (enemy != null)
+                enemy.TakeDamage(damage);
+        }
+        else
+        {
+            Vector3 dest = hit.point;
+            if (hit.collider == null)
+                dest = Camera.main.transform.position + Camera.main.transform.forward * shootSpeed;
+
+            GameObject bullet = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
+
+            Vector3 velocity = (dest - spawnPosition.position).normalized;
+
+            var rb = bullet.GetComponent<Rigidbody>();
+            if (rb != null)
+                rb.linearVelocity = velocity * shootSpeed;
+
+            var pd = bullet.GetComponent<ProjectileDamage>() ?? bullet.AddComponent<ProjectileDamage>();
+            pd.damage = damage;
+
+            Destroy(bullet, bulletLifetime);
+        }
+    }
+
+    public void AddCooldownMultiplier(float multiplier, float seconds)
+    {
+        StartCoroutine(CooldownMultiplierRoutine(multiplier, seconds));
+    }
+
+    private System.Collections.IEnumerator CooldownMultiplierRoutine(float multiplier, float seconds)
+    {
+        _cooldownMultiplier *= multiplier;
+        yield return new WaitForSeconds(seconds);
+        _cooldownMultiplier /= multiplier;
     }
 }
