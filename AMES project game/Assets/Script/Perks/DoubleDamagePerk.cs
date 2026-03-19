@@ -26,13 +26,16 @@ namespace AmesGame
 
             // Apply global multiplier
             EnemyController.DamageMultiplier *= 2f;
-            Debug.Log($"DoubleDamagePerk: Activated. Damage multiplier is now {EnemyController.DamageMultiplier} for {duration} seconds.");
+            float mult = EnemyController.DamageMultiplier;
+            int example = Mathf.Max(1, Mathf.RoundToInt(1f * mult));
+            Debug.Log($"DoubleDamagePerk: Activated. Damage multiplier is now {mult}x — a 1-damage hit will deal {example} for {duration} seconds.");
 
             yield return new WaitForSeconds(duration);
 
             // Revert multiplier
             EnemyController.DamageMultiplier /= 2f;
-            Debug.Log("DoubleDamagePerk: Deactivated.");
+            float after = EnemyController.DamageMultiplier;
+            Debug.Log($"DoubleDamagePerk: Deactivated. Damage multiplier reverted to {after}x.");
 
             // start cooldown
             yield return new WaitForSeconds(cooldown);

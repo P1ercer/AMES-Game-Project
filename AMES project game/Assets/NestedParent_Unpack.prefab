@@ -500,6 +500,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6556307555316582679}
     m_Modifications:
+    - target: {fileID: 2813700173029841776, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.94
+      objectReference: {fileID: 0}
     - target: {fileID: 3166080557339453875, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.13374524
@@ -510,7 +514,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3166080557339453875, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4220391
+      value: 0.7816586
       objectReference: {fileID: 0}
     - target: {fileID: 3166080557339453875, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.x
@@ -522,12 +526,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3166080557339453875, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5
+      value: 0.379
       objectReference: {fileID: 0}
     - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: action
       value: 
       objectReference: {fileID: -6407636032385626233, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: damage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
@@ -609,6 +617,21 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4060263366023275657}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8704756568086924236}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4771270695249019530}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8103561806774133589}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4075656279119246074}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1928333426134004302}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1 &453084650579209855 stripped
 GameObject:
@@ -692,19 +715,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perkSlots:
-  - perk: {fileID: 7846522128696264690}
+  - perk: {fileID: 4771270695249019530}
     activationKey: 0
-  - perk: {fileID: 4233008378684111259}
+  - perk: {fileID: 8103561806774133589}
     activationKey: 1
-  - perk: {fileID: 7890977023191361733}
+  - perk: {fileID: 4075656279119246074}
     activationKey: 2
-  - perk: {fileID: 4060263366023275657}
+  - perk: {fileID: 1928333426134004302}
     activationKey: 3
+  - perk: {fileID: 8704756568086924236}
+    activationKey: 4
   activePerks:
-  - {fileID: 7846522128696264690}
-  - {fileID: 4233008378684111259}
-  - {fileID: 7890977023191361733}
-  - {fileID: 4060263366023275657}
+  - {fileID: 4771270695249019530}
+  - {fileID: 8103561806774133589}
+  - {fileID: 4075656279119246074}
+  - {fileID: 1928333426134004302}
+  - {fileID: 8704756568086924236}
   maxPerks: 5
 --- !u!114 &7846522128696264690
 MonoBehaviour:
@@ -768,6 +794,99 @@ MonoBehaviour:
   cooldown: 8
   knockbackForce: 6
   airDropVelocity: -25
+--- !u!114 &8704756568086924236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18d71ee4fb90ae45bfd615cdb0f17bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 20
+  pullDuration: 1.5
+  pullSpeed: 15
+  cooldown: 5
+--- !u!114 &4771270695249019530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598b104fbae96024b95619cd88694edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 6255910347409757019}
+  projectileSpeed: 20
+  projectileLifetime: 5
+  damage: 5
+  knockbackAmount: 5
+  stationaryMultiplier: 3
+  cooldown: 1.2
+--- !u!114 &8103561806774133589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd00a173f63a734a8be8772d30139f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 6255910347409757019}
+  projectileSpeed: 25
+  projectileLifetime: 10
+  explosionRadius: 6
+  explosionDamage: 1
+  explosionKnockback: 10000
+  knockbackMultiplier: 3
+  explosionVfx: {fileID: 0}
+  cooldown: 3
+--- !u!114 &4075656279119246074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe7de6fdd506f04fb41f5b29367c5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 6255910347409757019}
+  projectileSpeed: 18
+  projectileLifetime: 6
+  dotDamagePerTick: 1
+  dotTickInterval: 1
+  dotDuration: 6
+  cooldown: 2.5
+--- !u!114 &1928333426134004302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c2eeb291d746347a6341dd815ab802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMultiplier: 3
+  duration: 5
+  cooldown: 10
 --- !u!4 &937451010987979973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -781,5 +900,10 @@ Transform:
 --- !u!1 &5242107653240477476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4135013735270702863, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+  m_PrefabInstance: {fileID: 8204767106804910123}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6255910347409757019 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2813700173029841776, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
   m_PrefabInstance: {fileID: 8204767106804910123}
   m_PrefabAsset: {fileID: 0}

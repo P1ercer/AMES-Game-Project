@@ -27,6 +27,8 @@ namespace AmesGame
 
             [Tooltip("Key used to activate this perk")]
             public ActivationKey activationKey = ActivationKey.Shift;
+            [Tooltip("Check to enable this perk at start (choose which perks you want active)")]
+            public bool chosen = false;
         }
 
         // Set up perks and their keybinds in the inspector using these slots
@@ -37,7 +39,10 @@ namespace AmesGame
 
         // Maximum number of perks that can be active at once
         [SerializeField]
-        private int maxPerks = 5;
+        private int maxPerks = 3;
+
+        // Expose maxPerks for UI or other systems to query
+        public int MaxPerks => maxPerks;
 
         void Update()
         {
@@ -70,11 +75,15 @@ namespace AmesGame
                     continue;
                 }
 
+                // Only add perks that have been chosen in the inspector
+                if (!slot.chosen)
+                    continue;
+
                 if (!activePerks.Contains(slot.perk))
                 {
                     if (activePerks.Count >= maxPerks)
                     {
-                        Debug.LogWarning($"Cannot add perk '{slot.perk.name}': maximum of {maxPerks} perks reached.");
+                        Debug.LogWarning($"Cannot add chosen perk '{slot.perk.name}': maximum of {maxPerks} perks reached.");
                         continue;
                     }
 

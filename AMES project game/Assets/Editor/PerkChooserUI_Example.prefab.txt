@@ -1,0 +1,5 @@
+Prefab placeholder: create a UI Canvas with a Text element (`selectedPerkText`) and another Text element (`activeCountText`). Attach `PerkChooserUI` and assign `PerkController`.
+
+Usage:
+- The UI will list available perks on the player and show them in `selectedPerkText` with numbers (1..9).
+- Press the corresponding number key to choose and add that perk. `activeCountText` shows active count.

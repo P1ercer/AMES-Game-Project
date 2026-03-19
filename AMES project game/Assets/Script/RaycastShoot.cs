@@ -6,8 +6,10 @@ public class RaycastShoot : MonoBehaviour
     public bool projectileShoot = true;
     public GameObject prefab;
     public Transform spawnPosition;
-    public float shootSpeed = 5;
+    public float shootSpeed = 60f;
     public float bulletLifetime = 10;
+    [Tooltip("Damage dealt by this weapon / projectile")]
+    public int damage = 1;
     //I want this function to run whenever I push the shoot button (defined in the input system)
     public void OnShoot(InputValue value)
     {
@@ -25,7 +27,7 @@ public class RaycastShoot : MonoBehaviour
                     Debug.Log(hit.collider.gameObject.name);
                     if (hit.collider.gameObject.GetComponent<EnemyController>() != null)
                     {
-                        hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(1);
+                        hit.collider.gameObject.GetComponent<EnemyController>().TakeDamage(damage);
                     }
                 }
             }
@@ -42,6 +44,10 @@ public class RaycastShoot : MonoBehaviour
                 Vector3 velocity = dest - spawnPosition.position;
                 velocity.Normalize();
                 bullet.GetComponent<Rigidbody>().linearVelocity = velocity * shootSpeed;
+
+                // ensure the bullet carries damage info
+                var pd = bullet.GetComponent<ProjectileDamage>() ?? bullet.AddComponent<ProjectileDamage>();
+                pd.damage = damage;
                 Destroy(bullet, bulletLifetime);
             }
         }
