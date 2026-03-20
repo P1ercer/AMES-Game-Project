@@ -1,12 +1,13 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using System;
 
 public class EnemyController : MonoBehaviour
 {
     // Global multiplier applied to incoming damage. Perks can modify this.
     public static float DamageMultiplier = 1f;
-
+    public event Action OnEnemyDied;
     //Shooting
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -85,7 +86,6 @@ public class EnemyController : MonoBehaviour
     //Health
     public void TakeDamage(int damage)
     {
-        // Apply global damage multiplier from perks
         float adjusted = damage * DamageMultiplier;
         int applied = Mathf.Max(1, Mathf.RoundToInt(adjusted));
         health -= applied;
@@ -97,6 +97,7 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
+            OnEnemyDied?.Invoke(); // 🔥 Fire event BEFORE destroy
             Destroy(gameObject);
         }
     }

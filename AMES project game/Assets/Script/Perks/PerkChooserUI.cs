@@ -4,72 +4,141 @@ using UnityEngine.UI;
 
 namespace AmesGame
 {
-    // Simple UI to choose a random perk from available PerkSlots and enable it
     public class PerkChooserUI : MonoBehaviour
     {
         public PerkController perkController;
 
-        [Tooltip("Button that triggers random selection")]
-        public Button randomButton;
+        [Header("Roll Button")]
+        public Button rollButton;
 
-        [Tooltip("Text field to show selected perk name")]
-        public Text selectedPerkText;
+        [Header("All 30 Buttons (match perkSlots order)")]
+        public List<Button> allButtons = new List<Button>();
 
-        [Tooltip("Optional: Text to show current chosen perks count")]
-        public Text activeCountText;
+        private List<PerkController.PerkSlot> availableSlots = new List<PerkController.PerkSlot>();
+        private bool isChoosing = false;
 
         private void Start()
         {
-            if (randomButton != null)
-                randomButton.onClick.AddListener(OnRandomButton);
+            HideAll();
 
-            UpdateActiveCount();
+            // Hide UI + roll button at start
+            gameObject.SetActive(false);
+            if (rollButton != null)
+                rollButton.gameObject.SetActive(false);
+
+            if (rollButton != null)
+                rollButton.onClick.AddListener(RollPerks);
         }
 
-        private void OnRandomButton()
+        // Called by enemy death
+        public void ShowPerkUI()
         {
-            if (perkController == null) return;
+            if (isChoosing) return;
 
-            // pick random from available slots that are not already chosen and not null
-            List<PerkController.PerkSlot> candidates = new List<PerkController.PerkSlot>();
-            foreach (var slot in perkController.perkSlots)
+            gameObject.SetActive(true);
+
+            // Show roll button
+            if (rollButton != null)
+                rollButton.gameObject.SetActive(true);
+
+            // Pause game
+            Time.timeScale = 0f;
+
+            // Unlock cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            isChoosing = true;
+        }
+
+        void RollPerks()
+        {
+            availableSlots.Clear();
+
+            // Get available perks
+            for (int i = 0; i < perkController.perkSlots.Count; i++)
             {
+                var slot = perkController.perkSlots[i];
                 if (slot == null || slot.perk == null) continue;
                 if (slot.chosen) continue;
-                candidates.Add(slot);
+
+                availableSlots.Add(slot);
             }
 
-            if (candidates.Count == 0)
+            if (availableSlots.Count < 3)
             {
-                if (selectedPerkText != null) selectedPerkText.text = "No available perks";
+                Debug.Log("Not enough perks left!");
                 return;
             }
 
-            var choice = candidates[Random.Range(0, candidates.Count)];
+            HideAll();
 
-            // request controller to add the perk (will respect maxPerks)
-            perkController.AddPerk(choice.perk);
+            List<PerkController.PerkSlot> chosen = new List<PerkController.PerkSlot>();
 
-            if (choice.chosen)
+            // Pick 3 unique
+            while (chosen.Count < 3)
             {
-                if (selectedPerkText != null) selectedPerkText.text = "Already chosen: " + choice.perk.name;
-            }
-            else
-            {
-                if (selectedPerkText != null) selectedPerkText.text = "Selected: " + choice.perk.name;
+                int rand = Random.Range(1, availableSlots.Count + 1);
+                var pick = availableSlots[rand - 1];
+
+                if (!chosen.Contains(pick))
+                    chosen.Add(pick);
             }
 
-            UpdateActiveCount();
+            // Show correct buttons
+            foreach (var slot in chosen)
+            {
+                int index = perkController.perkSlots.IndexOf(slot);
+                if (index < 0 || index >= allButtons.Count) continue;
+
+                Button btn = allButtons[index];
+                btn.gameObject.SetActive(true);
+
+                Text txt = btn.GetComponentInChildren<Text>();
+                if (txt != null)
+                    txt.text = slot.perk.name;
+
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(() => OnPerkSelected(slot, index));
+            }
+
+            // Optional: hide roll button after rolling once
+            rollButton.gameObject.SetActive(false);
         }
 
-        private void UpdateActiveCount()
+        void OnPerkSelected(PerkController.PerkSlot slot, int index)
         {
-            if (activeCountText == null || perkController == null) return;
-            int chosenCount = 0;
-            foreach (var s in perkController.perkSlots)
-                if (s != null && s.chosen) chosenCount++;
+            // Add perk
+            perkController.AddPerk(slot.perk);
 
-            activeCountText.text = $"Chosen: {chosenCount}/{perkController.MaxPerks}";
+            // Remove permanently
+            perkController.perkSlots.Remove(slot);
+
+            if (slot.perk != null)
+                Destroy(slot.perk.gameObject);
+
+            // Hide UI
+            HideAll();
+            gameObject.SetActive(false);
+
+            // Hide roll button again
+            if (rollButton != null)
+                rollButton.gameObject.SetActive(false);
+
+            // Resume game
+            Time.timeScale = 1f;
+
+            // Lock cursor back (FPS-style)
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            isChoosing = false;
+        }
+
+        void HideAll()
+        {
+            foreach (var btn in allButtons)
+                btn.gameObject.SetActive(false);
         }
     }
 }
