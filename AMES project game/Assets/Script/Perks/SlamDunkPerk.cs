@@ -31,7 +31,6 @@ namespace AmesGame
         private FieldInfo verticalVelocityField;
 
         private PlayerController player;
-
         private void Awake()
         {
             player = GetComponentInParent<PlayerController>();

@@ -660,7 +660,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 15
   RotationSpeed: 2
-  SpeedChangeRate: 20
+  AccelerationRate: 80
+  DecelerationRate: 15
   JumpHeight: 1
   Gravity: -12
   JumpTimeout: 0.1
@@ -723,15 +724,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perkSlots:
-  - perk: {fileID: 4771270695249019530}
+  - perk: {fileID: 1928333426134004302}
+    mode: 0
     activationKey: 0
-    chosen: 1
-  - perk: {fileID: 8704756568086924236}
+    chosen: 0
+  - perk: {fileID: 4771270695249019530}
+    mode: 0
     activationKey: 1
-    chosen: 1
-  - perk: {fileID: 599323796292585090}
+    chosen: 0
+  - perk: {fileID: 8704756568086924236}
+    mode: 0
     activationKey: 2
-    chosen: 1
+    chosen: 0
+  - perk: {fileID: 4060263366023275657}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+  - perk: {fileID: 7846522128696264690}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+  - perk: {fileID: 8704756568086924236}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+  - perk: {fileID: 8103561806774133589}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+  - perk: {fileID: 4075656279119246074}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+  - perk: {fileID: 599323796292585090}
+    mode: 0
+    activationKey: 2
+    chosen: 0
   maxPerks: 3
 --- !u!114 &7846522128696264690
 MonoBehaviour:
@@ -745,6 +773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fb17bd2389bfe4b9156ca7131e4206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   duration: 15
   cooldown: 30
   forcefieldVfx: {fileID: 0}
@@ -760,6 +789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778c9ccf3663d2348b412b7f16a1404e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   duration: 20
   cooldown: 30
 --- !u!114 &4060263366023275657
@@ -774,7 +804,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f809899f26d82b4ea6d4d1b7cb77a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  perkName: 
+  damage: 15
   radius: 5
   windup: 0.25
   cooldown: 8
@@ -792,6 +823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18d71ee4fb90ae45bfd615cdb0f17bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   range: 20
   pullDuration: 1.5
   pullSpeed: 15
@@ -808,6 +840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598b104fbae96024b95619cd88694edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 20
@@ -828,6 +861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd00a173f63a734a8be8772d30139f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 25
@@ -850,6 +884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe7de6fdd506f04fb41f5b29367c5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 18
@@ -870,6 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c2eeb291d746347a6341dd815ab802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   speedMultiplier: 3
   duration: 5
   cooldown: 10
@@ -885,6 +921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adf66754ce890343b08bf29ffc29498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: 
   fireSpeedMultiplier: 3
   duration: 6
   cooldown: 12
