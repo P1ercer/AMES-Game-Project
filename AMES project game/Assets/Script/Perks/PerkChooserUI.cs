@@ -9,6 +9,9 @@ namespace AmesGame
     {
         public PerkController perkController;
 
+        [Header("Player")]
+        public RaycastShoot playerShooter;
+
         [Header("Roll Button")]
         public Button rollButton;
 
@@ -16,7 +19,7 @@ namespace AmesGame
         public class PerkButton
         {
             public Button button;
-            public TMP_Text label; // Assign manually in Inspector
+            public TMP_Text label;
         }
 
         public List<PerkButton> choiceButtons = new List<PerkButton>();
@@ -36,7 +39,6 @@ namespace AmesGame
             }
         }
 
-        
         public void ShowPerkUI()
         {
             if (isChoosing) return;
@@ -51,6 +53,9 @@ namespace AmesGame
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
+            if (playerShooter != null)
+                playerShooter.canShoot = false;
+
             isChoosing = true;
         }
 
@@ -58,7 +63,6 @@ namespace AmesGame
         {
             availableSlots.Clear();
 
-            // Gather available perks
             foreach (var slot in perkController.perkSlots)
             {
                 if (slot == null || slot.perk == null) continue;
@@ -73,7 +77,6 @@ namespace AmesGame
                 return;
             }
 
-            // Pick 3 unique perks
             List<PerkController.PerkSlot> chosen = new List<PerkController.PerkSlot>();
 
             while (chosen.Count < 3)
@@ -85,7 +88,6 @@ namespace AmesGame
                     chosen.Add(pick);
             }
 
-            // Assign perks to buttons
             for (int i = 0; i < choiceButtons.Count; i++)
             {
                 if (i >= chosen.Count) break;
@@ -124,8 +126,12 @@ namespace AmesGame
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
+            if (playerShooter != null)
+                playerShooter.canShoot = true;
+
             isChoosing = false;
         }
+
         public void ShowCurrentPerks()
         {
             gameObject.SetActive(true);
@@ -133,6 +139,9 @@ namespace AmesGame
 
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            if (playerShooter != null)
+                playerShooter.canShoot = false;
 
             DisplayEquippedPerks();
         }
@@ -197,6 +206,9 @@ namespace AmesGame
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (playerShooter != null)
+                playerShooter.canShoot = true;
         }
     }
 }

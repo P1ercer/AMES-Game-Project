@@ -20,6 +20,8 @@ public class RaycastShoot : MonoBehaviour
     [Tooltip("Damage dealt by this weapon / projectile")]
     public int damage = 1;
 
+    public bool canShoot = true;
+
     private void OnEnable()
     {
         shootAction.action.Enable();
@@ -32,6 +34,10 @@ public class RaycastShoot : MonoBehaviour
 
     private void Update()
     {
+       
+        if (!canShoot)
+            return;
+
         if (!shootAction.action.IsPressed())
             return;
 
