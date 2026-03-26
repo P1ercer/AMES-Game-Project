@@ -21,22 +21,18 @@ namespace AmesGame
         [Header("Perk Info")]
         public string perkName = "New Perk"; //default fallback name
 
-        // Called when the perk is triggered manually
         public virtual void Activate() { }
 
-        // Called when the perk becomes active (chosen)
         public virtual void OnEquip()
         {
             Debug.Log($"Equipped perk: {perkName}");
         }
 
-        // Called when the perk is removed
         public virtual void OnUnequip()
         {
             Debug.Log($"Unequipped perk: {perkName}");
         }
 
-        // Called every frame if passive
         public virtual void Tick() { }
     }
 
@@ -45,25 +41,19 @@ namespace AmesGame
         [System.Serializable]
         public class PerkSlot
         {
-            [Tooltip("Drag a GameObject that has a Perk-derived component")]
             public Perk perk;
-
-            [Tooltip("Is this perk passive (always active) or triggered by a key?")]
             public PerkMode mode = PerkMode.Active;
-
-            [Tooltip("Key used to activate this perk (only used if Active)")]
             public ActivationKey activationKey = ActivationKey.Shift;
-
-            [Tooltip("Check to enable this perk at start")]
             public bool chosen = false;
         }
 
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
 
-        [SerializeField]
-        private int maxPerks = 3;
+        [SerializeField] private int maxActivePerks = 2;
+        [SerializeField] private int maxPassivePerks = 1;
 
-        public int MaxPerks => maxPerks;
+        public int MaxActivePerks => maxActivePerks;
+        public int MaxPassivePerks => maxPassivePerks;
 
         private void Start()
         {
@@ -117,13 +107,10 @@ namespace AmesGame
             {
                 case ActivationKey.Shift:
                     return Input.GetKeyDown(KeyCode.LeftShift);
-
                 case ActivationKey.Ctrl:
                     return Input.GetKeyDown(KeyCode.LeftControl);
-
                 case ActivationKey.Q:
                     return Input.GetKeyDown(KeyCode.Q);
-
                 default:
                     return false;
             }
@@ -154,13 +141,27 @@ namespace AmesGame
             if (found.chosen)
                 return;
 
-            int chosenCount = 0;
-            foreach (var s in perkSlots)
-                if (s != null && s.chosen) chosenCount++;
+            int activeCount = 0;
+            int passiveCount = 0;
 
-            if (chosenCount >= maxPerks)
+            foreach (var s in perkSlots)
             {
-                Debug.LogWarning($"Cannot add perk '{perk.perkName}': max ({maxPerks}) reached.");
+                if (s != null && s.chosen)
+                {
+                    if (s.mode == PerkMode.Active) activeCount++;
+                    else passiveCount++;
+                }
+            }
+
+            if (found.mode == PerkMode.Active && activeCount >= maxActivePerks)
+            {
+                Debug.LogWarning($"Cannot add active perk '{perk.perkName}': max ({maxActivePerks}) reached.");
+                return;
+            }
+
+            if (found.mode == PerkMode.Passive && passiveCount >= maxPassivePerks)
+            {
+                Debug.LogWarning($"Cannot add passive perk '{perk.perkName}': max ({maxPassivePerks}) reached.");
                 return;
             }
 

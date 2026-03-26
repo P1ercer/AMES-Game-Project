@@ -22,6 +22,11 @@ public class RaycastShoot : MonoBehaviour
 
     public bool canShoot = true;
 
+    // New event for perks to modify bullets
+    public event System.Action<GameObject> OnBulletSpawned;
+
+    public float bulletSpeedMultiplier = 1f;
+
     private void OnEnable()
     {
         shootAction.action.Enable();
@@ -34,7 +39,6 @@ public class RaycastShoot : MonoBehaviour
 
     private void Update()
     {
-       
         if (!canShoot)
             return;
 
@@ -73,10 +77,12 @@ public class RaycastShoot : MonoBehaviour
 
             var rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
-                rb.linearVelocity = velocity * shootSpeed;
+                rb.linearVelocity = velocity * shootSpeed * bulletSpeedMultiplier; // ✅ Apply multiplier
 
             var pd = bullet.GetComponent<ProjectileDamage>() ?? bullet.AddComponent<ProjectileDamage>();
             pd.damage = damage;
+
+            OnBulletSpawned?.Invoke(bullet);
 
             Destroy(bullet, bulletLifetime);
         }

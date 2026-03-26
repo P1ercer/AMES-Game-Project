@@ -7,35 +7,40 @@ public class EnemyController : MonoBehaviour
 {
     // Global multiplier applied to incoming damage. Perks can modify this.
     public static float DamageMultiplier = 1f;
+
+    // Event fired when any enemy dies (used by perks like "In a Rush")
+    public static event Action<GameObject> OnEnemyKilled;
+
     public event Action OnEnemyDied;
-    //Shooting
+
+    // Shooting
     public GameObject bulletPrefab;
     public Transform firePoint;
     public float fireRate = 2f;
     public float bulletSpeed = 15f;
     private float nextFireTime = 0f;
 
-    //Movement
+    // Movement
     private GameObject player;
     private NavMeshAgent agent;
     public float chaseDistance = 10f;
     private Vector3 home;
 
-    //Health
+    // Health
     public float health = 3;
     public Image healthBar;
     private float maxHealth;
 
     void Start()
     {
-        //Find player
+        // Find player
         player = GameObject.FindGameObjectWithTag("Player");
 
-        //NavMesh setup
+        // NavMesh setup
         agent = GetComponent<NavMeshAgent>();
         home = transform.position;
 
-        //Health setup
+        // Health setup
         maxHealth = health;
         if (healthBar != null)
         {
@@ -47,17 +52,17 @@ public class EnemyController : MonoBehaviour
     {
         if (player == null) return;
 
-        //Movement
+        // Movement
         Vector3 direction = player.transform.position - transform.position;
 
         if (direction.magnitude < chaseDistance)
         {
             agent.destination = player.transform.position;
 
-            //Face the player
+            // Face the player
             transform.LookAt(player.transform);
 
-            //Shooting
+            // Shooting
             if (Time.time >= nextFireTime)
             {
                 Shoot();
@@ -83,7 +88,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    //Health
+    // Health
     public void TakeDamage(int damage)
     {
         float adjusted = damage * DamageMultiplier;
@@ -97,7 +102,12 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
-            OnEnemyDied?.Invoke(); // 🔥 Fire event BEFORE destroy
+            // Fire perk-wide kill event BEFORE destroying
+            OnEnemyKilled?.Invoke(gameObject);
+
+            // Fire local death event
+            OnEnemyDied?.Invoke();
+
             Destroy(gameObject);
         }
     }
@@ -106,7 +116,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            // try to get damage from a ProjectileDamage component if present
+            // Try to get damage from a ProjectileDamage component if present
             var pd = other.gameObject.GetComponent<ProjectileDamage>();
             int dmg = pd != null ? pd.damage : 1;
             TakeDamage(dmg);

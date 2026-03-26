@@ -76,7 +76,7 @@ namespace AmesGame
 
         private float _speed;
         private float _rotationVelocity;
-        private float _verticalVelocity;
+        public float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
 
         private float _jumpTimeoutDelta;
