@@ -697,6 +697,14 @@ PrefabInstance:
       value: perkUI
       objectReference: {fileID: 0}
     - target: {fileID: 3814499403873054709, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
+      propertyPath: playerUI
+      value: 
+      objectReference: {fileID: 1518005076}
+    - target: {fileID: 3814499403873054709, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
+      propertyPath: playerLook
+      value: 
+      objectReference: {fileID: 1930870882}
+    - target: {fileID: 3814499403873054709, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
       propertyPath: playerShooter
       value: 
       objectReference: {fileID: 2076019568}
@@ -859,6 +867,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1518005076 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3108665086990029030, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 1068727449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddcb4b579217dee45951e4147cbb45eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1568513874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1094,6 +1113,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1930870882 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2862278905927072854, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 1068727449}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1972658511
 GameObject:
   m_ObjectHideFlags: 0

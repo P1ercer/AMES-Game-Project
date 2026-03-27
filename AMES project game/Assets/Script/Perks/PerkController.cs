@@ -19,7 +19,12 @@ namespace AmesGame
     public abstract class Perk : MonoBehaviour
     {
         [Header("Perk Info")]
-        public string perkName = "New Perk"; //default fallback name
+        public string perkName = "New Perk";
+
+        [TextArea(2, 5)]
+        public string description;
+
+        public Sprite icon;
 
         public virtual void Activate() { }
 
@@ -45,6 +50,12 @@ namespace AmesGame
             public PerkMode mode = PerkMode.Active;
             public ActivationKey activationKey = ActivationKey.Shift;
             public bool chosen = false;
+
+            [Header("Selection Settings")]
+            [Range(0f, 100f)]
+            public float weight = 1f;
+
+            public bool includeInRandom = true;
         }
 
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
@@ -61,19 +72,17 @@ namespace AmesGame
             {
                 if (slot == null || slot.perk == null)
                 {
-                    Debug.LogWarning("PerkController: Empty perk slot detected in inspector.");
+                    Debug.LogWarning("PerkController: Empty perk slot detected.");
                     continue;
                 }
 
                 if (string.IsNullOrEmpty(slot.perk.perkName))
                 {
                     slot.perk.perkName = slot.perk.name;
-                    Debug.LogWarning($"Perk '{slot.perk.name}' had no perkName, using GameObject name instead.");
                 }
 
                 if (slot.chosen)
                 {
-                    Debug.Log($"Starting with perk: {slot.perk.perkName}");
                     slot.perk.OnEquip();
                 }
             }
@@ -90,13 +99,9 @@ namespace AmesGame
                 {
                     slot.perk.Tick();
                 }
-                else
+                else if (IsKeyPressed(slot.activationKey))
                 {
-                    if (IsKeyPressed(slot.activationKey))
-                    {
-                        Debug.Log($"Activating perk: {slot.perk.perkName}");
-                        slot.perk.Activate();
-                    }
+                    slot.perk.Activate();
                 }
             }
         }
@@ -105,21 +110,61 @@ namespace AmesGame
         {
             switch (key)
             {
-                case ActivationKey.Shift:
-                    return Input.GetKeyDown(KeyCode.LeftShift);
-                case ActivationKey.Ctrl:
-                    return Input.GetKeyDown(KeyCode.LeftControl);
-                case ActivationKey.Q:
-                    return Input.GetKeyDown(KeyCode.Q);
-                default:
-                    return false;
+                case ActivationKey.Shift: return Input.GetKeyDown(KeyCode.LeftShift);
+                case ActivationKey.Ctrl: return Input.GetKeyDown(KeyCode.LeftControl);
+                case ActivationKey.Q: return Input.GetKeyDown(KeyCode.Q);
+                default: return false;
             }
+        }
+
+        //Skewed chances
+        public Perk GetRandomPerk()
+        {
+            float totalWeight = 0f;
+
+            foreach (var slot in perkSlots)
+            {
+                if (IsValid(slot))
+                    totalWeight += slot.weight;
+            }
+
+            if (totalWeight <= 0f)
+                return null;
+
+            float randomPoint = Random.Range(0f, totalWeight);
+
+            foreach (var slot in perkSlots)
+            {
+                if (!IsValid(slot)) continue;
+
+                if (randomPoint < slot.weight)
+                    return slot.perk;
+
+                randomPoint -= slot.weight;
+            }
+
+            return null;
+        }
+
+        bool IsValid(PerkSlot slot)
+        {
+            return slot != null &&
+                   slot.perk != null &&
+                   !slot.chosen &&
+                   slot.includeInRandom &&
+                   slot.weight > 0f;
+        }
+
+        public void AddRandomPerk()
+        {
+            var perk = GetRandomPerk();
+            if (perk != null)
+                AddPerk(perk);
         }
 
         public void AddPerk(Perk perk)
         {
-            if (perk == null)
-                return;
+            if (perk == null) return;
 
             PerkSlot found = null;
 
@@ -132,59 +177,36 @@ namespace AmesGame
                 }
             }
 
-            if (found == null)
-            {
-                Debug.LogWarning($"PerkController: Tried to add a perk not in slots: {perk.name}");
-                return;
-            }
-
-            if (found.chosen)
+            if (found == null || found.chosen)
                 return;
 
-            int activeCount = 0;
-            int passiveCount = 0;
+            int active = 0;
+            int passive = 0;
 
             foreach (var s in perkSlots)
             {
                 if (s != null && s.chosen)
                 {
-                    if (s.mode == PerkMode.Active) activeCount++;
-                    else passiveCount++;
+                    if (s.mode == PerkMode.Active) active++;
+                    else passive++;
                 }
             }
 
-            if (found.mode == PerkMode.Active && activeCount >= maxActivePerks)
-            {
-                Debug.LogWarning($"Cannot add active perk '{perk.perkName}': max ({maxActivePerks}) reached.");
-                return;
-            }
-
-            if (found.mode == PerkMode.Passive && passiveCount >= maxPassivePerks)
-            {
-                Debug.LogWarning($"Cannot add passive perk '{perk.perkName}': max ({maxPassivePerks}) reached.");
-                return;
-            }
+            if (found.mode == PerkMode.Active && active >= maxActivePerks) return;
+            if (found.mode == PerkMode.Passive && passive >= maxPassivePerks) return;
 
             found.chosen = true;
-
-            Debug.Log($"Added perk: {perk.perkName}");
-
             found.perk.OnEquip();
         }
 
         public void RemovePerk(Perk perk)
         {
-            if (perk == null) return;
-
             foreach (var s in perkSlots)
             {
                 if (s != null && s.perk == perk)
                 {
                     if (s.chosen)
-                    {
-                        Debug.Log($"Removed perk: {perk.perkName}");
                         s.perk.OnUnequip();
-                    }
 
                     s.chosen = false;
                     break;
