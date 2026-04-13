@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace AmesGame
 {
@@ -8,11 +9,28 @@ namespace AmesGame
     {
         public PerkController perkController;
 
+        [Header("Player")]
+        public RaycastShoot playerShooter;
+
+        [Header("Player Control")]
+        public MonoBehaviour playerLook; // Drag your mouse look / camera script here
+
+        [Header("UI")]
+        public PlayerUI playerUI; // Reference to crosshair handler
+
         [Header("Roll Button")]
         public Button rollButton;
 
-        [Header("All 30 Buttons (match perkSlots order)")]
-        public List<Button> allButtons = new List<Button>();
+        [System.Serializable]
+        public class PerkButton
+        {
+            public Button button;
+            public TMP_Text label;
+            public TMP_Text descriptionText;
+            public Image iconImage;
+        }
+
+        public List<PerkButton> choiceButtons = new List<PerkButton>();
 
         private List<PerkController.PerkSlot> availableSlots = new List<PerkController.PerkSlot>();
         private bool isChoosing = false;
@@ -20,33 +38,37 @@ namespace AmesGame
         private void Start()
         {
             HideAll();
-
-            // Hide UI + roll button at start
             gameObject.SetActive(false);
-            if (rollButton != null)
-                rollButton.gameObject.SetActive(false);
 
             if (rollButton != null)
+            {
+                rollButton.gameObject.SetActive(false);
                 rollButton.onClick.AddListener(RollPerks);
+            }
         }
 
-        // Called by enemy death
         public void ShowPerkUI()
         {
             if (isChoosing) return;
 
             gameObject.SetActive(true);
 
-            // Show roll button
             if (rollButton != null)
                 rollButton.gameObject.SetActive(true);
 
-            // Pause game
             Time.timeScale = 0f;
 
-            // Unlock cursor
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+
+            if (playerShooter != null)
+                playerShooter.canShoot = false;
+
+            if (playerLook != null)
+                playerLook.enabled = false;
+
+            if (playerUI != null)
+                playerUI.SetCrosshairVisible(false);
 
             isChoosing = true;
         }
@@ -55,10 +77,8 @@ namespace AmesGame
         {
             availableSlots.Clear();
 
-            // Get available perks
-            for (int i = 0; i < perkController.perkSlots.Count; i++)
+            foreach (var slot in perkController.perkSlots)
             {
-                var slot = perkController.perkSlots[i];
                 if (slot == null || slot.perk == null) continue;
                 if (slot.chosen) continue;
 
@@ -66,79 +86,141 @@ namespace AmesGame
             }
 
             if (availableSlots.Count < 3)
-            {
-                Debug.Log("Not enough perks left!");
                 return;
-            }
-
-            HideAll();
 
             List<PerkController.PerkSlot> chosen = new List<PerkController.PerkSlot>();
 
-            // Pick 3 unique
             while (chosen.Count < 3)
             {
-                int rand = Random.Range(1, availableSlots.Count + 1);
-                var pick = availableSlots[rand - 1];
+                int rand = Random.Range(0, availableSlots.Count);
+                var pick = availableSlots[rand];
 
                 if (!chosen.Contains(pick))
                     chosen.Add(pick);
             }
 
-            // Show correct buttons
-            foreach (var slot in chosen)
+            for (int i = 0; i < choiceButtons.Count; i++)
             {
-                int index = perkController.perkSlots.IndexOf(slot);
-                if (index < 0 || index >= allButtons.Count) continue;
+                if (i >= chosen.Count) break;
 
-                Button btn = allButtons[index];
-                btn.gameObject.SetActive(true);
+                var entry = choiceButtons[i];
+                var slot = chosen[i];
+                var perk = slot.perk;
 
-                Text txt = btn.GetComponentInChildren<Text>();
-                if (txt != null)
-                    txt.text = slot.perk.name;
+                entry.button.gameObject.SetActive(true);
 
-                btn.onClick.RemoveAllListeners();
-                btn.onClick.AddListener(() => OnPerkSelected(slot, index));
+                entry.label.text = perk.perkName;
+                entry.descriptionText.text = perk.description;
+
+                if (entry.iconImage != null)
+                {
+                    entry.iconImage.sprite = perk.icon;
+                    entry.iconImage.enabled = perk.icon != null;
+                }
+
+                entry.button.onClick.RemoveAllListeners();
+                entry.button.onClick.AddListener(() => OnPerkSelected(slot));
             }
-
-            // Optional: hide roll button after rolling once
-            rollButton.gameObject.SetActive(false);
         }
 
-        void OnPerkSelected(PerkController.PerkSlot slot, int index)
+        void OnPerkSelected(PerkController.PerkSlot slot)
         {
-            // Add perk
             perkController.AddPerk(slot.perk);
 
-            // Remove permanently
-            perkController.perkSlots.Remove(slot);
-
-            if (slot.perk != null)
-                Destroy(slot.perk.gameObject);
-
-            // Hide UI
             HideAll();
             gameObject.SetActive(false);
 
-            // Hide roll button again
             if (rollButton != null)
                 rollButton.gameObject.SetActive(false);
 
-            // Resume game
             Time.timeScale = 1f;
 
-            // Lock cursor back (FPS-style)
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            if (playerShooter != null)
+                playerShooter.canShoot = true;
+
+            if (playerLook != null)
+                playerLook.enabled = true;
+
+            if (playerUI != null)
+                playerUI.SetCrosshairVisible(true);
 
             isChoosing = false;
         }
 
+        void DisplayEquippedPerks()
+        {
+            HideAll();
+
+            List<PerkController.PerkSlot> active = new List<PerkController.PerkSlot>();
+
+            foreach (var slot in perkController.perkSlots)
+            {
+                if (slot != null && slot.perk != null && slot.chosen)
+                    active.Add(slot);
+            }
+
+            for (int i = 0; i < choiceButtons.Count; i++)
+            {
+                if (i >= active.Count) break;
+
+                var entry = choiceButtons[i];
+                var perk = active[i].perk;
+
+                entry.button.gameObject.SetActive(true);
+
+                entry.label.text = perk.perkName;
+                entry.descriptionText.text = perk.description;
+
+                if (entry.iconImage != null)
+                {
+                    entry.iconImage.sprite = perk.icon;
+                    entry.iconImage.enabled = perk.icon != null;
+                }
+
+                var slot = active[i];
+                entry.button.onClick.RemoveAllListeners();
+                entry.button.onClick.AddListener(() => RemovePerk(slot));
+            }
+        }
+
+        void RemovePerk(PerkController.PerkSlot slot)
+        {
+            perkController.RemovePerk(slot.perk);
+            DisplayEquippedPerks();
+        }
+
         void HideAll()
         {
-            foreach (var btn in allButtons)
-                btn.gameObject.SetActive(false);
+            foreach (var entry in choiceButtons)
+            {
+                if (entry.button != null)
+                    entry.button.gameObject.SetActive(false);
+            }
+        }
+
+        public void CloseUI()
+        {
+            gameObject.SetActive(false);
+
+            // ▶ Resume game
+            Time.timeScale = 1f;
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+
+            if (playerShooter != null)
+                playerShooter.canShoot = true;
+
+            if (playerLook != null)
+                playerLook.enabled = true;
+
+            if (playerUI != null)
+                playerUI.SetCrosshairVisible(true);
+
+            isChoosing = false;
         }
     }
 }

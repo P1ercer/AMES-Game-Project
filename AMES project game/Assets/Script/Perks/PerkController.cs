@@ -10,9 +10,35 @@ namespace AmesGame
         Q
     }
 
+    public enum PerkMode
+    {
+        Active,
+        Passive
+    }
+
     public abstract class Perk : MonoBehaviour
     {
-        public abstract void Activate();
+        [Header("Perk Info")]
+        public string perkName = "New Perk";
+
+        [TextArea(2, 5)]
+        public string description;
+
+        public Sprite icon;
+
+        public virtual void Activate() { }
+
+        public virtual void OnEquip()
+        {
+            Debug.Log($"Equipped perk: {perkName}");
+        }
+
+        public virtual void OnUnequip()
+        {
+            Debug.Log($"Unequipped perk: {perkName}");
+        }
+
+        public virtual void Tick() { }
     }
 
     public class PerkController : MonoBehaviour
@@ -20,48 +46,62 @@ namespace AmesGame
         [System.Serializable]
         public class PerkSlot
         {
-            [Tooltip("Drag a GameObject that has a Perk-derived component (or the component itself)")]
             public Perk perk;
-
-            [Tooltip("Key used to activate this perk")]
+            public PerkMode mode = PerkMode.Active;
             public ActivationKey activationKey = ActivationKey.Shift;
-            [Tooltip("Check to enable this perk at start (choose which perks you want active)")]
             public bool chosen = false;
+
+            [Header("Selection Settings")]
+            [Range(0f, 100f)]
+            public float weight = 1f;
+
+            public bool includeInRandom = true;
         }
 
-        // Set up perks and their keybinds in the inspector using these slots
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
 
-        // Maximum number of perks that can be active at once
-        [SerializeField]
-        private int maxPerks = 3;
+        [SerializeField] private int maxActivePerks = 2;
+        [SerializeField] private int maxPassivePerks = 1;
 
-        // Expose maxPerks for UI or other systems to query
-        public int MaxPerks => maxPerks;
+        public int MaxActivePerks => maxActivePerks;
+        public int MaxPassivePerks => maxPassivePerks;
 
-        void Update()
+        private void Start()
         {
-            // Check each configured slot for its key press and activate the associated perk
             foreach (var slot in perkSlots)
             {
                 if (slot == null || slot.perk == null)
-                    continue;
-
-                if (slot.chosen && IsKeyPressed(slot.activationKey))
                 {
-                    slot.perk.Activate();
+                    Debug.LogWarning("PerkController: Empty perk slot detected.");
+                    continue;
+                }
+
+                if (string.IsNullOrEmpty(slot.perk.perkName))
+                {
+                    slot.perk.perkName = slot.perk.name;
+                }
+
+                if (slot.chosen)
+                {
+                    slot.perk.OnEquip();
                 }
             }
         }
 
-        private void Start()
+        private void Update()
         {
-            // validate slots
             foreach (var slot in perkSlots)
             {
-                if (slot == null || slot.perk == null)
+                if (slot == null || slot.perk == null || !slot.chosen)
+                    continue;
+
+                if (slot.mode == PerkMode.Passive)
                 {
-                    Debug.LogWarning("PerkController: Empty perk slot detected in inspector.");
+                    slot.perk.Tick();
+                }
+                else if (IsKeyPressed(slot.activationKey))
+                {
+                    slot.perk.Activate();
                 }
             }
         }
@@ -70,26 +110,64 @@ namespace AmesGame
         {
             switch (key)
             {
-                case ActivationKey.Shift:
-                    return Input.GetKeyDown(KeyCode.LeftShift);
-
-                case ActivationKey.Ctrl:
-                    return Input.GetKeyDown(KeyCode.LeftControl);
-
-                case ActivationKey.Q:
-                    return Input.GetKeyDown(KeyCode.Q);
-
-                default:
-                    return false;
+                case ActivationKey.Shift: return Input.GetKeyDown(KeyCode.LeftShift);
+                case ActivationKey.Ctrl: return Input.GetKeyDown(KeyCode.LeftControl);
+                case ActivationKey.Q: return Input.GetKeyDown(KeyCode.Q);
+                default: return false;
             }
+        }
+
+        //Skewed chances
+        public Perk GetRandomPerk()
+        {
+            float totalWeight = 0f;
+
+            foreach (var slot in perkSlots)
+            {
+                if (IsValid(slot))
+                    totalWeight += slot.weight;
+            }
+
+            if (totalWeight <= 0f)
+                return null;
+
+            float randomPoint = Random.Range(0f, totalWeight);
+
+            foreach (var slot in perkSlots)
+            {
+                if (!IsValid(slot)) continue;
+
+                if (randomPoint < slot.weight)
+                    return slot.perk;
+
+                randomPoint -= slot.weight;
+            }
+
+            return null;
+        }
+
+        bool IsValid(PerkSlot slot)
+        {
+            return slot != null &&
+                   slot.perk != null &&
+                   !slot.chosen &&
+                   slot.includeInRandom &&
+                   slot.weight > 0f;
+        }
+
+        public void AddRandomPerk()
+        {
+            var perk = GetRandomPerk();
+            if (perk != null)
+                AddPerk(perk);
         }
 
         public void AddPerk(Perk perk)
         {
-            if (perk == null)
-                return;
-            // find the slot for this perk
+            if (perk == null) return;
+
             PerkSlot found = null;
+
             foreach (var s in perkSlots)
             {
                 if (s != null && s.perk == perk)
@@ -99,35 +177,37 @@ namespace AmesGame
                 }
             }
 
-            if (found == null)
-            {
-                Debug.LogWarning($"PerkController: Tried to add a perk that is not in slots: {perk.name}");
+            if (found == null || found.chosen)
                 return;
-            }
 
-            int chosenCount = 0;
+            int active = 0;
+            int passive = 0;
+
             foreach (var s in perkSlots)
-                if (s != null && s.chosen) chosenCount++;
-
-            if (found.chosen)
-                return; // already chosen
-
-            if (chosenCount >= maxPerks)
             {
-                Debug.LogWarning($"Cannot add perk '{perk.name}': maximum of {maxPerks} perks reached.");
-                return;
+                if (s != null && s.chosen)
+                {
+                    if (s.mode == PerkMode.Active) active++;
+                    else passive++;
+                }
             }
+
+            if (found.mode == PerkMode.Active && active >= maxActivePerks) return;
+            if (found.mode == PerkMode.Passive && passive >= maxPassivePerks) return;
 
             found.chosen = true;
+            found.perk.OnEquip();
         }
 
         public void RemovePerk(Perk perk)
         {
-            if (perk == null) return;
             foreach (var s in perkSlots)
             {
                 if (s != null && s.perk == perk)
                 {
+                    if (s.chosen)
+                        s.perk.OnUnequip();
+
                     s.chosen = false;
                     break;
                 }

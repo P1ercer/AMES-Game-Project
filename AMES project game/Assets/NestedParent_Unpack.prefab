@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3251401399517541646}
   - component: {fileID: 7437842998012432386}
   - component: {fileID: 5188905586022049064}
+  - component: {fileID: 3108665086990029030}
   m_Layer: 0
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -104,6 +105,20 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &3108665086990029030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3689768216517188904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddcb4b579217dee45951e4147cbb45eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  crosshairPart1: {fileID: 5823017422771904805}
+  crosshairPart2: {fileID: 6457502836955354013}
 --- !u!1 &5823017422771904805
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,6 +497,10 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 5242107653240477475}
+    - target: {fileID: 8762286023885395323, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -543,6 +562,10 @@ PrefabInstance:
     - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: shotCooldown
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: bulletSpeedMultiplier
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
@@ -640,6 +663,45 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       insertIndex: -1
       addedObject: {fileID: 599323796292585090}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2112434065296502699}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8434752928732221523}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7958657736920345753}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4015279901566233384}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4872476893746646696}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5528635446382686800}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3851624592091239456}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4966446513674295952}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7032406915732157987}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8035827502813736950}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1130189685098681007}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4805469658645684470}
+    - targetCorrespondingSourceObject: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6362235781102553463}
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
 --- !u!1 &453084650579209855 stripped
 GameObject:
@@ -660,7 +722,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 15
   RotationSpeed: 2
-  SpeedChangeRate: 20
+  AccelerationRate: 80
+  DecelerationRate: 15
   JumpHeight: 1
   Gravity: -12
   JumpTimeout: 0.1
@@ -679,6 +742,7 @@ MonoBehaviour:
   healthBar: {fileID: 3653962399901560629}
   bulletDamage: 10
   isImmune: 0
+  _verticalVelocity: 0
 --- !u!114 &8489146610735838171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,16 +787,134 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   perkSlots:
-  - perk: {fileID: 4771270695249019530}
-    activationKey: 0
-    chosen: 1
-  - perk: {fileID: 8704756568086924236}
-    activationKey: 1
-    chosen: 1
-  - perk: {fileID: 599323796292585090}
+  - perk: {fileID: 1928333426134004302}
+    mode: 0
     activationKey: 2
-    chosen: 1
-  maxPerks: 3
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 4771270695249019530}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+    weight: 5
+    includeInRandom: 1
+  - perk: {fileID: 8704756568086924236}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 25
+    includeInRandom: 1
+  - perk: {fileID: 4060263366023275657}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 5
+    includeInRandom: 1
+  - perk: {fileID: 7846522128696264690}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+    weight: 10
+    includeInRandom: 1
+  - perk: {fileID: 4233008378684111259}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 8103561806774133589}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 20
+    includeInRandom: 1
+  - perk: {fileID: 4075656279119246074}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+    weight: 20
+    includeInRandom: 1
+  - perk: {fileID: 599323796292585090}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 2112434065296502699}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 8434752928732221523}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 7958657736920345753}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 35
+    includeInRandom: 1
+  - perk: {fileID: 4015279901566233384}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 45
+    includeInRandom: 1
+  - perk: {fileID: 4872476893746646696}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 5528635446382686800}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 3851624592091239456}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 4966446513674295952}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 0.5
+    includeInRandom: 1
+  - perk: {fileID: 7032406915732157987}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 0.5
+    includeInRandom: 1
+  - perk: {fileID: 1130189685098681007}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 50
+    includeInRandom: 1
+  - perk: {fileID: 6362235781102553463}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 50
+    includeInRandom: 1
+  - perk: {fileID: 4805469658645684470}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 50
+    includeInRandom: 1
+  maxActivePerks: 3
+  maxPassivePerks: 4
 --- !u!114 &7846522128696264690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -745,6 +927,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4fb17bd2389bfe4b9156ca7131e4206, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Force Shield
+  description: Summon a forcefield around you that blocks all damage towards you
+    for a bit, activated via the CTRL Key
+  icon: {fileID: 0}
   duration: 15
   cooldown: 30
   forcefieldVfx: {fileID: 0}
@@ -760,6 +946,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 778c9ccf3663d2348b412b7f16a1404e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Higher Caliber Bullets
+  description: Doubles your damage for a while. activated by the Q key
+  icon: {fileID: 0}
   duration: 20
   cooldown: 30
 --- !u!114 &4060263366023275657
@@ -774,7 +963,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f809899f26d82b4ea6d4d1b7cb77a7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 3
+  perkName: Slam Dunk
+  description: Slam unto your enemies, dealing high damage to all enemies within
+    range. activated by the SHIFT key
+  icon: {fileID: 0}
+  damage: 15
   radius: 5
   windup: 0.25
   cooldown: 8
@@ -792,9 +985,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18d71ee4fb90ae45bfd615cdb0f17bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Grappler
+  description: Grapple onto an enemy and pull them towards you. activated by the
+    SHIFT key
+  icon: {fileID: 0}
   range: 20
   pullDuration: 1.5
-  pullSpeed: 15
+  pullSpeed: 45
   cooldown: 5
 --- !u!114 &4771270695249019530
 MonoBehaviour:
@@ -808,11 +1005,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598b104fbae96024b95619cd88694edd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Handcannon
+  description: Shoot a single powerful bullet at an enemy, bound to instantly kill
+    any weak enemy. activated by the CTRL key
+  icon: {fileID: 0}
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 20
   projectileLifetime: 5
-  damage: 5
+  damage: 25
   knockbackAmount: 5
   stationaryMultiplier: 3
   cooldown: 1.2
@@ -828,6 +1029,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffd00a173f63a734a8be8772d30139f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Launcher
+  description: Shoot a bomb at a group of enemies, dealing medium damage to all enemies
+    in its range, does extra damage with a direct hit to an enemy. activated by the
+    SHIFT key
+  icon: {fileID: 0}
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 25
@@ -850,6 +1056,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe7de6fdd506f04fb41f5b29367c5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Fireball
+  description: Shoot a Fireball at an enemy of which it deals damage over time to
+    that enemy activated by the CTRL key
+  icon: {fileID: 0}
   projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPoint: {fileID: 6255910347409757019}
   projectileSpeed: 18
@@ -870,6 +1080,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c2eeb291d746347a6341dd815ab802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  perkName: Need for Speed
+  description: Boosts movement speed for a while. activated by the Q key
+  icon: {fileID: 0}
   speedMultiplier: 3
   duration: 5
   cooldown: 10
@@ -885,10 +1098,257 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2adf66754ce890343b08bf29ffc29498, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fireSpeedMultiplier: 3
-  duration: 6
+  perkName: Loose Trigger finger
+  description: Boosts your firerate for a while. activated by the Q key.
+  icon: {fileID: 0}
+  fireSpeedMultiplier: 4
+  duration: 7
   cooldown: 12
   shooter: {fileID: 1503704226533128505}
+--- !u!114 &2112434065296502699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fc8206c0cca9f4e8fdc4ea50955572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Tiny
+  description: Raises your movement speed but decreases your health
+  icon: {fileID: 0}
+  speedMultiplier: 1.3
+  healthMultiplier: 0.7
+--- !u!114 &8434752928732221523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b333789b9f3ece4438882f3b567b28f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Giant
+  description: boosts your health but decreases your movement speed
+  icon: {fileID: 0}
+  speedMultiplier: 0.5
+  healthMultiplier: 1.3
+--- !u!114 &7958657736920345753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbed864fa678b3d4388d8e9d50650eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: The Flash
+  description: boosts your movement speed but decreases your firerate
+  icon: {fileID: 0}
+  speedMultiplier: 1.6
+  fireRateMultiplier: 1.5
+--- !u!114 &4015279901566233384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacba217ef7160948bb957ad0e514a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Featherweight
+  description: Removes friction on the floor causing endless movement, but increases
+    your weight (faster falling)
+  icon: {fileID: 0}
+  gravityMultiplier: 0.4
+--- !u!114 &4872476893746646696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4af749aa0b51f49910c166b0185f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Mario
+  description: Increases jump height but increases your weight (faster falling)
+  icon: {fileID: 0}
+  jumpMultiplier: 1.5
+  gravityMultiplier: 1.4
+--- !u!114 &5528635446382686800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05a630e6ae2c7c40a3e30d9ad77383a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Luigi
+  description: Increases jump height and decreases weight (floatier falling) but
+    decreases your Max health and Damage. increases your jump cooldown
+  icon: {fileID: 0}
+  jumpMultiplier: 1.5
+  gravityMultiplier: 0.6
+  healthMultiplier: 0.75
+  jumpTimeoutMultiplier: 7
+  damageMultiplier: 0.7
+--- !u!114 &3851624592091239456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776cb3852ead6bd4cbe387870f603931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Heavy hitting
+  description: Boosts your bullet damage but decreases your movement speed and rate
+    of fire
+  icon: {fileID: 0}
+  damageMultiplier: 1.8
+  speedMultiplier: 0.7
+  fireRateMultiplier: 1.5
+--- !u!114 &4966446513674295952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48acfc7d4eb9cf44cb13e9e635d2ec0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: The Cost
+  description: Increases speed, health, and jump height, but decreases damage and
+    firerate, increases weight (faster falling) Find the other piece for high power.
+    (disables all other perks and locks you out of getting others)
+  icon: {fileID: 0}
+  speedMultiplier: 2
+  healthMultiplier: 1.5
+  jumpMultiplier: 1.5
+  gravityMultiplier: 1.2
+  damageMultiplier: 0.7
+  fireRateMultiplier: 1.3
+  synergyMultiplier: 1.5
+--- !u!114 &7032406915732157987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb92c07c88440544992004ee2fb5ebe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: A price
+  description: DRASTICALLY Increase damage but decreases movement speed, health,
+    jump height, and increase weight. Find the other piece for high power. (disables
+    all other perks and locks you out of finding others)
+  icon: {fileID: 0}
+  speedMultiplier: 0.7
+  healthMultiplier: 0.5
+  jumpMultiplier: 1
+  gravityMultiplier: 1.3
+  damageMultiplier: 5
+  synergyMultiplier: 1.5
+--- !u!114 &8035827502813736950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a98a67934a41af43a26882ab626acda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Talented
+  description: Gives you two extra passive perk slots!
+  icon: {fileID: 0}
+  additionalPassivePerks: 2
+--- !u!114 &1130189685098681007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2b1b1578c52934fb0480a4ab9e0519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: In A Rush
+  description: Increases your speed for every killed enemy. but decreases your speed
+    once the duration is out
+  icon: {fileID: 0}
+  speedPerKill: 1
+  boostDuration: 7
+  slowDuration: 3
+  slowMultiplier: 0.7
+--- !u!114 &4805469658645684470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53aed0d76887f458856cc389099cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Happy Feet
+  description: causes you to jump forever, but increases your weight (faster falling)
+  icon: {fileID: 0}
+  jumpHeightMultiplier: 0.5
+--- !u!114 &6362235781102553463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453084650579209855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927a589d1076ca649a88e084173aee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Alley-Oop
+  description: Gives your bullets gravity, but Increases your damage and movement
+    speed
+  icon: {fileID: 0}
+  speedMultiplier: 1.2
+  damageMultiplier: 1.5
+  bulletGravity: -1.5
+  bulletSpeedMultiplier: 1.2
 --- !u!4 &937451010987979973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
