@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace AmesGame
     // HandCannonperk: fires a projectile and knocks the player back (recoil) when used.
     public class HandCannonperk : Perk
     {
+        // event fired when the hand cannon fires a projectile
+        public event Action<GameObject> OnFired;
         [Tooltip("Projectile prefab to spawn (should have a Rigidbody)")]
         public GameObject projectilePrefab;
 
@@ -38,7 +41,7 @@ namespace AmesGame
             player = GetComponentInParent<PlayerController>();
             if (player == null)
             {
-                player = Object.FindAnyObjectByType<PlayerController>();
+                player = UnityEngine.Object.FindAnyObjectByType<PlayerController>();
             }
         }
 
@@ -79,6 +82,9 @@ namespace AmesGame
             }
 
             Destroy(proj, projectileLifetime);
+
+            // notify listeners that we've fired (pass spawned projectile)
+            OnFired?.Invoke(proj);
 
             Debug.Log($"HandCannonperk: Fired projectile dealing {damage} damage.");
 
