@@ -5,10 +5,8 @@ using UnityEngine;
 
 namespace AmesGame
 {
-    // SlamDunkPerk: performs a slam centred on the player that deals AoE damage
     public class SlamDunkPerk : Perk
     {
-        // invoked when the slam lands; passes center position and colliders hit
         public event Action<Vector3, Collider[]> OnSlamLanded;
         [Tooltip("Damage dealt to each enemy in the AoE")]
         public int damage = 3;
@@ -50,11 +48,9 @@ namespace AmesGame
             if (player == null)
             {
                 player = UnityEngine.Object.FindAnyObjectByType<PlayerController>();
-                player = UnityEngine.Object.FindAnyObjectByType<PlayerController>();
             }
 
-            // cache field info for manipulating player's vertical velocity when slamming midair
-            verticalVelocityField = typeof(PlayerController).GetField("_verticalVelocity", BindingFlags.NonPublic | BindingFlags.Instance);
+            // (no reflection needed) PlayerController exposes _verticalVelocity so we can set it directly
         }
 
         public override void Activate()
@@ -68,43 +64,37 @@ namespace AmesGame
         {
             onCooldown = true;
 
-            // If player is midair, push them downward immediately so they slam faster
-            if (player != null && !player.Grounded)
-                // Ensure the player is pushed downward when slam activates so the slam reliably hits
-                if (player != null)
+            // If we have a player, force a downward velocity and temporarily increase gravity so the slam hits faster
+            if (player != null)
+            {
+                var cc = player.GetComponent<CharacterController>();
+
+                // compute applied downward velocity (airDropVelocity is negative)
+                float appliedVelocity = airDropVelocity * airDropStrength;
+
+                if (!player.Grounded)
                 {
-                    if (verticalVelocityField == null)
-                    {
-                        verticalVelocityField = typeof(PlayerController).GetField("_verticalVelocity", BindingFlags.NonPublic | BindingFlags.Instance);
-                    }
-
-                    if (verticalVelocityField != null)
-                    {
-                        verticalVelocityField.SetValue(player, airDropVelocity);
-                        Debug.Log($"SlamDunkPerk: Applied air drop velocity {airDropVelocity} to player.");
-                        float appliedVelocity = airDropVelocity * airDropStrength;
-                        verticalVelocityField.SetValue(player, appliedVelocity);
-                        Debug.Log($"SlamDunkPerk: Applied air drop velocity {appliedVelocity} to player (base {airDropVelocity} x {airDropStrength}).");
-                    }
-
-                    // If the player is currently grounded, nudge them downward a small amount so the engine registers a fall
-                    if (player.Grounded)
-                    {
-                        var cc = player.GetComponent<CharacterController>();
-                        if (cc != null)
-                        {
-                            // small immediate displacement downwards to ensure contact loss
-                            // use a stronger immediate displacement scaled by airDropStrength
-                            Vector3 push = Vector3.up * airDropVelocity * airDropStrength * 0.08f; // airDropVelocity is negative
-                            cc.Move(push);
-                        }
-                    }
-
-                    // temporarily increase gravity so the player falls faster
-                    originalPlayerGravity = player.Gravity;
-                    player.Gravity = originalPlayerGravity * gravityMultiplier;
-                    gravityModified = true;
+                    // midair: directly set the player's vertical velocity to a strong downward value
+                    player._verticalVelocity = appliedVelocity;
+                    Debug.Log($"SlamDunkPerk: Applied air drop velocity {appliedVelocity} to player (midair).");
                 }
+                else
+                {
+                    // grounded: nudge the controller downward slightly to ensure an ungrounded state, then set velocity
+                    if (cc != null)
+                    {
+                        Vector3 push = Vector3.up * airDropVelocity * airDropStrength * 0.08f; // airDropVelocity is negative
+                        cc.Move(push);
+                    }
+                    player._verticalVelocity = appliedVelocity;
+                    Debug.Log($"SlamDunkPerk: Applied air drop velocity {appliedVelocity} to player (from ground).");
+                }
+
+                // temporarily increase gravity so the player falls faster
+                originalPlayerGravity = player.Gravity;
+                player.Gravity = originalPlayerGravity * gravityMultiplier;
+                gravityModified = true;
+            }
 
             // push the player down immediately and wait for them to land
             Debug.Log("SlamDunkPerk: Forcing immediate drop and waiting to land...");
