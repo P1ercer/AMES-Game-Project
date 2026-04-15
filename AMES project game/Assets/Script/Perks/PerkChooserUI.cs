@@ -80,6 +80,7 @@ namespace AmesGame
             // detect if HandCannonperk or EXPLOSION are currently equipped/chosen
             bool handCannonEquipped = false;
             bool explosionEquipped = false;
+            bool slamEquipped = false;
             foreach (var s in perkController.perkSlots)
             {
                 if (s == null || s.perk == null) continue;
@@ -87,7 +88,9 @@ namespace AmesGame
                     handCannonEquipped = true;
                 if (s.chosen && s.perk is EXPLOSION)
                     explosionEquipped = true;
-                if (handCannonEquipped && explosionEquipped) break;
+                if (s.chosen && s.perk is SlamDunkPerk)
+                    slamEquipped = true;
+                if (handCannonEquipped && explosionEquipped && slamEquipped) break;
             }
 
             foreach (var slot in perkController.perkSlots)
@@ -101,6 +104,10 @@ namespace AmesGame
 
                 // Only show the Explosion upgrade when explosion is equipped
                 if (slot.perk is ExplosionUpgradePerk && !explosionEquipped)
+                    continue;
+
+                // Only show the Slam upgrade when SlamDunk is equipped
+                if (slot.perk is SlamUpgradePerk && !slamEquipped)
                     continue;
 
                 availableSlots.Add(slot);

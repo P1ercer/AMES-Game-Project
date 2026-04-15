@@ -389,7 +389,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.709999
+      value: 11.710001
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.y
@@ -397,7 +397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.260002
+      value: -18.66
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.w
@@ -455,7 +455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.709999
+      value: 11.710001
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
@@ -463,7 +463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.260002
+      value: -18.66
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -589,7 +589,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 41.31
+      value: -18.61
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalRotation.w
@@ -797,7 +797,7 @@ MonoBehaviour:
     mode: 0
     activationKey: 1
     chosen: 0
-    weight: 5
+    weight: 2.5
     includeInRandom: 1
   - perk: {fileID: 8704756568086924236}
     mode: 0
@@ -827,7 +827,7 @@ MonoBehaviour:
     mode: 0
     activationKey: 0
     chosen: 0
-    weight: 20
+    weight: 5
     includeInRandom: 1
   - perk: {fileID: 4075656279119246074}
     mode: 0
@@ -899,19 +899,19 @@ MonoBehaviour:
     mode: 1
     activationKey: 2
     chosen: 0
-    weight: 50
+    weight: 2.5
     includeInRandom: 1
   - perk: {fileID: 6362235781102553463}
     mode: 1
     activationKey: 2
     chosen: 0
-    weight: 50
+    weight: 2.5
     includeInRandom: 1
   - perk: {fileID: 4805469658645684470}
     mode: 1
     activationKey: 2
     chosen: 0
-    weight: 50
+    weight: 2.5
     includeInRandom: 1
   maxActivePerks: 3
   maxPassivePerks: 4
@@ -969,10 +969,13 @@ MonoBehaviour:
   icon: {fileID: 0}
   damage: 15
   radius: 5
-  windup: 0.25
   cooldown: 8
   knockbackForce: 6
   airDropVelocity: -25
+  airDropStrength: 2
+  gravityMultiplier: 3
+  impactSpeedFactor: 0.05
+  maxImpactScale: 3
 --- !u!114 &8704756568086924236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,8 +1043,6 @@ MonoBehaviour:
   projectileLifetime: 10
   explosionRadius: 6
   explosionDamage: 1
-  explosionKnockback: 10000
-  knockbackMultiplier: 3
   explosionVfx: {fileID: 0}
   cooldown: 3
 --- !u!114 &4075656279119246074
@@ -1305,14 +1306,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2b1b1578c52934fb0480a4ab9e0519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkName: In A Rush
-  description: Increases your speed for every killed enemy. but decreases your speed
-    once the duration is out
+  perkName: Going Nuclear
+  description: Increases damage, might do a little back to you.
   icon: {fileID: 0}
-  speedPerKill: 1
-  boostDuration: 7
-  slowDuration: 3
-  slowMultiplier: 0.7
+  damageMultiplier: 2
+  radiusMultiplier: 1.75
+  projectileSpeedMultiplier: 1.7
+  cooldownMultiplier: 0.7
 --- !u!114 &4805469658645684470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1325,10 +1325,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d53aed0d76887f458856cc389099cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkName: Happy Feet
-  description: causes you to jump forever, but increases your weight (faster falling)
+  perkName: GroundPound
+  description: Increases your slam stats and adds DOT (damage over time) to you and
+    the enemy.
   icon: {fileID: 0}
-  jumpHeightMultiplier: 0.5
+  damageMultiplier: 1.5
+  radiusMultiplier: 1.25
+  cooldownMultiplier: 0.8
+  airDropMultiplier: 1.1
+  enemyDotPerTick: 2
+  playerDotPerTick: 1
+  dotInterval: 1
+  dotDuration: 5
 --- !u!114 &6362235781102553463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1341,14 +1349,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 927a589d1076ca649a88e084173aee94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkName: Alley-Oop
-  description: Gives your bullets gravity, but Increases your damage and movement
-    speed
+  perkName: Hand Destroyer
+  description: Increase your handcannon stats but it will do a little bit of damage
+    back to you
   icon: {fileID: 0}
-  speedMultiplier: 1.2
-  damageMultiplier: 1.5
-  bulletGravity: -1.5
-  bulletSpeedMultiplier: 1.2
+  cannonSpeedMultiplier: 1.5
+  cannonDamageMultiplier: 1.5
+  cannonCooldownMultiplier: 0.75
+  reflectDamageToPlayer: 1
+  selfDamageAmount: 5
 --- !u!4 &937451010987979973 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}

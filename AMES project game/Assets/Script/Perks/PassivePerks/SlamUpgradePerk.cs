@@ -11,7 +11,6 @@ namespace AmesGame
         [Header("Slam Buffs")]
         public float damageMultiplier = 1.5f;
         public float radiusMultiplier = 1.25f;
-        public float knockbackMultiplier = 1.5f;
         [Tooltip("Factor applied to cooldown (use <1 to reduce cooldown)")]
         public float cooldownMultiplier = 0.8f;
         [Tooltip("Additional multiplier to air drop velocity (more negative to drop faster)")]
@@ -88,7 +87,6 @@ namespace AmesGame
             // apply buffs
             slam.damage = Mathf.Max(1, Mathf.RoundToInt(slam.damage * damageMultiplier));
             slam.radius *= radiusMultiplier;
-            slam.knockbackForce *= knockbackMultiplier;
             slam.cooldown *= cooldownMultiplier;
             slam.airDropVelocity *= airDropMultiplier;
 
