@@ -77,31 +77,10 @@ namespace AmesGame
         {
             availableSlots.Clear();
 
-            // detect if HandCannonperk or EXPLOSION are currently equipped/chosen
-            bool handCannonEquipped = false;
-            bool explosionEquipped = false;
-            foreach (var s in perkController.perkSlots)
-            {
-                if (s == null || s.perk == null) continue;
-                if (s.chosen && s.perk is HandCannonperk)
-                    handCannonEquipped = true;
-                if (s.chosen && s.perk is EXPLOSION)
-                    explosionEquipped = true;
-                if (handCannonEquipped && explosionEquipped) break;
-            }
-
             foreach (var slot in perkController.perkSlots)
             {
                 if (slot == null || slot.perk == null) continue;
                 if (slot.chosen) continue;
-
-                // Only show the Handcannon upgrade when handcannon is equipped
-                if (slot.perk is HandcannonUpgradePerk && !handCannonEquipped)
-                    continue;
-
-                // Only show the Explosion upgrade when explosion is equipped
-                if (slot.perk is ExplosionUpgradePerk && !explosionEquipped)
-                    continue;
 
                 availableSlots.Add(slot);
             }

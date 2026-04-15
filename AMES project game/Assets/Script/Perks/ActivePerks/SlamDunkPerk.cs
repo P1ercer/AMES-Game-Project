@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
@@ -9,14 +8,14 @@ namespace AmesGame
     // on activation. Has a small windup, optional knockback, and a cooldown.
     public class SlamDunkPerk : Perk
     {
-        // invoked when the slam lands; passes center position and colliders hit
-        public event Action<Vector3, Collider[]> OnSlamLanded;
         [Tooltip("Damage dealt to each enemy in the AoE")]
         public int damage = 3;
 
         [Tooltip("Radius of the AoE (meters)")]
         public float radius = 5f;
 
+        [Tooltip("Short windup before slam (seconds)")]
+        public float windup = 0.25f;
 
         [Tooltip("Cooldown after using the slam (seconds)")]
         public float cooldown = 8f;
@@ -28,20 +27,8 @@ namespace AmesGame
 
         [Tooltip("Vertical velocity to apply to player when slamming while midair (negative = down)")]
         public float airDropVelocity = -25f;
-        [Tooltip("Multiplier applied to the air drop velocity to increase how fast the player is pushed down")]
-        public float airDropStrength = 2f;
-        [Tooltip("Multiplier to temporarily increase player gravity while forcing the drop")]
-        public float gravityMultiplier = 3f;
-        [Header("Impact Scaling")]
-        [Tooltip("How much the fall speed increases slam impact (per unit of fall speed)")]
-        public float impactSpeedFactor = 0.05f;
-
-        [Tooltip("Maximum multiplier applied to damage/knockback from fall speed")]
-        public float maxImpactScale = 3f;
 
         private FieldInfo verticalVelocityField;
-        private float originalPlayerGravity;
-        private bool gravityModified = false;
 
         private PlayerController player;
         private void Awake()
@@ -49,7 +36,7 @@ namespace AmesGame
             player = GetComponentInParent<PlayerController>();
             if (player == null)
             {
-                player = UnityEngine.Object.FindAnyObjectByType<PlayerController>();
+                player = Object.FindAnyObjectByType<PlayerController>();
             }
 
             // cache field info for manipulating player's vertical velocity when slamming midair
@@ -67,8 +54,8 @@ namespace AmesGame
         {
             onCooldown = true;
 
-            // Ensure the player is pushed downward when slam activates so the slam reliably hits
-            if (player != null)
+            // If player is midair, push them downward immediately so they slam faster
+            if (player != null && !player.Grounded)
             {
                 if (verticalVelocityField == null)
                 {
@@ -77,55 +64,14 @@ namespace AmesGame
 
                 if (verticalVelocityField != null)
                 {
-                    float appliedVelocity = airDropVelocity * airDropStrength;
-                    verticalVelocityField.SetValue(player, appliedVelocity);
-                    Debug.Log($"SlamDunkPerk: Applied air drop velocity {appliedVelocity} to player (base {airDropVelocity} x {airDropStrength}).");
+                    verticalVelocityField.SetValue(player, airDropVelocity);
+                    Debug.Log($"SlamDunkPerk: Applied air drop velocity {airDropVelocity} to player.");
                 }
-
-                // If the player is currently grounded, nudge them downward a small amount so the engine registers a fall
-                if (player.Grounded)
-                {
-                    var cc = player.GetComponent<CharacterController>();
-                    if (cc != null)
-                    {
-                        // small immediate displacement downwards to ensure contact loss
-                        // use a stronger immediate displacement scaled by airDropStrength
-                        Vector3 push = Vector3.up * airDropVelocity * airDropStrength * 0.08f; // airDropVelocity is negative
-                        cc.Move(push);
-                    }
-                }
-
-                // temporarily increase gravity so the player falls faster
-                originalPlayerGravity = player.Gravity;
-                player.Gravity = originalPlayerGravity * gravityMultiplier;
-                gravityModified = true;
             }
 
-            // push the player down immediately and wait for them to land
-            Debug.Log("SlamDunkPerk: Forcing immediate drop and waiting to land...");
-
-            float maxFallWait = 2.0f; // safety timeout in seconds
-            float waited = 0f;
-            while (player != null && !player.Grounded && waited < maxFallWait)
-            {
-                waited += Time.deltaTime;
-                yield return null;
-            }
-
-            // restore gravity once landed or timeout
-            if (player != null && gravityModified)
-            {
-                player.Gravity = originalPlayerGravity;
-                gravityModified = false;
-            }
-
-            // determine impact scaling from player's vertical velocity (fall speed)
-            float fallSpeed = 0f;
-            if (player != null)
-                fallSpeed = Mathf.Abs(player._verticalVelocity);
-
-            float impactScale = 1f + fallSpeed * impactSpeedFactor;
-            impactScale = Mathf.Clamp(impactScale, 1f, maxImpactScale);
+            // brief windup so players can see/hear the slam
+            Debug.Log($"SlamDunkPerk: Windup {windup}s before slam.");
+            yield return new WaitForSeconds(windup);
 
             Vector3 center = transform.position;
             if (player != null)
@@ -145,9 +91,8 @@ namespace AmesGame
                 EnemyController enemy = c.GetComponentInParent<EnemyController>();
                 if (enemy == null) continue;
 
-                // deal damage scaled by impact
-                int appliedDamage = Mathf.Max(1, Mathf.RoundToInt(damage * impactScale));
-                enemy.TakeDamage(appliedDamage);
+                // deal damage
+                enemy.TakeDamage(damage);
                 hitCount++;
 
                 // attempt to apply knockback if enemy has a rigidbody
@@ -156,8 +101,7 @@ namespace AmesGame
                 {
                     Vector3 away = (c.transform.position - center).normalized;
                     if (away.sqrMagnitude < 0.01f) away = Vector3.up;
-                    float appliedKnock = knockbackForce * impactScale;
-                    rb.AddForce(away * appliedKnock, ForceMode.VelocityChange);
+                    rb.AddForce(away * knockbackForce, ForceMode.VelocityChange);
                 }
                 else
                 {
@@ -167,22 +111,12 @@ namespace AmesGame
                     {
                         Vector3 away = (c.transform.position - center).normalized;
                         if (away.sqrMagnitude < 0.01f) away = Vector3.back;
-                        agent.SetDestination(c.transform.position + away * (2f * impactScale));
+                        agent.SetDestination(c.transform.position + away * 2f);
                     }
                 }
             }
 
             Debug.Log($"SlamDunkPerk: Slam hit {hitCount} enemies in radius {radius} for {damage} damage.");
-
-            // notify listeners about slam landing
-            try
-            {
-                OnSlamLanded?.Invoke(center, hits);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogException(ex);
-            }
 
             // cooldown
             yield return new WaitForSeconds(cooldown);

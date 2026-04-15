@@ -10,35 +10,33 @@ namespace AmesGame
         private bool _hasDoubleJumped;
 
         private PlayerController _controller;
+
+        private FieldInfo verticalVelocityField;
+
         void Start()
         {
             _controller = GetComponent<PlayerController>();
+
+            verticalVelocityField =
+                typeof(PlayerController).GetField("_verticalVelocity",
+                BindingFlags.NonPublic | BindingFlags.Instance);
         }
-        
 
         void Update()
         {
-            if (_controller == null)
-                return;
-
-            // reset when grounded
             if (_controller.Grounded)
             {
                 _hasDoubleJumped = false;
                 return;
             }
 
-            // Support both the old Input.GetKeyDown and the Input "Jump" button so double-jump works
-            bool jumpPressed = Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Jump");
-
-            // allow a single extra jump while airborne
-            if (!_hasDoubleJumped && jumpPressed)
+            if (!_hasDoubleJumped && Input.GetKeyDown(KeyCode.Space))
             {
                 float gravity = _controller.Gravity;
+
                 float velocity = Mathf.Sqrt(DoubleJumpHeight * -2f * gravity);
 
-                // directly set the player's vertical velocity to perform the double-jump
-                _controller._verticalVelocity = velocity;
+                verticalVelocityField.SetValue(_controller, velocity);
 
                 _hasDoubleJumped = true;
             }
