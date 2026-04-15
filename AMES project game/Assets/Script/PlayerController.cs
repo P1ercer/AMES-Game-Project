@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -14,6 +15,8 @@ namespace AmesGame
 #endif
     public class PlayerController : MonoBehaviour
     {
+        // event fired when the player presses the jump input (rising edge)
+        public event Action OnJumpPressed;
         [Header("Player")]
         public float MoveSpeed = 4.0f;
         public float RotationSpeed = 1.0f;
@@ -130,8 +133,18 @@ namespace AmesGame
             UpdateHealthUI();
         }
 
+        private bool _wasJumpPressedLastFrame = false;
+
         private void Update()
         {
+            // detect jump press rising edge and notify subscribers before jump logic runs
+            bool jumpState = _input != null && _input.jump;
+            if (jumpState && !_wasJumpPressedLastFrame)
+            {
+                OnJumpPressed?.Invoke();
+            }
+            _wasJumpPressedLastFrame = jumpState;
+
             JumpAndGravity();
             GroundedCheck();
             Move();
@@ -175,13 +188,13 @@ namespace AmesGame
 
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
 
-            // ✅ MOMENTUM-BASED SPEED CHANGE (only modified section)
+
             float target = targetSpeed * inputMagnitude;
             float rate = (_input.move == Vector2.zero) ? DecelerationRate : AccelerationRate;
 
             _speed = Mathf.MoveTowards(currentHorizontalSpeed, target, rate * Time.deltaTime);
             _speed = Mathf.Round(_speed * 1000f) / 1000f;
-            // ✅ END CHANGE
+
 
             Vector3 inputDirection = Vector3.zero;
 

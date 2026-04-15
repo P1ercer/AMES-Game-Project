@@ -24,11 +24,6 @@ namespace AmesGame
         [Tooltip("Damage dealt to enemies in the explosion radius")]
         public int explosionDamage = 4;
 
-        [Tooltip("Force applied to nearby enemies when exploded")]
-        public float explosionKnockback = 12f;
-        [Tooltip("Global multiplier applied to explosion knockback to increase strength")]
-        public float knockbackMultiplier = 3f;
-
         [Tooltip("Optional VFX prefab to spawn at explosion")]
         public GameObject explosionVfx;
 
@@ -76,8 +71,6 @@ namespace AmesGame
             if (expl == null) expl = proj.AddComponent<ExplosionProjectile>();
             expl.radius = explosionRadius;
             expl.damage = explosionDamage;
-            expl.knockback = explosionKnockback;
-            expl.knockbackMultiplier = knockbackMultiplier;
             expl.vfx = explosionVfx;
             expl.owner = this;
 
@@ -112,8 +105,6 @@ namespace AmesGame
     {
         [HideInInspector] public float radius = 5f;
         [HideInInspector] public int damage = 4;
-        [HideInInspector] public float knockback = 8f;
-        [HideInInspector] public float knockbackMultiplier = 1.0f;
         [HideInInspector] public GameObject vfx;
         [HideInInspector] public EXPLOSION owner;
 
@@ -151,49 +142,6 @@ namespace AmesGame
                 {
                     enemy.TakeDamage(damage);
                     hitCount++;
-
-                    Rigidbody rb = c.attachedRigidbody ?? c.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        Vector3 dir = (c.transform.position - pos).normalized;
-                        if (dir.sqrMagnitude < 0.01f) dir = Vector3.up;
-                        rb.AddForce(dir * knockback * knockbackMultiplier, ForceMode.Impulse);
-                    }
-                    else
-                    {
-                        var agent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                        if (agent != null && agent.isOnNavMesh)
-                        {
-                            Vector3 away = (enemy.transform.position - pos).normalized;
-                            if (away.sqrMagnitude < 0.01f) away = Vector3.back;
-                            agent.SetDestination(enemy.transform.position + away * 2f);
-                        }
-                    }
-                }
-                else
-                {
-                    // nearby: reduced knockback and damage
-                    int reduced = Mathf.Max(1, Mathf.RoundToInt(damage * 0.6f));
-                    enemy.TakeDamage(reduced);
-                    hitCount++;
-
-                    Rigidbody rb = c.attachedRigidbody ?? c.GetComponent<Rigidbody>();
-                    if (rb != null)
-                    {
-                        Vector3 dir = (c.transform.position - pos).normalized;
-                        if (dir.sqrMagnitude < 0.01f) dir = Vector3.up;
-                        rb.AddForce(dir * (knockback * 0.5f * knockbackMultiplier), ForceMode.Impulse);
-                    }
-                    else
-                    {
-                        var agent = enemy.GetComponent<UnityEngine.AI.NavMeshAgent>();
-                        if (agent != null && agent.isOnNavMesh)
-                        {
-                            Vector3 away = (enemy.transform.position - pos).normalized;
-                            if (away.sqrMagnitude < 0.01f) away = Vector3.back;
-                            agent.SetDestination(enemy.transform.position + away * 1f);
-                        }
-                    }
                 }
             }
 
