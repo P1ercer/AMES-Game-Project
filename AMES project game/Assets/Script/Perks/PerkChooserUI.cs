@@ -53,6 +53,9 @@ namespace AmesGame
 
             gameObject.SetActive(true);
 
+            // ensure individual perk widgets are hidden until the player rolls
+            HideAll();
+
             if (rollButton != null)
                 rollButton.gameObject.SetActive(true);
 
@@ -135,13 +138,22 @@ namespace AmesGame
                 var slot = chosen[i];
                 var perk = slot.perk;
 
-                entry.button.gameObject.SetActive(true);
-
-                entry.label.text = perk.perkName;
-                entry.descriptionText.text = perk.description;
+                // show the button and its child UI elements
+                if (entry.button != null) entry.button.gameObject.SetActive(true);
+                if (entry.label != null)
+                {
+                    entry.label.gameObject.SetActive(true);
+                    entry.label.text = perk.perkName;
+                }
+                if (entry.descriptionText != null)
+                {
+                    entry.descriptionText.gameObject.SetActive(true);
+                    entry.descriptionText.text = perk.description;
+                }
 
                 if (entry.iconImage != null)
                 {
+                    entry.iconImage.gameObject.SetActive(perk.icon != null);
                     entry.iconImage.sprite = perk.icon;
                     entry.iconImage.enabled = perk.icon != null;
                 }
@@ -198,12 +210,19 @@ namespace AmesGame
                 var perk = active[i].perk;
 
                 entry.button.gameObject.SetActive(true);
-
-                entry.label.text = perk.perkName;
-                entry.descriptionText.text = perk.description;
-
+                if (entry.label != null)
+                {
+                    entry.label.gameObject.SetActive(true);
+                    entry.label.text = perk.perkName;
+                }
+                if (entry.descriptionText != null)
+                {
+                    entry.descriptionText.gameObject.SetActive(true);
+                    entry.descriptionText.text = perk.description;
+                }
                 if (entry.iconImage != null)
                 {
+                    entry.iconImage.gameObject.SetActive(perk.icon != null);
                     entry.iconImage.sprite = perk.icon;
                     entry.iconImage.enabled = perk.icon != null;
                 }
@@ -226,6 +245,12 @@ namespace AmesGame
             {
                 if (entry.button != null)
                     entry.button.gameObject.SetActive(false);
+                if (entry.label != null)
+                    entry.label.gameObject.SetActive(false);
+                if (entry.descriptionText != null)
+                    entry.descriptionText.gameObject.SetActive(false);
+                if (entry.iconImage != null)
+                    entry.iconImage.gameObject.SetActive(false);
             }
         }
 

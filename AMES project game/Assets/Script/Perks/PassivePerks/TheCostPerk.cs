@@ -29,6 +29,7 @@ namespace AmesGame
         private int originalDamage;
 
         private List<Perk> disabledPerks = new List<Perk>();
+        private float appliedFireRateMultiplier = 1f;
 
         public override void OnEquip()
         {
@@ -57,13 +58,15 @@ namespace AmesGame
 
             if (synergyActive)
             {
-                // --- Synergy: remove all debuffs and boost stats by 30% ---
-                finalSpeed = 1f * synergyMultiplier;
-                finalHealth = 1f * synergyMultiplier;
-                finalJump = 1f * synergyMultiplier;
-                finalGravity = 1f * synergyMultiplier;    // neutralize gravity penalty
-                finalDamage = 1f * synergyMultiplier;     // neutralize damage penalty
-                finalFireRate = 1f * synergyMultiplier;   // neutralize fire rate penalty
+                // --- Synergy: disable debuffs and apply only this perk's buffs scaled by synergy multiplier ---
+                finalSpeed = speedMultiplier * synergyMultiplier;
+                finalHealth = healthMultiplier * synergyMultiplier;
+                finalJump = jumpMultiplier * synergyMultiplier;
+                // do not apply gravity or damage penalties when synergy active
+                finalGravity = 1f;
+                finalDamage = 1f;
+                // do not apply fire rate penalty when synergy active
+                finalFireRate = 1f;
 
                 // Unlock all other perks
                 disabledPerks.Clear();
@@ -116,7 +119,9 @@ namespace AmesGame
                 originalDamage = shooter.damage;
                 shooter.damage = Mathf.RoundToInt(shooter.damage * finalDamage);
 
-                shooter.AddCooldownMultiplier(finalFireRate, 99999f);
+                // apply cooldown multiplier and remember what we applied so we can undo it accurately
+                appliedFireRateMultiplier = finalFireRate;
+                shooter.AddCooldownMultiplier(appliedFireRateMultiplier, 99999f);
             }
         }
 
@@ -137,7 +142,10 @@ namespace AmesGame
             if (shooter != null)
             {
                 shooter.damage = originalDamage;
-                shooter.AddCooldownMultiplier(1f / fireRateMultiplier, 99999f);
+                // undo the exact multiplier we applied
+                if (appliedFireRateMultiplier != 0f)
+                    shooter.AddCooldownMultiplier(1f / appliedFireRateMultiplier, 99999f);
+                appliedFireRateMultiplier = 1f;
             }
 
             if (perkController != null && disabledPerks.Count > 0)

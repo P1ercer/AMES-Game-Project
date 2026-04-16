@@ -28,6 +28,7 @@ namespace AmesGame
         private int originalDamage;
 
         private List<Perk> disabledPerks = new List<Perk>();
+        private float appliedFireRateMultiplier = 1f;
 
         public override void OnEquip()
         {
@@ -56,12 +57,12 @@ namespace AmesGame
 
             if (synergyActive)
             {
-                // --- Synergy: remove all debuffs and boost stats by 30% ---
-                finalSpeed = 1f * synergyMultiplier;
+                // --- Synergy: disable debuffs and apply only buffs scaled by synergy multiplier ---
+                finalSpeed = 1f * synergyMultiplier; // APrice primarily buffs damage, keep neutral movement
                 finalHealth = 1f * synergyMultiplier;
                 finalJump = 1f * synergyMultiplier;
-                finalGravity = 1f * synergyMultiplier;
-                finalDamage = 1f * synergyMultiplier;
+                finalGravity = 1f; // do not apply gravity penalty when synergy active
+                finalDamage = damageMultiplier * synergyMultiplier;
 
                 disabledPerks.Clear();
             }
@@ -111,6 +112,7 @@ namespace AmesGame
             {
                 originalDamage = shooter.damage;
                 shooter.damage = Mathf.RoundToInt(shooter.damage * finalDamage);
+                appliedFireRateMultiplier = 1f; // APrice doesn't change fire rate, but keep symmetry
             }
         }
 
@@ -131,6 +133,9 @@ namespace AmesGame
             if (shooter != null)
             {
                 shooter.damage = originalDamage;
+                if (appliedFireRateMultiplier != 0f)
+                    shooter.AddCooldownMultiplier(1f / appliedFireRateMultiplier, 99999f);
+                appliedFireRateMultiplier = 1f;
             }
 
             if (perkController != null && disabledPerks.Count > 0)
