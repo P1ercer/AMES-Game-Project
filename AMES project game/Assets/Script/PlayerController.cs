@@ -68,6 +68,18 @@ namespace AmesGame
             StartCoroutine(TemporaryImmunityCoroutine(seconds));
         }
 
+        // Apply a knockback impulse to the player.
+        // horizontalImpulse is in world units (meters per second) to add to the player's horizontal velocity.
+        // verticalImpulse is an upward velocity to set (will not reduce an existing larger upward velocity).
+        public void ApplyKnockback(Vector3 horizontalImpulse, float verticalImpulse)
+        {
+            // add horizontal impulse
+            _horizontalVelocity += new Vector3(horizontalImpulse.x, 0f, horizontalImpulse.z);
+
+            // set vertical velocity to at least the requested upward impulse
+            _verticalVelocity = Mathf.Max(_verticalVelocity, verticalImpulse);
+        }
+
         private IEnumerator TemporaryImmunityCoroutine(float seconds)
         {
             isImmune = true;
