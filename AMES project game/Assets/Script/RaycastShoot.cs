@@ -57,7 +57,15 @@ public class RaycastShoot : MonoBehaviour
     private void ShootOnce()
     {
         RaycastHit hit;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        // Raycast from camera through the crosshair center
+        Vector2 screenPoint = Vector2.zero;
+        var playerUI = FindObjectOfType<PlayerUI>();
+        if (playerUI != null)
+            screenPoint = playerUI.GetCrosshairScreenPosition();
+        else
+            screenPoint = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPoint);
 
         if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
         {
