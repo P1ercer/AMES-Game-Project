@@ -342,23 +342,28 @@ MonoBehaviour:
   firePoint: {fileID: 7751218801359968644}
   fireRate: 2
   bulletSpeed: 15
-  chaseDistance: 10
+  chaseDistance: 20
   health: 3
   healthBar: {fileID: 5473426222525628054}
   hasSlam: 0
   hasHandCannon: 0
-  hasForceField: 0
-  slamRadius: 4
-  slamDamage: 2
-  slamKnockback: 6
-  slamCooldown: 6
+  hasForceField: 1
+  slamRadius: 9
+  slamDamage: 3
+  slamKnockback: 15
+  slamCooldown: 5
+  slamJumpChance: 0.5
+  slamJumpForce: 4
   handCannonProjectile: {fileID: 8231196997462454073, guid: ad7334f7e59bf6340882c9bcad526eb2, type: 3}
   handCannonSpawn: {fileID: 7751218801359968644}
-  handCannonProjectileSpeed: 12
-  handCannonCooldown: 2
+  handCannonProjectileSpeed: 12.7
+  handCannonCooldown: 3
   handCannonRecoil: 3
   forceFieldDuration: 3
   forceFieldCooldown: 10
+  usePerksAtRange: 1
+  perkRange: 20
+  forceFieldOnPerkChance: 0.15
 --- !u!1 &7030368663503027576
 GameObject:
   m_ObjectHideFlags: 0
