@@ -16,26 +16,6 @@ public class PlayerUI : MonoBehaviour
                 keyImage.enabled = hasKey;
         }
 
-    // Returns the screen-space position of the crosshair. If the crosshair parts are not set,
-    // returns the center of the screen.
-    public Vector2 GetCrosshairScreenPosition()
-    {
-        Vector2 center = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-
-        // prefer crosshairPart1 if available
-        if (crosshairPart1 == null)
-            return center;
-
-        var rt = crosshairPart1.GetComponent<RectTransform>();
-        Camera cam = Camera.main;
-        if (rt != null && cam != null)
-        {
-            return RectTransformUtility.WorldToScreenPoint(cam, rt.position);
-        }
-
-        return center;
-    }
-
     private void Start()
     {
         // hide key UI by default

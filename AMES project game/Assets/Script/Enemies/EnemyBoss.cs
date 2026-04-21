@@ -41,6 +41,11 @@ namespace AmesGame
         public float perkRange = 10f;
         [Tooltip("Chance (0..1) to trigger forcefield when performing another perk")]
         public float forceFieldOnPerkChance = 0.25f;
+        [Header("Force Field Visual")]
+        public float forceFieldRadius = 3f;
+
+        private GameObject forceFieldVisual;
+        private Material forceFieldMaterial;
 
         private float slamNext = 0f;
         private float handNext = 0f;
@@ -251,8 +256,19 @@ namespace AmesGame
         private IEnumerator ActivateForceField()
         {
             forceActive = true; // Activate force field
+
+            if (forceFieldVisual != null)
+            {
+                forceFieldVisual.SetActive(true);
+                // ensure correct size
+                forceFieldVisual.transform.localScale = Vector3.one * forceFieldRadius * 2f;
+            }
+
             yield return new WaitForSeconds(forceFieldDuration); // Wait for duration
+
             forceActive = false; // Deactivate force field
+            if (forceFieldVisual != null)
+                forceFieldVisual.SetActive(false);
         }
 
         public override void TakeDamage(int damage)
