@@ -1,114 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &81370411737544223
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3166080557339453875}
-  - component: {fileID: 1151261469253595866}
-  - component: {fileID: 5495843689464504381}
-  - component: {fileID: 8966145415674686005}
-  m_Layer: 0
-  m_Name: Gun
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3166080557339453875
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81370411737544223}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.44, y: 0.89700043, z: 0.48}
-  m_LocalScale: {x: 0.31057, y: 0.31057, z: 0.9258217}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 2813700173029841776}
-  m_Father: {fileID: 8997996947095583982}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &1151261469253595866
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81370411737544223}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &5495843689464504381
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81370411737544223}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8966145415674686005
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81370411737544223}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4135013735270702863
 GameObject:
   m_ObjectHideFlags: 0
@@ -274,12 +165,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6677990709317936587}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.584}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.03, y: 0.31, z: 0.402}
+  m_LocalScale: {x: 1.3443425, y: 1.3443425, z: 4.0075393}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3166080557339453875}
+  m_Father: {fileID: 198186345902473516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8616685848737228372
 GameObject:
@@ -291,10 +182,35 @@ GameObject:
   m_Component:
   - component: {fileID: 8997996947095583982}
   - component: {fileID: 8616685848737228382}
-  - component: {fileID: 1978471637655604388}
-  - component: {fileID: 5420857361349278248}
   - component: {fileID: 8616685848737228376}
   - component: {fileID: 7278673725361762578}
+  - component: {fileID: 5993849807399994567}
+  - component: {fileID: 343816163321300600}
+  - component: {fileID: 4194752082452349878}
+  - component: {fileID: 8996698412037461615}
+  - component: {fileID: 318910216328259246}
+  - component: {fileID: 5044748645915417003}
+  - component: {fileID: 3431051184357736916}
+  - component: {fileID: 8890715998229267294}
+  - component: {fileID: 3088967800093855351}
+  - component: {fileID: 8459480160129199587}
+  - component: {fileID: 8308199975299357363}
+  - component: {fileID: 2260816399841212083}
+  - component: {fileID: 1769258014363537002}
+  - component: {fileID: 6457496004420881353}
+  - component: {fileID: 8011034820631674792}
+  - component: {fileID: 3148922913024111240}
+  - component: {fileID: 3389705206272370906}
+  - component: {fileID: 5434958352530736516}
+  - component: {fileID: 712959463097788356}
+  - component: {fileID: 2034943618386049878}
+  - component: {fileID: 6455196858527201254}
+  - component: {fileID: 857237484190834002}
+  - component: {fileID: 5153801744322650224}
+  - component: {fileID: 4775559684780266924}
+  - component: {fileID: 6897191217817052472}
+  - component: {fileID: 6253754220497477460}
+  - component: {fileID: 826724922179452317}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -317,7 +233,7 @@ Transform:
   m_Children:
   - {fileID: 4135013735270702856}
   - {fileID: 5393215578589016641}
-  - {fileID: 3166080557339453875}
+  - {fileID: 198186345902473516}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8616685848737228382
@@ -345,42 +261,6 @@ CharacterController:
   m_SkinWidth: 0.02
   m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.93, z: 0}
---- !u!114 &1978471637655604388
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 909d917d73a63f940ac158d02e936645, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pushLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  canPush: 0
-  strength: 1.1
---- !u!114 &5420857361349278248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8616685848737228372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  look: {x: 0, y: 0}
-  jump: 0
-  sprint: 0
-  analogMovement: 0
-  cursorLocked: 1
-  cursorInputForLook: 1
 --- !u!114 &8616685848737228376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -491,9 +371,753 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a00e9a543c0bb174baa4780776229bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  action: {fileID: -6407636032385626233, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+  shootAction: {fileID: -6407636032385626233, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
   projectileShoot: 1
   prefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
   spawnPosition: {fileID: 2813700173029841776}
   shootSpeed: 5
   bulletLifetime: 10
+  shotCooldown: 0.3
+  damage: 5
+  canShoot: 1
+  bulletSpeedMultiplier: 2
+--- !u!114 &5993849807399994567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465c036de9024b441ba990ba7607de87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MoveSpeed: 15
+  RotationSpeed: 2
+  AccelerationRate: 80
+  DecelerationRate: 15
+  JumpHeight: 1
+  Gravity: -12
+  JumpTimeout: 0.1
+  FallTimeout: 0.15
+  Grounded: 1
+  GroundedOffset: -0.14
+  GroundedRadius: 0.5
+  GroundLayers:
+    serializedVersion: 2
+    m_Bits: 1
+  CinemachineCameraTarget: {fileID: 4135013735270702863}
+  TopClamp: 90
+  BottomClamp: -90
+  MaxHealth: 100
+  CurrentHealth: 100
+  healthBar: {fileID: 0}
+  bulletDamage: 10
+  isImmune: 0
+  _verticalVelocity: 0
+--- !u!114 &343816163321300600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdfeae8510354c449cc5ae3432bdbca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
+  jump: 0
+  analogMovement: 0
+  cursorLocked: 1
+  cursorInputForLook: 1
+--- !u!114 &4194752082452349878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f39da1d8bb78abc4d8ac2d00795442f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoubleJumpHeight: 1.5
+--- !u!114 &8996698412037461615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aca4a29900e0fc4ab03f480638006dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkSlots:
+  - perk: {fileID: 2260816399841212083}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 3088967800093855351}
+    mode: 0
+    activationKey: 1
+    chosen: 1
+    weight: 2.5
+    includeInRandom: 1
+  - perk: {fileID: 8890715998229267294}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 25
+    includeInRandom: 1
+  - perk: {fileID: 3431051184357736916}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 5
+    includeInRandom: 1
+  - perk: {fileID: 318910216328259246}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+    weight: 10
+    includeInRandom: 1
+  - perk: {fileID: 5044748645915417003}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 8459480160129199587}
+    mode: 0
+    activationKey: 0
+    chosen: 0
+    weight: 5
+    includeInRandom: 1
+  - perk: {fileID: 8308199975299357363}
+    mode: 0
+    activationKey: 1
+    chosen: 0
+    weight: 20
+    includeInRandom: 1
+  - perk: {fileID: 1769258014363537002}
+    mode: 0
+    activationKey: 2
+    chosen: 0
+    weight: 15
+    includeInRandom: 1
+  - perk: {fileID: 6457496004420881353}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 8011034820631674792}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 3148922913024111240}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 35
+    includeInRandom: 1
+  - perk: {fileID: 3389705206272370906}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 45
+    includeInRandom: 1
+  - perk: {fileID: 5434958352530736516}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 712959463097788356}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 2034943618386049878}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 30
+    includeInRandom: 1
+  - perk: {fileID: 6455196858527201254}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 0.5
+    includeInRandom: 1
+  - perk: {fileID: 857237484190834002}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 0.5
+    includeInRandom: 1
+  - perk: {fileID: 4775559684780266924}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 2.5
+    includeInRandom: 1
+  - perk: {fileID: 6253754220497477460}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 2.5
+    includeInRandom: 1
+  - perk: {fileID: 6897191217817052472}
+    mode: 1
+    activationKey: 2
+    chosen: 0
+    weight: 2.5
+    includeInRandom: 1
+  maxActivePerks: 3
+  maxPassivePerks: 4
+--- !u!114 &318910216328259246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4fb17bd2389bfe4b9156ca7131e4206, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Force Shield
+  description: Summon a forcefield around you that blocks all damage towards you
+    for a bit, activated via the CTRL Key
+  icon: {fileID: 0}
+  duration: 15
+  cooldown: 30
+  forcefieldVfx: {fileID: 0}
+--- !u!114 &5044748645915417003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 778c9ccf3663d2348b412b7f16a1404e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Higher Caliber Bullets
+  description: Doubles your damage for a while. activated by the Q key
+  icon: {fileID: 0}
+  duration: 20
+  cooldown: 30
+--- !u!114 &3431051184357736916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f809899f26d82b4ea6d4d1b7cb77a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Slam Dunk
+  description: Slam unto your enemies, dealing high damage to all enemies within
+    range. activated by the SHIFT key
+  icon: {fileID: 0}
+  damage: 15
+  radius: 5
+  cooldown: 8
+  knockbackForce: 6
+  airDropVelocity: -25
+  airDropStrength: 2
+  gravityMultiplier: 3
+  impactSpeedFactor: 0.05
+  maxImpactScale: 3
+--- !u!114 &8890715998229267294
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18d71ee4fb90ae45bfd615cdb0f17bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Grappler
+  description: Grapple onto an enemy and pull them towards you. activated by the
+    SHIFT key
+  icon: {fileID: 0}
+  range: 20
+  pullDuration: 1.5
+  pullSpeed: 45
+  cooldown: 5
+--- !u!114 &3088967800093855351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 598b104fbae96024b95619cd88694edd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Handcannon
+  description: Shoot a single powerful bullet at an enemy, bound to instantly kill
+    any weak enemy. activated by the CTRL key
+  icon: {fileID: 21300000, guid: 999e9ba8760052044b9dfebb2dd0e032, type: 3}
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 2813700173029841776}
+  projectileSpeed: 20
+  projectileLifetime: 5
+  damage: 25
+  knockbackAmount: 15
+  stationaryMultiplier: 3
+  cooldown: 1.2
+--- !u!114 &8459480160129199587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffd00a173f63a734a8be8772d30139f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Launcher
+  description: Shoot a bomb at a group of enemies, dealing medium damage to all enemies
+    in its range, does extra damage with a direct hit to an enemy. activated by the
+    SHIFT key
+  icon: {fileID: 21300000, guid: cca16e2fcf8f5b84a804931c93a04287, type: 3}
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 2813700173029841776}
+  projectileSpeed: 25
+  projectileLifetime: 10
+  explosionRadius: 6
+  explosionDamage: 1
+  explosionVfx: {fileID: 0}
+  cooldown: 3
+--- !u!114 &8308199975299357363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe7de6fdd506f04fb41f5b29367c5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Fireball
+  description: Shoot a Fireball at an enemy of which it deals damage over time to
+    that enemy activated by the CTRL key
+  icon: {fileID: 21300000, guid: d42985fc7f999134680f6aca3459976b, type: 3}
+  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
+  spawnPoint: {fileID: 2813700173029841776}
+  projectileSpeed: 18
+  projectileLifetime: 6
+  dotDamagePerTick: 1
+  dotTickInterval: 1
+  dotDuration: 6
+  cooldown: 2.5
+--- !u!114 &2260816399841212083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2c2eeb291d746347a6341dd815ab802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Need for Speed
+  description: Boosts movement speed for a while. activated by the Q key
+  icon: {fileID: 0}
+  speedMultiplier: 3
+  duration: 5
+  cooldown: 10
+--- !u!114 &1769258014363537002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2adf66754ce890343b08bf29ffc29498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Loose Trigger finger
+  description: Boosts your firerate for a while. activated by the Q key.
+  icon: {fileID: 0}
+  fireSpeedMultiplier: 4
+  duration: 7
+  cooldown: 12
+  shooter: {fileID: 7278673725361762578}
+--- !u!114 &6457496004420881353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13fc8206c0cca9f4e8fdc4ea50955572, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Tiny
+  description: Raises your movement speed but decreases your health
+  icon: {fileID: 21300000, guid: 6234d5c54474b6242b4028b8a55a05b7, type: 3}
+  speedMultiplier: 1.3
+  healthMultiplier: 0.7
+--- !u!114 &8011034820631674792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b333789b9f3ece4438882f3b567b28f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Giant
+  description: boosts your health but decreases your movement speed
+  icon: {fileID: 21300000, guid: 79542a9603032f340ab8e4add006fc87, type: 3}
+  speedMultiplier: 0.5
+  healthMultiplier: 1.3
+--- !u!114 &3148922913024111240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbed864fa678b3d4388d8e9d50650eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: The Flash
+  description: boosts your movement speed but decreases your firerate
+  icon: {fileID: 0}
+  speedMultiplier: 1.6
+  fireRateMultiplier: 1.5
+--- !u!114 &3389705206272370906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cacba217ef7160948bb957ad0e514a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Featherweight
+  description: Removes friction on the floor causing endless movement, but increases
+    your weight (faster falling)
+  icon: {fileID: 21300000, guid: fda7d715652672643a9451e07cbba205, type: 3}
+  gravityMultiplier: 0.4
+--- !u!114 &5434958352530736516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b4af749aa0b51f49910c166b0185f2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Mario
+  description: Increases jump height but increases your weight (faster falling)
+  icon: {fileID: 0}
+  jumpMultiplier: 1.5
+  gravityMultiplier: 1.4
+--- !u!114 &712959463097788356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d05a630e6ae2c7c40a3e30d9ad77383a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Luigi
+  description: Increases jump height and decreases weight (floatier falling) but
+    decreases your Max health and Damage. increases your jump cooldown
+  icon: {fileID: 0}
+  jumpMultiplier: 1.5
+  gravityMultiplier: 0.6
+  healthMultiplier: 0.75
+  jumpTimeoutMultiplier: 7
+  damageMultiplier: 0.7
+--- !u!114 &2034943618386049878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 776cb3852ead6bd4cbe387870f603931, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Heavy hitting
+  description: Boosts your bullet damage but decreases your movement speed and rate
+    of fire
+  icon: {fileID: 21300000, guid: 851892a4d4b212847bfd8ef14d9ff34f, type: 3}
+  damageMultiplier: 1.8
+  speedMultiplier: 0.7
+  fireRateMultiplier: 1.5
+--- !u!114 &6455196858527201254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48acfc7d4eb9cf44cb13e9e635d2ec0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: The Cost
+  description: Increases speed, health, and jump height, but decreases damage and
+    firerate, increases weight (faster falling) Find the other piece for high power.
+    (disables all other perks and locks you out of getting others)
+  icon: {fileID: 21300000, guid: dad2a456ece561e4aa33ff1ab4d0987f, type: 3}
+  speedMultiplier: 2
+  healthMultiplier: 1.5
+  jumpMultiplier: 1.5
+  gravityMultiplier: 1.2
+  damageMultiplier: 0.7
+  fireRateMultiplier: 1.3
+  synergyMultiplier: 1.5
+--- !u!114 &857237484190834002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb92c07c88440544992004ee2fb5ebe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: A price
+  description: DRASTICALLY Increase damage but decreases movement speed, health,
+    jump height, and increase weight. Find the other piece for high power. (disables
+    all other perks and locks you out of finding others)
+  icon: {fileID: 21300000, guid: fed30164c8cdf1447b7507f3f9cffb78, type: 3}
+  speedMultiplier: 0.7
+  healthMultiplier: 0.5
+  jumpMultiplier: 1
+  gravityMultiplier: 1.3
+  damageMultiplier: 5
+  synergyMultiplier: 1.5
+--- !u!114 &5153801744322650224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a98a67934a41af43a26882ab626acda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Talented
+  description: Gives you two extra passive perk slots!
+  icon: {fileID: 21300000, guid: 088a2ca52e1adff44befdc334efd1586, type: 3}
+  additionalPassivePerks: 2
+--- !u!114 &4775559684780266924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd2b1b1578c52934fb0480a4ab9e0519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Going Nuclear
+  description: Increases damage, might do a little back to you.
+  icon: {fileID: 0}
+  damageMultiplier: 2
+  radiusMultiplier: 1.75
+  projectileSpeedMultiplier: 1.7
+  cooldownMultiplier: 0.7
+--- !u!114 &6897191217817052472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d53aed0d76887f458856cc389099cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: GroundPound
+  description: Increases your slam stats and adds DOT (damage over time) to you and
+    the enemy.
+  icon: {fileID: 0}
+  damageMultiplier: 1.5
+  radiusMultiplier: 1.25
+  cooldownMultiplier: 0.8
+  airDropMultiplier: 1.1
+  enemyDotPerTick: 2
+  playerDotPerTick: 1
+  dotInterval: 1
+  dotDuration: 5
+--- !u!114 &6253754220497477460
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 927a589d1076ca649a88e084173aee94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  perkName: Hand Destroyer
+  description: Increase your handcannon stats but it will do a little bit of damage
+    back to you
+  icon: {fileID: 0}
+  cannonSpeedMultiplier: 1.5
+  cannonDamageMultiplier: 1.5
+  cannonCooldownMultiplier: 0.75
+  reflectDamageToPlayer: 1
+  selfDamageAmount: 5
+--- !u!114 &826724922179452317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5685c32365828794cab631b5d52c4538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasKey: 0
+--- !u!1001 &381293122004772551
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8997996947095583982}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.23102
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.23102
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.23102
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.602
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.91573
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.32607
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      propertyPath: m_Name
+      value: Mp7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2813700173029841776}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+--- !u!4 &198186345902473516 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+  m_PrefabInstance: {fileID: 381293122004772551}
+  m_PrefabAsset: {fileID: 0}

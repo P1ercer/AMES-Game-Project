@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine;
 
 namespace AmesGame
 {
@@ -35,6 +36,7 @@ namespace AmesGame
 
         private bool onCooldown = false;
         private PlayerController player;
+        // This perk no longer uses animations; visual effects should be handled by projectile prefab
 
         private void Awake()
         {
@@ -86,15 +88,26 @@ namespace AmesGame
             // notify listeners that we've fired (pass spawned projectile)
             OnFired?.Invoke(proj);
 
-            Debug.Log($"HandCannonperk: Fired projectile dealing {damage} damage.");
-
-            // Apply recoil/knockback to player
+            // Spawn directional VFX depending on player movement
             if (player != null)
             {
-                var cc = player.GetComponent<CharacterController>();
+                var inputsForVfx = player.GetComponent<AmesGameInputs>();
+                Vector2 moveForVfx = inputsForVfx != null ? inputsForVfx.move : Vector2.zero;
+
+                float absX = Mathf.Abs(moveForVfx.x);
+                float absY = Mathf.Abs(moveForVfx.y);
+
+                // Visuals are handled by the projectile prefab or external systems. No animation is played here.
+            }
+
+            Debug.Log($"HandCannonperk: Fired projectile dealing {damage} damage.");
+
+            // Apply recoil/knockback to player (prefer physics via Rigidbody, otherwise use PlayerController API)
+            if (player != null)
+            {
                 Vector3 pushDir = -spawnPoint.forward;
 
-                // Determine movement-based multiplier: standing still -> larger recoil; moving forward/sideways -> reduced recoil
+                // Determine movement-based multiplier: standing still -> stronger recoil; moving -> still receives full recoil
                 float multiplier = 1f;
                 var inputs = player.GetComponent<AmesGameInputs>();
                 Vector2 move = inputs != null ? inputs.move : Vector2.zero;
@@ -104,34 +117,29 @@ namespace AmesGame
                     // standing still -> stronger recoil
                     multiplier = stationaryMultiplier;
                 }
-                else
-                {
-                    // moving forward reduces recoil more than strafing
-                    if (move.y > 0.1f)
-                        multiplier = 0.5f; // moving forward
-                    else if (Mathf.Abs(move.x) > 0.1f)
-                        multiplier = 0.7f; // strafing
-                }
 
-                Vector3 displacement = pushDir.normalized * knockbackAmount * multiplier;
+                Vector3 horizontalImpulse = pushDir.normalized * knockbackAmount * multiplier;
+                float verticalImpulse = knockbackAmount * 0.25f; // small upward component
 
-                if (cc != null)
+                // prefer Rigidbody-based physics
+                var rbPlayer = player.GetComponent<Rigidbody>();
+                if (rbPlayer != null)
                 {
-                    // Move character controller immediately (small teleport-like impulse)
-                    cc.Move(displacement);
+                    Vector3 total = horizontalImpulse + Vector3.up * verticalImpulse;
+                    rbPlayer.AddForce(total, ForceMode.VelocityChange);
                 }
                 else
                 {
-                    // fallback: move transform
-                    player.transform.position += displacement;
+                    // use PlayerController's ApplyKnockback if available
+                    player.ApplyKnockback(horizontalImpulse, verticalImpulse);
                 }
 
-                Debug.Log($"HandCannonperk: Applied recoil to player. base={knockbackAmount}, multiplier={multiplier}, final={displacement.magnitude}.");
+                Debug.Log($"HandCannonperk: Applied recoil to player. base={knockbackAmount}, multiplier={multiplier} => total={horizontalImpulse.magnitude}");
+
+                // cooldown wait
+                yield return new WaitForSeconds(cooldown);
+                onCooldown = false;
             }
-
-            // cooldown wait
-            yield return new WaitForSeconds(cooldown);
-            onCooldown = false;
         }
     }
 }

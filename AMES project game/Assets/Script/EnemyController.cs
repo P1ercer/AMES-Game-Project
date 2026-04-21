@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     // Health
     public float health = 3;
     public Image healthBar;
-    private float maxHealth;
+    protected float maxHealth;
 
     void Start()
     {
@@ -48,7 +48,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
         if (player == null) return;
 
@@ -57,8 +57,6 @@ public class EnemyController : MonoBehaviour
 
         if (direction.magnitude < chaseDistance)
         {
-            agent.destination = player.transform.position;
-
             // Face the player
             transform.LookAt(player.transform);
 
@@ -71,7 +69,8 @@ public class EnemyController : MonoBehaviour
         }
         else
         {
-            agent.destination = home;
+            // idle: keep agent at home position (do not set destination to avoid NavMesh errors)
+            // agent.destination = home;
         }
     }
 
@@ -89,7 +88,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Health
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         float adjusted = damage * DamageMultiplier;
         int applied = Mathf.Max(1, Mathf.RoundToInt(adjusted));
