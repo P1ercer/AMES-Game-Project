@@ -390,6 +390,120 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 1
+--- !u!1001 &657120038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 34.926632
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.38
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 75.19908
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_Name
+      value: Nerd.Red
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+--- !u!1001 &767157524
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 21.905186
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 4.6381145
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 59.564026
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071067
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
+      propertyPath: m_Name
+      value: Fatnerd2.Boss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,3 +866,5 @@ SceneRoots:
   - {fileID: 3252079192441437303}
   - {fileID: 16902935}
   - {fileID: 1923854923}
+  - {fileID: 767157524}
+  - {fileID: 657120038}
