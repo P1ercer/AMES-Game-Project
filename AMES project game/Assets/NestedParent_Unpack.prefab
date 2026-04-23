@@ -482,7 +482,7 @@ Transform:
   m_GameObject: {fileID: 9022774333485098004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 0.595, z: 1.08}
+  m_LocalPosition: {x: -1.25, y: 1.31, z: 1.08}
   m_LocalScale: {x: 0.0823785, y: 0.0823785, z: 0.0823785}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -677,10 +677,18 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 8379748878025739318}
+    - target: {fileID: 5393215578589016640, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 3653962399901560629}
+    - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: deathSceneName
+      value: DeathScreen
+      objectReference: {fileID: 0}
     - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: damage
       value: 3
@@ -697,9 +705,21 @@ PrefabInstance:
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 8379748878025739318}
+    - target: {fileID: 8459480160129199587, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: explosionDamage
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8459480160129199587, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: explosionRadius
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
+      objectReference: {fileID: 0}
+    - target: {fileID: 8996698412037461615, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: perkSlots.Array.data[1].chosen
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_LocalPosition.x

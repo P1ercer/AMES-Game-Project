@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using UnityEngine;
-using UnityEngine;
 
 namespace AmesGame
 {
@@ -36,7 +35,6 @@ namespace AmesGame
 
         private bool onCooldown = false;
         private PlayerController player;
-        // This perk no longer uses animations; visual effects should be handled by projectile prefab
 
         private void Awake()
         {
