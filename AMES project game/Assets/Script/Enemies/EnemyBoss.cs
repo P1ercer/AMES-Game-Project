@@ -4,7 +4,6 @@ using UnityEngine.AI;
 
 namespace AmesGame
 {
-    // EnemyBoss: derived from EnemyController but can have player-like perks toggled on.
     // Perks implemented: Slam (area knockback/damage), HandCannon (fires a projectile, applies self-knockback), ForceField (temporary invulnerability)
     [RequireComponent(typeof(NavMeshAgent))]
     public class EnemyBoss : EnemyController

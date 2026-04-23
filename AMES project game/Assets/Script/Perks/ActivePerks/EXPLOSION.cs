@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace AmesGame
@@ -130,22 +131,27 @@ namespace AmesGame
 
             // Find all potential targets
             Collider[] hits = Physics.OverlapSphere(pos, radius);
+
             int hitCount = 0;
+
+            // Prevent hitting same enemy multiple times (if multiple colliders)
+            HashSet<EnemyController> damagedEnemies = new HashSet<EnemyController>();
+
             foreach (var c in hits)
             {
                 if (c == null) continue;
+
                 var enemy = c.GetComponentInParent<EnemyController>();
                 if (enemy == null) continue;
 
-                // Distinguish directly hit collider vs nearby ones
-                if (directHit != null && c == directHit)
-                {
-                    enemy.TakeDamage(damage);
-                    hitCount++;
-                }
+                if (damagedEnemies.Contains(enemy)) continue;
+
+                enemy.TakeDamage(damage);
+                damagedEnemies.Add(enemy);
+                hitCount++;
             }
 
-            Debug.Log($"ExplosionProjectile: Exploded at {pos} affecting {hitCount} enemies (direct hit: {directHit}).");
+            Debug.Log($"ExplosionProjectile: Exploded at {pos} affecting {hitCount} enemies.");
 
             Destroy(gameObject);
         }

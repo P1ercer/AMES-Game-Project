@@ -50,14 +50,16 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (player == null) return;
+        if (player == null || agent == null) return;
 
-        // Movement
-        Vector3 direction = player.transform.position - transform.position;
+        float distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (direction.magnitude < chaseDistance)
+        if (distance < chaseDistance)
         {
-            // Face the player
+            // Move toward player
+            agent.SetDestination(player.transform.position);
+
+            // Face the player (optional if agent updates rotation)
             transform.LookAt(player.transform);
 
             // Shooting
@@ -68,9 +70,8 @@ public class EnemyController : MonoBehaviour
             }
         }
         else
-        {
-            // idle: keep agent at home position (do not set destination to avoid NavMesh errors)
-            // agent.destination = home;
+        { 
+            agent.SetDestination(home);
         }
     }
 
