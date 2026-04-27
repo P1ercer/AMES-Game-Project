@@ -151,7 +151,7 @@ MonoBehaviour:
   handCannonSpawn: {fileID: 7768813340850542208}
   handCannonProjectileSpeed: 12.7
   handCannonCooldown: 4.5
-  handCannonRecoil: 5
+  handCannonRecoil: 10
   forceFieldDuration: 5
   forceFieldCooldown: 10
   usePerksAtRange: 1

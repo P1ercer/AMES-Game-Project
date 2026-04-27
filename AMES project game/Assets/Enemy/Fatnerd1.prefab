@@ -77,7 +77,7 @@ MonoBehaviour:
   health: 51
   healthBar: {fileID: 0}
   hasSlam: 0
-  hasHandCannon: 1
+  hasHandCannon: 0
   hasForceField: 1
   slamRadius: 9
   slamDamage: 3
