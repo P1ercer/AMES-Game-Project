@@ -1092,7 +1092,8 @@ PrefabInstance:
       value: GreenNerd
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
