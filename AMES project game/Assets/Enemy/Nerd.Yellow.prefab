@@ -91,6 +91,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1018664272722485354, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
       propertyPath: m_Name
       value: Nerd.Yellow
@@ -140,37 +144,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1037072559511658109}
-    - targetCorrespondingSourceObject: {fileID: -1018664272722485354, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4700527297920616321}
+      addedObject: {fileID: 3939416739141809233}
   m_SourcePrefab: {fileID: 100100000, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
---- !u!1 &4036798950968651583 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -1018664272722485354, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
-  m_PrefabInstance: {fileID: 5321404830044483753}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &4700527297920616321
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4036798950968651583}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4711208715938537054, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
 --- !u!4 &4472730113865606735 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8632055958874330854, guid: 31b24a0a65d69644394a08e3547d87af, type: 3}
@@ -195,10 +172,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 3120353964073649286, guid: b255947e0d3cf2f43bfb664cb7b5604a, type: 3}
   firePoint: {fileID: 9106866384486108695}
-  fireRate: 2
+  fireRate: 3
   bulletSpeed: 15
-  chaseDistance: 10
-  health: 3
+  chaseDistance: 15
+  health: 45
   healthBar: {fileID: 0}
 --- !u!114 &6132835859513903160
 MonoBehaviour:
@@ -235,3 +212,24 @@ NavMeshAgent:
   m_BaseOffset: 1.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!135 &3939416739141809233
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4978734534986321400}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 1.6027193
+  m_Center: {x: 0, y: 0.91099817, z: 0.020121945}
