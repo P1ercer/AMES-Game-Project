@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3625367775319254379}
   - component: {fileID: 7999813041393350228}
   - component: {fileID: 4930713722583546330}
-  - component: {fileID: 8404462017881953915}
+  - component: {fileID: 751145192056586489}
   m_Layer: 0
   m_Name: Fatnerd1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,7 +74,7 @@ MonoBehaviour:
   fireRate: 5
   bulletSpeed: 19
   chaseDistance: 20
-  health: 50
+  health: 51
   healthBar: {fileID: 0}
   hasSlam: 0
   hasHandCannon: 0
@@ -96,8 +96,8 @@ MonoBehaviour:
   perkRange: 20
   forceFieldOnPerkChance: 0.15
   forceFieldRadius: 3
---- !u!64 &8404462017881953915
-MeshCollider:
+--- !u!136 &751145192056586489
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -114,10 +114,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Radius: 1.8101306
+  m_Height: 5.1117005
+  m_Direction: 1
+  m_Center: {x: 0.07593799, y: 0.973768, z: 0.15156269}
 --- !u!1 &2238164887281686409
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +130,6 @@ GameObject:
   - component: {fileID: 3333538988931918257}
   - component: {fileID: 1380221323834493705}
   - component: {fileID: 37949280590601515}
-  - component: {fileID: 4765607947949004579}
   m_Layer: 0
   m_Name: FatNerd1
   m_TagString: Untagged
@@ -210,28 +210,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &4765607947949004579
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 1951864397440035423, guid: c766e6f328a5d7f4db961a9aabcf0a1f, type: 3}
-  m_PrefabInstance: {fileID: 6127851466644815305}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2238164887281686409}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4711208715938537054, guid: 1788f96df5d8fcc4b83923c659338b92, type: 3}
 --- !u!1 &6549029400424210744
 GameObject:
   m_ObjectHideFlags: 0
