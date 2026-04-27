@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7776871339199077194}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &904995893031931789
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7768813340850542208}
+  m_Layer: 0
+  m_Name: enemybulletspawn (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7768813340850542208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 904995893031931789}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.5, y: 0.5, z: 0.5, w: 0.5}
+  m_LocalPosition: {x: -0.0058, y: -0.0156, z: 0.010889502}
+  m_LocalScale: {x: 0.00022217403, y: 0.00022217403, z: 0.00022217403}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7776871339199077194}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2544487143198925318
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e15fbb76d516a8a45900887a6f98c4e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8231196997462454073, guid: ad7334f7e59bf6340882c9bcad526eb2, type: 3}
+  bulletPrefab: {fileID: 3120353964073649286, guid: b255947e0d3cf2f43bfb664cb7b5604a, type: 3}
   firePoint: {fileID: 5385756054286987296}
   fireRate: 3
   bulletSpeed: 19
@@ -115,8 +146,8 @@ MonoBehaviour:
   slamCooldown: 5
   slamJumpChance: 0.5
   slamJumpForce: 4
-  handCannonProjectile: {fileID: 8231196997462454073, guid: ad7334f7e59bf6340882c9bcad526eb2, type: 3}
-  handCannonSpawn: {fileID: 5385756054286987296}
+  handCannonProjectile: {fileID: 3120353964073649286, guid: 5668d77c099bbe44c8d8e1f8fc66f1c4, type: 3}
+  handCannonSpawn: {fileID: 7768813340850542208}
   handCannonProjectileSpeed: 12.7
   handCannonCooldown: 4.5
   handCannonRecoil: 5
@@ -184,6 +215,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 91ea70a07ba24bc43af8be203289f767, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5385756054286987296}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 91ea70a07ba24bc43af8be203289f767, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7768813340850542208}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 91ea70a07ba24bc43af8be203289f767, type: 3}
       insertIndex: -1
@@ -213,7 +247,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4711208715938537054, guid: 91ea70a07ba24bc43af8be203289f767, type: 3}
 --- !u!4 &7776871339199077194 stripped

@@ -41,7 +41,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.849646
+      value: 10.22
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -49,7 +49,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 35.096893
+      value: 47.62
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -149,7 +149,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4711208715938537054, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
 --- !u!4 &3964093388244267391 stripped
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2a4a627dec756645bd843bbf3ead839, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 8231196997462454073, guid: ad7334f7e59bf6340882c9bcad526eb2, type: 3}
+  bulletPrefab: {fileID: 3120353964073649286, guid: b255947e0d3cf2f43bfb664cb7b5604a, type: 3}
   firePoint: {fileID: 4237488490276097346}
   fireRate: 2
   bulletSpeed: 15
