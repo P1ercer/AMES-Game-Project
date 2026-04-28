@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4930713722583546330}
   - component: {fileID: 751145192056586489}
   m_Layer: 0
-  m_Name: Fatnerd1
+  m_Name: DiscModNerd
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

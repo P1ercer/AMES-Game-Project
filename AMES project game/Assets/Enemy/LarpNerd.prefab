@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 4362955699104639745}
   - component: {fileID: 4199696705633725694}
   m_Layer: 0
-  m_Name: NerdBlack
+  m_Name: LarpNerd
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
