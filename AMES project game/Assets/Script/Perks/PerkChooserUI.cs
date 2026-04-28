@@ -122,6 +122,9 @@ namespace AmesGame
 
         void RollPerks()
         {
+            if (rollButton != null)
+                rollButton.gameObject.SetActive(false);
+
             // Prevent rolling if TheCost or APrice is active alone
             bool costActive = false;
             bool aPriceActive = false;
