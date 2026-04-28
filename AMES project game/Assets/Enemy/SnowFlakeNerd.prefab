@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 5973838927998749326}
   - component: {fileID: 1339188133579564174}
   m_Layer: 0
-  m_Name: Fatnerd2
+  m_Name: SnowFlakeNerd
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

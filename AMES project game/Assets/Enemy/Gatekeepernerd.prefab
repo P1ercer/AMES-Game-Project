@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 7756289795251309231}
   - component: {fileID: 3628960386115241950}
   m_Layer: 0
-  m_Name: Rednerd
+  m_Name: Gatekeepernerd
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
