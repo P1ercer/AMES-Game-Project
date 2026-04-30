@@ -2572,14 +2572,58 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 185096105393525400, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 5453440855263512590, guid: 90a348a46d9b2974ba7e3d67045a6e5b, type: 3}
     - target: {fileID: 340914936775288264, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: projectilePrefab
       value: 
       objectReference: {fileID: 3120353964073649286, guid: 6e510003814806b4b899c8564674565d, type: 3}
+    - target: {fileID: 774367549218098037, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 649ca8f1de7349e42b2538b9ac02cd65, type: 3}
+    - target: {fileID: 1503704226533128505, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bulletSpeedMultiplier
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: deathScreen
       value: 
       objectReference: {fileID: 1885454938}
+    - target: {fileID: 2816153168754284415, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 2eb6cda4a65d8584ab0b4a6f1c597942, type: 3}
+    - target: {fileID: 2816153168754284415, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: selfDamageAmount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2900479039232295906, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 43f5d8c9cf0dff443a5368bc3751e525, type: 3}
+    - target: {fileID: 3344642800964037907, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ae406ad7a2208e45b6e6f239a350d77, type: 3}
+    - target: {fileID: 3718568175251201415, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 732474a97a0628d4985f63c1998b7806, type: 3}
+    - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -10.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 6516155065928612515, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 77cc75563463dde40995184bbaac1260, type: 3}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5
@@ -2624,6 +2668,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: NestedParent_Unpack
       objectReference: {fileID: 0}
+    - target: {fileID: 7979596508012166808, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: b1e7a3564e2c2ee4792a1d807a3329f5, type: 3}
+    - target: {fileID: 8379748878025739318, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8480787242797215365, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: aef944c52f7c609459eeb6e8b3ddd22b, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
