@@ -2974,6 +2974,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PerkUI
       objectReference: {fileID: 0}
+    - target: {fileID: 6565176208930948775, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8449368388168845474, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 846
