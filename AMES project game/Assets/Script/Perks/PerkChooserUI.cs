@@ -13,13 +13,20 @@ namespace AmesGame
         public RaycastShoot playerShooter;
 
         [Header("Player Control")]
-        public MonoBehaviour playerLook; // Drag your mouse look / camera script here
+        public MonoBehaviour playerLook;
 
         [Header("UI")]
-        public PlayerUI playerUI; // Reference to crosshair handler
+        public PlayerUI playerUI;
 
         [Header("Roll Button")]
         public Button rollButton;
+
+        [Header("Close Roll Button")]
+        public Button closeRollButton;
+
+        [Header("Rare Roll Chance")]
+        [Range(0f, 1f)]
+        public float rareRollChance = 0.01f;
 
         [System.Serializable]
         public class PerkButton
@@ -34,6 +41,7 @@ namespace AmesGame
 
         private List<PerkController.PerkSlot> availableSlots = new List<PerkController.PerkSlot>();
         private bool isChoosing = false;
+        private bool rareRollAllowed = false;
 
         private void Start()
         {
@@ -45,6 +53,32 @@ namespace AmesGame
                 rollButton.gameObject.SetActive(false);
                 rollButton.onClick.AddListener(RollPerks);
             }
+
+            if (closeRollButton != null)
+            {
+                closeRollButton.gameObject.SetActive(false);
+                closeRollButton.onClick.AddListener(CloseUI);
+            }
+        }
+
+        bool IsKeyAvailable(PerkController.PerkSlot slot)
+        {
+            if (slot.mode != PerkMode.Active)
+                return true;
+
+            foreach (var s in perkController.perkSlots)
+            {
+                if (s == null || s.perk == null) continue;
+
+                if (s.chosen &&
+                    s.mode == PerkMode.Active &&
+                    s.activationKey == slot.activationKey)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         public void ShowPerkUI()
@@ -52,12 +86,39 @@ namespace AmesGame
             if (isChoosing) return;
 
             gameObject.SetActive(true);
-
-            // ensure individual perk widgets are hidden until the player rolls
             HideAll();
 
+            bool costActive = false;
+            bool aPriceActive = false;
+
+            foreach (var s in perkController.perkSlots)
+            {
+                if (s == null || s.perk == null) continue;
+
+                if (s.chosen && s.perk is TheCostPerk) costActive = true;
+                if (s.chosen && s.perk is APricePerk) aPriceActive = true;
+
+                if (costActive && aPriceActive) break;
+            }
+
+            bool blockedSinglePerk = costActive ^ aPriceActive;
+
             if (rollButton != null)
-                rollButton.gameObject.SetActive(true);
+            {
+                if (blockedSinglePerk)
+                {
+                    rareRollAllowed = Random.value <= rareRollChance;
+                    rollButton.gameObject.SetActive(rareRollAllowed);
+                }
+                else
+                {
+                    rareRollAllowed = false;
+                    rollButton.gameObject.SetActive(true);
+                }
+            }
+
+            if (closeRollButton != null)
+                closeRollButton.gameObject.SetActive(true);
 
             Time.timeScale = 0f;
 
@@ -78,73 +139,174 @@ namespace AmesGame
 
         void RollPerks()
         {
-            availableSlots.Clear();
+            if (rollButton != null)
+                rollButton.gameObject.SetActive(false);
 
-            // detect if HandCannonperk or EXPLOSION are currently equipped/chosen
-            bool handCannonEquipped = false;
-            bool explosionEquipped = false;
-            bool slamEquipped = false;
+            bool costActive = false;
+            bool aPriceActive = false;
+
             foreach (var s in perkController.perkSlots)
             {
                 if (s == null || s.perk == null) continue;
-                if (s.chosen && s.perk is HandCannonperk)
-                    handCannonEquipped = true;
-                if (s.chosen && s.perk is EXPLOSION)
-                    explosionEquipped = true;
-                if (s.chosen && s.perk is SlamDunkPerk)
-                    slamEquipped = true;
-                if (handCannonEquipped && explosionEquipped && slamEquipped) break;
+
+                if (s.chosen && s.perk is TheCostPerk) costActive = true;
+                if (s.chosen && s.perk is APricePerk) aPriceActive = true;
+
+                if (costActive && aPriceActive) break;
             }
 
-            foreach (var slot in perkController.perkSlots)
+            bool rareMode = false;
+
+            if (costActive ^ aPriceActive)
             {
-                if (slot == null || slot.perk == null) continue;
-                if (slot.chosen) continue;
+                if (!rareRollAllowed) return;
 
-                // Only show the Handcannon upgrade when handcannon is equipped
-                if (slot.perk is HandcannonUpgradePerk && !handCannonEquipped)
-                    continue;
+                rareMode = true;
+                availableSlots.Clear();
 
-                // Only show the Explosion upgrade when explosion is equipped
-                if (slot.perk is ExplosionUpgradePerk && !explosionEquipped)
-                    continue;
+                foreach (var slot in perkController.perkSlots)
+                {
+                    if (slot == null || slot.perk == null) continue;
+                    if (slot.chosen) continue;
+                    if (!IsKeyAvailable(slot)) continue;
 
-                // Only show the Slam upgrade when SlamDunk is equipped
-                if (slot.perk is SlamUpgradePerk && !slamEquipped)
-                    continue;
+                    if (costActive && slot.perk is APricePerk)
+                        availableSlots.Add(slot);
 
-                availableSlots.Add(slot);
+                    if (aPriceActive && slot.perk is TheCostPerk)
+                        availableSlots.Add(slot);
+                }
+            }
+            else
+            {
+                availableSlots.Clear();
+
+                bool handCannonEquipped = false;
+                bool explosionEquipped = false;
+                bool slamEquipped = false;
+
+                foreach (var s in perkController.perkSlots)
+                {
+                    if (s == null || s.perk == null) continue;
+
+                    if (s.chosen && s.perk is HandCannonperk)
+                        handCannonEquipped = true;
+
+                    if (s.chosen && s.perk is EXPLOSION)
+                        explosionEquipped = true;
+
+                    if (s.chosen && s.perk is SlamDunkPerk)
+                        slamEquipped = true;
+
+                    if (handCannonEquipped && explosionEquipped && slamEquipped)
+                        break;
+                }
+
+                foreach (var slot in perkController.perkSlots)
+                {
+                    if (slot == null || slot.perk == null) continue;
+                    if (slot.chosen) continue;
+                    if (!slot.includeInRandom) continue;
+
+                    // 🚫 NEW: keybind filtering
+                    if (!IsKeyAvailable(slot))
+                        continue;
+
+                    if (slot.perk is HandcannonUpgradePerk && !handCannonEquipped)
+                        continue;
+
+                    if (slot.perk is ExplosionUpgradePerk && !explosionEquipped)
+                        continue;
+
+                    if (slot.perk is SlamUpgradePerk && !slamEquipped)
+                        continue;
+
+                    availableSlots.Add(slot);
+                }
             }
 
-            if (availableSlots.Count < 3)
+            if (!rareMode)
+            {
+                if (availableSlots.Count < 3)
+                    return;
+
+                List<PerkController.PerkSlot> chosen = new List<PerkController.PerkSlot>();
+
+                while (chosen.Count < 3)
+                {
+                    int rand = Random.Range(0, availableSlots.Count);
+                    var pick = availableSlots[rand];
+
+                    if (!chosen.Contains(pick))
+                        chosen.Add(pick);
+                }
+
+                for (int i = 0; i < choiceButtons.Count; i++)
+                {
+                    if (i >= chosen.Count) break;
+
+                    var entry = choiceButtons[i];
+                    var slot = chosen[i];
+                    var perk = slot.perk;
+
+                    if (entry.button != null) entry.button.gameObject.SetActive(true);
+
+                    if (entry.label != null)
+                    {
+                        entry.label.gameObject.SetActive(true);
+                        entry.label.text = perk.perkName;
+                    }
+
+                    if (entry.descriptionText != null)
+                    {
+                        entry.descriptionText.gameObject.SetActive(true);
+                        entry.descriptionText.text = perk.description;
+                    }
+
+                    if (entry.iconImage != null)
+                    {
+                        entry.iconImage.gameObject.SetActive(perk.icon != null);
+                        entry.iconImage.sprite = perk.icon;
+                        entry.iconImage.enabled = perk.icon != null;
+                    }
+
+                    entry.button.onClick.RemoveAllListeners();
+                    entry.button.onClick.AddListener(() => OnPerkSelected(slot));
+                }
+
+                return;
+            }
+
+            if (availableSlots.Count == 0)
                 return;
 
-            List<PerkController.PerkSlot> chosen = new List<PerkController.PerkSlot>();
+            List<PerkController.PerkSlot> rareChosen = new List<PerkController.PerkSlot>();
 
-            while (chosen.Count < 3)
+            foreach (var s in availableSlots)
             {
-                int rand = Random.Range(0, availableSlots.Count);
-                var pick = availableSlots[rand];
+                if (!rareChosen.Contains(s))
+                    rareChosen.Add(s);
 
-                if (!chosen.Contains(pick))
-                    chosen.Add(pick);
+                if (rareChosen.Count >= choiceButtons.Count)
+                    break;
             }
 
             for (int i = 0; i < choiceButtons.Count; i++)
             {
-                if (i >= chosen.Count) break;
+                if (i >= rareChosen.Count) break;
 
                 var entry = choiceButtons[i];
-                var slot = chosen[i];
+                var slot = rareChosen[i];
                 var perk = slot.perk;
 
-                // show the button and its child UI elements
                 if (entry.button != null) entry.button.gameObject.SetActive(true);
+
                 if (entry.label != null)
                 {
                     entry.label.gameObject.SetActive(true);
                     entry.label.text = perk.perkName;
                 }
+
                 if (entry.descriptionText != null)
                 {
                     entry.descriptionText.gameObject.SetActive(true);
@@ -173,6 +335,9 @@ namespace AmesGame
             if (rollButton != null)
                 rollButton.gameObject.SetActive(false);
 
+            if (closeRollButton != null)
+                closeRollButton.gameObject.SetActive(false);
+
             Time.timeScale = 1f;
 
             Cursor.lockState = CursorLockMode.Locked;
@@ -190,65 +355,19 @@ namespace AmesGame
             isChoosing = false;
         }
 
-        void DisplayEquippedPerks()
-        {
-            HideAll();
-
-            List<PerkController.PerkSlot> active = new List<PerkController.PerkSlot>();
-
-            foreach (var slot in perkController.perkSlots)
-            {
-                if (slot != null && slot.perk != null && slot.chosen)
-                    active.Add(slot);
-            }
-
-            for (int i = 0; i < choiceButtons.Count; i++)
-            {
-                if (i >= active.Count) break;
-
-                var entry = choiceButtons[i];
-                var perk = active[i].perk;
-
-                entry.button.gameObject.SetActive(true);
-                if (entry.label != null)
-                {
-                    entry.label.gameObject.SetActive(true);
-                    entry.label.text = perk.perkName;
-                }
-                if (entry.descriptionText != null)
-                {
-                    entry.descriptionText.gameObject.SetActive(true);
-                    entry.descriptionText.text = perk.description;
-                }
-                if (entry.iconImage != null)
-                {
-                    entry.iconImage.gameObject.SetActive(perk.icon != null);
-                    entry.iconImage.sprite = perk.icon;
-                    entry.iconImage.enabled = perk.icon != null;
-                }
-
-                var slot = active[i];
-                entry.button.onClick.RemoveAllListeners();
-                entry.button.onClick.AddListener(() => RemovePerk(slot));
-            }
-        }
-
-        void RemovePerk(PerkController.PerkSlot slot)
-        {
-            perkController.RemovePerk(slot.perk);
-            DisplayEquippedPerks();
-        }
-
         void HideAll()
         {
             foreach (var entry in choiceButtons)
             {
                 if (entry.button != null)
                     entry.button.gameObject.SetActive(false);
+
                 if (entry.label != null)
                     entry.label.gameObject.SetActive(false);
+
                 if (entry.descriptionText != null)
                     entry.descriptionText.gameObject.SetActive(false);
+
                 if (entry.iconImage != null)
                     entry.iconImage.gameObject.SetActive(false);
             }
@@ -258,7 +377,6 @@ namespace AmesGame
         {
             gameObject.SetActive(false);
 
-            // ▶ Resume game
             Time.timeScale = 1f;
 
             Cursor.lockState = CursorLockMode.Locked;

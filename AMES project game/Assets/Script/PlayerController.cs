@@ -1,6 +1,8 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -60,12 +62,27 @@ namespace AmesGame
         [SerializeField]
         private bool isImmune = false;
 
+        public DeathScreen deathScreen;
+        private bool _isDead = false;
+
         public bool IsImmune => isImmune;
 
         public void SetTemporaryImmunity(float seconds)
         {
             if (seconds <= 0f) return;
             StartCoroutine(TemporaryImmunityCoroutine(seconds));
+        }
+
+        // Apply a knockback impulse to the player.
+        // horizontalImpulse is in world units (meters per second) to add to the player's horizontal velocity.
+        // verticalImpulse is an upward velocity to set (will not reduce an existing larger upward velocity).
+        public void ApplyKnockback(Vector3 horizontalImpulse, float verticalImpulse)
+        {
+            // add horizontal impulse
+            _horizontalVelocity += new Vector3(horizontalImpulse.x, 0f, horizontalImpulse.z);
+
+            // set vertical velocity to at least the requested upward impulse
+            _verticalVelocity = Mathf.Max(_verticalVelocity, verticalImpulse);
         }
 
         private IEnumerator TemporaryImmunityCoroutine(float seconds)
@@ -123,7 +140,7 @@ namespace AmesGame
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 #else
-            Debug.LogError("Starter Assets package is missing dependencies.");
+    Debug.LogError("Starter Assets package is missing dependencies.");
 #endif
 
             _jumpTimeoutDelta = JumpTimeout;
@@ -131,12 +148,16 @@ namespace AmesGame
 
             CurrentHealth = MaxHealth;
             UpdateHealthUI();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
         }
 
         private bool _wasJumpPressedLastFrame = false;
 
         private void Update()
         {
+            if (_isDead) return;
             // detect jump press rising edge and notify subscribers before jump logic runs
             bool jumpState = _input != null && _input.jump;
             if (jumpState && !_wasJumpPressedLastFrame)
@@ -152,6 +173,8 @@ namespace AmesGame
 
         private void LateUpdate()
         {
+            if (_isDead) return;
+
             CameraRotation();
         }
 
@@ -330,6 +353,25 @@ namespace AmesGame
 
         private void Die()
         {
+            _isDead = true;
+
+            // Stop all motion so no sliding/drifting
+            _horizontalVelocity = Vector3.zero;
+            _verticalVelocity = 0f;
+
+#if ENABLE_INPUT_SYSTEM
+            if (_playerInput != null)
+            {
+                _playerInput.enabled = false;
+            }
+#endif
+
+            // Unlock cursor for UI
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+
+            deathScreen.ShowDeathScreen();
         }
+
     }
 }

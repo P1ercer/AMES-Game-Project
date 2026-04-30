@@ -1,3 +1,4 @@
+using AmesGame;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -57,7 +58,13 @@ public class RaycastShoot : MonoBehaviour
     private void ShootOnce()
     {
         RaycastHit hit;
-        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        Vector2 screenPoint = Vector2.zero;
+        var playerUI = FindObjectOfType<PlayerUI>();
+        if (playerUI != null)
+            screenPoint = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+
+        Ray ray = Camera.main.ScreenPointToRay(screenPoint);
 
         if (Physics.Raycast(ray, out hit, 10) && !projectileShoot)
         {
@@ -73,11 +80,18 @@ public class RaycastShoot : MonoBehaviour
 
             GameObject bullet = Instantiate(prefab, spawnPosition.position, Quaternion.identity);
 
+            var bulletScript = bullet.GetComponent<PlayerBullet>();
+            if (bulletScript != null)
+            {
+                var playerController = GetComponent<PlayerController>();
+                bulletScript.Initialize(playerController);
+            }
+
             Vector3 velocity = (dest - spawnPosition.position).normalized;
 
             var rb = bullet.GetComponent<Rigidbody>();
             if (rb != null)
-                rb.linearVelocity = velocity * shootSpeed * bulletSpeedMultiplier; // ✅ Apply multiplier
+                rb.linearVelocity = velocity * shootSpeed * bulletSpeedMultiplier;
 
             var pd = bullet.GetComponent<ProjectileDamage>() ?? bullet.AddComponent<ProjectileDamage>();
             pd.damage = damage;

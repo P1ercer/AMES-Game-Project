@@ -29,7 +29,7 @@ public class EnemyController : MonoBehaviour
     // Health
     public float health = 3;
     public Image healthBar;
-    private float maxHealth;
+    protected float maxHealth;
 
     void Start()
     {
@@ -48,18 +48,18 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    void Update()
+    protected virtual void Update()
     {
-        if (player == null) return;
+        if (player == null || agent == null) return;
 
-        // Movement
-        Vector3 direction = player.transform.position - transform.position;
+        float distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (direction.magnitude < chaseDistance)
+        if (distance < chaseDistance)
         {
-            agent.destination = player.transform.position;
+            // Move toward player
+            agent.SetDestination(player.transform.position);
 
-            // Face the player
+            // Face the player (optional if agent updates rotation)
             transform.LookAt(player.transform);
 
             // Shooting
@@ -70,8 +70,8 @@ public class EnemyController : MonoBehaviour
             }
         }
         else
-        {
-            agent.destination = home;
+        { 
+            agent.SetDestination(home);
         }
     }
 
@@ -89,7 +89,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Health
-    public void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         float adjusted = damage * DamageMultiplier;
         int applied = Mathf.Max(1, Mathf.RoundToInt(adjusted));
