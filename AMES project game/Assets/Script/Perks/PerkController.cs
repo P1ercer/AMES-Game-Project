@@ -56,6 +56,12 @@ namespace AmesGame
             public float weight = 1f;
 
             public bool includeInRandom = true;
+
+            [Header("Audio")]
+            [Tooltip("Optional audio clip played when this slot's active perk is triggered")]
+            public AudioClip activateClip;
+            [Range(0f, 1f)]
+            public float clipVolume = 1f;
         }
 
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
@@ -65,6 +71,22 @@ namespace AmesGame
 
         public int MaxActivePerks => maxActivePerks;
         public int MaxPassivePerks => maxPassivePerks;
+
+        [Header("Audio (fallback)")]
+        [Tooltip("Fallback sound played when an active perk is triggered and the slot has no clip")]
+        public AudioClip activePerkActivateSound;
+        private AudioSource perkAudioSource;
+
+        private void Awake()
+        {
+            // ensure we have an AudioSource to play perk-related feedback
+            perkAudioSource = GetComponent<AudioSource>();
+            if (perkAudioSource == null)
+            {
+                perkAudioSource = gameObject.AddComponent<AudioSource>();
+                perkAudioSource.playOnAwake = false;
+            }
+        }
 
         private void Start()
         {
@@ -101,6 +123,23 @@ namespace AmesGame
                 }
                 else if (IsKeyPressed(slot.activationKey))
                 {
+                    // Play slot-specific activation clip if provided, otherwise use fallback
+                    if (slot.activateClip != null)
+                    {
+                        if (perkAudioSource != null)
+                            perkAudioSource.PlayOneShot(slot.activateClip, slot.clipVolume);
+                        else
+                            AudioSource.PlayClipAtPoint(slot.activateClip, transform.position, slot.clipVolume);
+                    }
+                    else if (activePerkActivateSound != null)
+                    {
+                        if (perkAudioSource != null)
+                            perkAudioSource.PlayOneShot(activePerkActivateSound);
+                        else
+                            AudioSource.PlayClipAtPoint(activePerkActivateSound, transform.position);
+                    }
+
+                    // invoke the active perk
                     slot.perk.Activate();
                 }
             }

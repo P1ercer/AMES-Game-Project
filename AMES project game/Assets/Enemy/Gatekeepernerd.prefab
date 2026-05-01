@@ -82,7 +82,8 @@ MonoBehaviour:
   firePoint: {fileID: 8188611557655456178}
   fireRate: 4
   bulletSpeed: 15
-  chaseDistance: 15
+  chaseDistance: 17
+  stopDistance: 9
   health: 30
   healthBar: {fileID: 0}
   giveKeySound: {fileID: 0}

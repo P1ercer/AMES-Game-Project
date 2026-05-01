@@ -24,6 +24,12 @@ namespace AmesGame
         [Tooltip("Upward force applied to the boss when it attempts to jump (world units)")]
         public float slamJumpForce = 4f;
 
+        [Header("Slam Impact Scaling")]
+        [Tooltip("How much the boss's downward speed increases slam impact (per unit of fall speed)")]
+        public float impactSpeedFactor = 0.05f;
+        [Tooltip("Maximum multiplier applied to damage/knockback from fall speed")]
+        public float maxImpactScale = 3f;
+
         [Header("HandCannon Settings")]
         public GameObject handCannonProjectile;
         public Transform handCannonSpawn;
@@ -43,6 +49,18 @@ namespace AmesGame
         [Header("Force Field Visual")]
         public float forceFieldRadius = 3f;
 
+        [Header("Audio")]
+        [Tooltip("Sound played when performing a slam (at impact)")]
+        public AudioClip slamSound;
+        [Tooltip("Sound played when firing the hand cannon")]
+        public AudioClip handCannonSound;
+        [Tooltip("Sound played when forcefield activates")]
+        public AudioClip forceFieldActivateSound;
+        [Tooltip("Optional sound played when forcefield deactivates")]
+        public AudioClip forceFieldDeactivateSound;
+
+        private AudioSource bossAudioSource;
+
         private GameObject forceFieldVisual;
         private Material forceFieldMaterial;
 
@@ -51,6 +69,17 @@ namespace AmesGame
         private float fieldNext = 0f;
 
         private bool forceActive = false;
+
+        private void Awake()
+        {
+            // set up audio source without overriding any existing configuration
+            bossAudioSource = GetComponent<AudioSource>();
+            if (bossAudioSource == null)
+            {
+                bossAudioSource = gameObject.AddComponent<AudioSource>();
+                bossAudioSource.playOnAwake = false;
+            }
+        }
 
         protected override void Update()
         {
@@ -87,30 +116,102 @@ namespace AmesGame
             // small windup
             yield return new WaitForSeconds(0.25f);
 
-            // randomly attempt to jump as part of the slam
+            // --- Attempt jump: ensure the boss actually goes up and then falls back down ---
             bool willJump = Random.value <= slamJumpChance;
+            Rigidbody rbSelf = GetComponent<Rigidbody>();
+            var navAgent = GetComponent<NavMeshAgent>();
+            bool createdRb = false;
+            bool agentWasEnabled = false;
+
             if (willJump)
             {
-                // prefer Rigidbody upward impulse if present
-                var rbSelf = GetComponent<Rigidbody>();
-                if (rbSelf != null)
+                // Ensure a Rigidbody exists to allow physics-based jump
+                if (rbSelf == null)
                 {
-                    rbSelf.AddForce(Vector3.up * slamJumpForce, ForceMode.VelocityChange);
+                    rbSelf = gameObject.AddComponent<Rigidbody>();
+                    rbSelf.mass = 1f;
+                    rbSelf.constraints = RigidbodyConstraints.FreezeRotation; // keep upright
+                    createdRb = true;
                 }
-                else
+
+                // Disable NavMeshAgent while physics moves the object
+                if (navAgent != null && navAgent.enabled)
                 {
-                    // try nav agent move or small transform nudge upwards
-                    var agent = GetComponent<NavMeshAgent>();
-                    if (agent != null)
+                    agentWasEnabled = true;
+                    navAgent.enabled = false;
+                }
+
+                // apply upward impulse
+                rbSelf.AddForce(Vector3.up * slamJumpForce, ForceMode.VelocityChange);
+
+                // let the boss ascend a short moment
+                float ascendWait = 0.15f;
+                float timer = 0f;
+                while (timer < ascendWait)
+                {
+                    timer += Time.deltaTime;
+                    yield return null;
+                }
+
+                // force a descent by setting a downward velocity � ensures a reliable fall back down
+                float forcedDownVel = Mathf.Max( slamJumpForce * 1.2f, 6f );
+                Vector3 v = rbSelf.linearVelocity;
+                rbSelf.linearVelocity = new Vector3(v.x, -Mathf.Abs(forcedDownVel), v.z);
+
+                // wait until we detect landing or timeout
+                float landedTimeout = 2.0f;
+                float waited = 0f;
+                float groundCheckDistance = 1.5f;
+                while (waited < landedTimeout)
+                {
+                    waited += Time.deltaTime;
+
+                    // Cast downward to check for ground within reasonable distance
+                    if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, groundCheckDistance))
                     {
-                        agent.Move(Vector3.up * (slamJumpForce * 0.1f));
+                        // treat as landed when close enough to ground AND vertical velocity small / downward
+                        if (hit.distance <= 0.6f && Mathf.Abs(rbSelf.linearVelocity.y) < 1.0f)
+                        {
+                            break;
+                        }
                     }
-                    else
-                    {
-                        transform.position += Vector3.up * (slamJumpForce * 0.1f);
-                    }
+
+                    yield return null;
+                }
+
+                // Snap NavMeshAgent back to physics position and re-enable
+                if (navAgent != null && agentWasEnabled)
+                {
+                    navAgent.Warp(rbSelf.position);
+                    navAgent.enabled = true;
+                }
+
+                // remove temporary rigidbody shortly after landing so original setup restored
+                if (createdRb)
+                {
+                    StartCoroutine(RemoveTemporaryRigidbody(rbSelf, 0.25f));
                 }
             }
+
+            // play slam sound at impact time (after jump/landing)
+            if (slamSound != null)
+            {
+                if (bossAudioSource != null)
+                    bossAudioSource.PlayOneShot(slamSound);
+                else
+                    AudioSource.PlayClipAtPoint(slamSound, transform.position);
+            }
+
+            // Calculate impact scaling from boss's downward velocity (if any)
+            float fallSpeed = 0f;
+            if (rbSelf != null)
+            {
+                float vy = rbSelf.linearVelocity.y;
+                if (vy < 0f) fallSpeed = Mathf.Abs(vy);
+            }
+
+            float impactScale = 1f + fallSpeed * impactSpeedFactor;
+            impactScale = Mathf.Clamp(impactScale, 1f, maxImpactScale);
 
             Vector3 center = transform.position;
             Collider[] hits = Physics.OverlapSphere(center, slamRadius);
@@ -127,25 +228,33 @@ namespace AmesGame
                         StartCoroutine(ActivateForceField());
                     }
 
-                    // apply damage via player's TakeDamage
+                    // deal damage: base damage + additional scaled damage (mirrors SlamDunkPerk logic)
                     p.TakeDamage(slamDamage);
+                    int appliedDamage = Mathf.Max(1, Mathf.RoundToInt(slamDamage * impactScale));
+                    p.TakeDamage(appliedDamage);
 
                     // compute impulse (horizontal + upward)
                     Vector3 away = (p.transform.position - center).normalized;
                     Vector3 horizontalImpulse = new Vector3(away.x, 0f, away.z) * (slamKnockback * 0.5f);
                     float verticalImpulse = slamKnockback * 0.75f; // upward velocity equivalent
 
-                    // prefer Rigidbody-based physics knockback like HandCannonperk
+                    // prefer Rigidbody-based physics knockback
                     var rbPlayer = p.GetComponent<Rigidbody>();
                     if (rbPlayer != null)
                     {
                         Vector3 impulse = horizontalImpulse + Vector3.up * verticalImpulse;
                         rbPlayer.AddForce(impulse, ForceMode.VelocityChange);
+
+                        // apply additional knockback scaled by impact
+                        float appliedKnock = slamKnockback * impactScale;
+                        rbPlayer.AddForce(away * appliedKnock, ForceMode.VelocityChange);
                     }
                     else
                     {
-                        // fallback to PlayerController API which adjusts velocities
-                        p.ApplyKnockback(horizontalImpulse, verticalImpulse);
+                        // fallback to PlayerController API which adjusts velocities; scale knockback by impactScale
+                        Vector3 scaledHorizontal = horizontalImpulse * impactScale;
+                        float scaledVertical = verticalImpulse * impactScale;
+                        p.ApplyKnockback(scaledHorizontal, scaledVertical);
                     }
                 }
 
@@ -160,6 +269,22 @@ namespace AmesGame
                         // include slight upwards component for other enemies
                         Vector3 k = away * (slamKnockback * 0.5f) + Vector3.up * (slamKnockback * 0.25f);
                         rb.AddForce(k, ForceMode.VelocityChange);
+
+                        // apply additional scaled knockback for impact
+                        float appliedKnock = slamKnockback * impactScale;
+                        rb.AddForce(away * appliedKnock, ForceMode.VelocityChange);
+                    }
+                    else
+                    {
+                        // if enemy uses NavMeshAgent, try to nudge its destination away
+                        var agent = enemy.GetComponent<NavMeshAgent>();
+                        if (agent != null && agent.isOnNavMesh)
+                        {
+                            Vector3 away = (c.transform.position - center).normalized;
+                            if (away.sqrMagnitude < 0.01f) away = Vector3.back;
+                            agent.SetDestination(c.transform.position + away * 2f);
+                            agent.SetDestination(c.transform.position + away * (2f * impactScale));
+                        }
                     }
                 }
             }
@@ -168,6 +293,15 @@ namespace AmesGame
         private void FireHandCannonAt(Vector3 target)
         {
             if (handCannonProjectile == null || handCannonSpawn == null) return;
+
+            // play handcannon sound
+            if (handCannonSound != null)
+            {
+                if (bossAudioSource != null)
+                    bossAudioSource.PlayOneShot(handCannonSound);
+                else
+                    AudioSource.PlayClipAtPoint(handCannonSound, handCannonSpawn.position);
+            }
 
             var proj = Instantiate(handCannonProjectile, handCannonSpawn.position, handCannonSpawn.rotation);
             var pd = proj.GetComponent<ProjectileDamage>() ?? proj.AddComponent<ProjectileDamage>();
@@ -256,6 +390,15 @@ namespace AmesGame
         {
             forceActive = true; // Activate force field
 
+            // play activation sound
+            if (forceFieldActivateSound != null)
+            {
+                if (bossAudioSource != null)
+                    bossAudioSource.PlayOneShot(forceFieldActivateSound);
+                else
+                    AudioSource.PlayClipAtPoint(forceFieldActivateSound, transform.position);
+            }
+
             if (forceFieldVisual != null)
             {
                 forceFieldVisual.SetActive(true);
@@ -266,6 +409,16 @@ namespace AmesGame
             yield return new WaitForSeconds(forceFieldDuration); // Wait for duration
 
             forceActive = false; // Deactivate force field
+
+            // play deactivation sound (optional)
+            if (forceFieldDeactivateSound != null)
+            {
+                if (bossAudioSource != null)
+                    bossAudioSource.PlayOneShot(forceFieldDeactivateSound);
+                else
+                    AudioSource.PlayClipAtPoint(forceFieldDeactivateSound, transform.position);
+            }
+
             if (forceFieldVisual != null)
                 forceFieldVisual.SetActive(false);
         }

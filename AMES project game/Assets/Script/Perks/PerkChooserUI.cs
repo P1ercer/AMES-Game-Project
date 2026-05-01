@@ -43,8 +43,25 @@ namespace AmesGame
         private bool isChoosing = false;
         private bool rareRollAllowed = false;
 
+        [Header("Audio")]
+        [Tooltip("Sound played when rolling perks")]
+        public AudioClip rollSound;
+        [Tooltip("Sound played when selecting a perk")]
+        public AudioClip selectSound;
+        [Tooltip("Sound played when closing the chooser")]
+        public AudioClip closeSound;
+        private AudioSource uiAudioSource;
+
         private void Start()
         {
+            // Audio setup
+            uiAudioSource = GetComponent<AudioSource>();
+            if (uiAudioSource == null)
+            {
+                uiAudioSource = gameObject.AddComponent<AudioSource>();
+                uiAudioSource.playOnAwake = false;
+            }
+
             HideAll();
             gameObject.SetActive(false);
 
@@ -141,6 +158,15 @@ namespace AmesGame
         {
             if (rollButton != null)
                 rollButton.gameObject.SetActive(false);
+
+            // play roll sound
+            if (rollSound != null)
+            {
+                if (uiAudioSource != null)
+                    uiAudioSource.PlayOneShot(rollSound);
+                else
+                    AudioSource.PlayClipAtPoint(rollSound, transform.position);
+            }
 
             bool costActive = false;
             bool aPriceActive = false;
@@ -327,6 +353,15 @@ namespace AmesGame
 
         void OnPerkSelected(PerkController.PerkSlot slot)
         {
+            // play select sound
+            if (selectSound != null)
+            {
+                if (uiAudioSource != null)
+                    uiAudioSource.PlayOneShot(selectSound);
+                else
+                    AudioSource.PlayClipAtPoint(selectSound, transform.position);
+            }
+
             perkController.AddPerk(slot.perk);
 
             HideAll();
@@ -375,6 +410,15 @@ namespace AmesGame
 
         public void CloseUI()
         {
+            // play close sound
+            if (closeSound != null)
+            {
+                if (uiAudioSource != null)
+                    uiAudioSource.PlayOneShot(closeSound);
+                else
+                    AudioSource.PlayClipAtPoint(closeSound, transform.position);
+            }
+
             gameObject.SetActive(false);
 
             Time.timeScale = 1f;

@@ -52,6 +52,7 @@ MonoBehaviour:
   fireRate: 4
   bulletSpeed: 12
   chaseDistance: 10
+  stopDistance: 6
   health: 12
   healthBar: {fileID: 0}
 --- !u!195 &6898595929686759321
