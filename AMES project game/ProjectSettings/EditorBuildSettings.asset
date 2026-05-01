@@ -6,14 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
     path: Assets/Scenes/DeathScreen.unity
     guid: 9c91ca3492b2bd84cafbb4d34af3e16e
   - enabled: 1
-    path: Assets/Scenes/IsraelTestScene.unity
-    guid: 99b976a8a8cbc094c9d1d8e12bad78d9
+    path: Assets/Scenes/MainMenu.unity
+    guid: c9f44fe273c917240893f32a8ff8f88b
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
