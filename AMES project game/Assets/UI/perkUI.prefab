@@ -461,7 +461,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -399, y: -298}
+  m_AnchoredPosition: {x: -451, y: 198}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5316597892403515407
@@ -728,7 +728,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 771, y: 590}
+  m_AnchoredPosition: {x: 846, y: 45}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3244484290657623265
@@ -1655,7 +1655,7 @@ GameObject:
   - component: {fileID: 1400162763289087449}
   - component: {fileID: 4336003766738375831}
   m_Layer: 5
-  m_Name: PerkUI
+  m_Name: perkUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1787,6 +1787,9 @@ MonoBehaviour:
     label: {fileID: 4621419506171193178}
     descriptionText: {fileID: 4118628544407066560}
     iconImage: {fileID: 3577139411833494351}
+  rollSound: {fileID: 0}
+  selectSound: {fileID: 0}
+  closeSound: {fileID: 0}
 --- !u!1 &7137182500937486004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,7 +2034,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 391, y: -301}
+  m_AnchoredPosition: {x: -262, y: 196}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3035313463260539456

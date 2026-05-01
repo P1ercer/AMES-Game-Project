@@ -135,6 +135,8 @@ MonoBehaviour:
   firePoint: {fileID: 5385756054286987296}
   fireRate: 3
   bulletSpeed: 19
+  shootSound: {fileID: 0}
+  deathSound: {fileID: 0}
   chaseDistance: 20
   stopDistance: 10
   health: 102
@@ -142,12 +144,14 @@ MonoBehaviour:
   hasSlam: 1
   hasHandCannon: 1
   hasForceField: 1
-  slamRadius: 11
+  slamRadius: 200
   slamDamage: 3
   slamKnockback: 15
   slamCooldown: 5
-  slamJumpChance: 0.5
-  slamJumpForce: 4
+  slamJumpChance: 100
+  slamJumpForce: 10
+  impactSpeedFactor: 0.05
+  maxImpactScale: 3
   handCannonProjectile: {fileID: 3120353964073649286, guid: 5668d77c099bbe44c8d8e1f8fc66f1c4, type: 3}
   handCannonSpawn: {fileID: 7768813340850542208}
   handCannonProjectileSpeed: 12.7
@@ -159,6 +163,10 @@ MonoBehaviour:
   perkRange: 20
   forceFieldOnPerkChance: 0.15
   forceFieldRadius: 3
+  slamSound: {fileID: 8300000, guid: 9f380a0881bf613449bd095b26c27dfa, type: 3}
+  handCannonSound: {fileID: 8300000, guid: 6e952b592ccf868429754409ca9abb06, type: 3}
+  forceFieldActivateSound: {fileID: 8300000, guid: e77e324095ae4de4c8659271c76fefe7, type: 3}
+  forceFieldDeactivateSound: {fileID: 8300000, guid: f69a75be1aa948a4eb9bfd5fe8c7d7d9, type: 3}
 --- !u!65 &1339188133579564174
 BoxCollider:
   m_ObjectHideFlags: 0
