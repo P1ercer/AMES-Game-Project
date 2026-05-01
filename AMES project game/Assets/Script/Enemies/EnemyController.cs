@@ -20,10 +20,18 @@ public class EnemyController : MonoBehaviour
     public float bulletSpeed = 15f;
     private float nextFireTime = 0f;
 
+    // Audio
+    [Tooltip("Sound played when this enemy fires")]
+    public AudioClip shootSound;
+    [Tooltip("Sound played when this enemy dies")]
+    public AudioClip deathSound;
+    private AudioSource audioSource;
+
     // Movement
     private GameObject player;
     private NavMeshAgent agent;
     public float chaseDistance = 10f;
+    public float stopDistance = 2f; // distance at which enemy should stop approaching the player
     private Vector3 home;
 
     // Health
@@ -38,6 +46,19 @@ public class EnemyController : MonoBehaviour
 
         // NavMesh setup
         agent = GetComponent<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.stoppingDistance = stopDistance;
+        }
+
+        // Audio setup: prefer an existing AudioSource, otherwise add one
+        audioSource = GetComponent<AudioSource>();
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.playOnAwake = false;
+        }
+
         home = transform.position;
 
         // Health setup
@@ -56,8 +77,23 @@ public class EnemyController : MonoBehaviour
 
         if (distance < chaseDistance)
         {
-            // Move toward player
-            agent.SetDestination(player.transform.position);
+            // If farther than stopDistance -> approach, otherwise stop moving but keep facing/shooting
+            if (distance > stopDistance)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(player.transform.position);
+            }
+            else
+            {
+                // Stop agent movement while remaining oriented toward player
+                agent.isStopped = true;
+
+                // snap velocity to zero to avoid sliding
+                if (agent.velocity.sqrMagnitude > 0f)
+                {
+                    agent.velocity = Vector3.zero;
+                }
+            }
 
             // Face the player (optional if agent updates rotation)
             transform.LookAt(player.transform);
@@ -70,13 +106,16 @@ public class EnemyController : MonoBehaviour
             }
         }
         else
-        { 
+        {
+            agent.isStopped = false;
             agent.SetDestination(home);
         }
     }
 
     void Shoot()
     {
+        if (bulletPrefab == null || firePoint == null || player == null) return;
+
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
 
         Rigidbody rb = bullet.GetComponent<Rigidbody>();
@@ -85,6 +124,19 @@ public class EnemyController : MonoBehaviour
         {
             Vector3 direction = (player.transform.position - firePoint.position).normalized;
             rb.linearVelocity = direction * bulletSpeed;
+        }
+
+        // play shooting sound
+        if (shootSound != null)
+        {
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(shootSound);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(shootSound, transform.position);
+            }
         }
     }
 
@@ -102,6 +154,12 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
+            // play death sound at position so it continues even after object is destroyed
+            if (deathSound != null)
+            {
+                AudioSource.PlayClipAtPoint(deathSound, transform.position);
+            }
+
             // Fire perk-wide kill event BEFORE destroying
             OnEnemyKilled?.Invoke(gameObject);
 

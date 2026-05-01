@@ -81,7 +81,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_Name
-      value: GreenNerd
+      value: DumNerd
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: ff2db8a1c0bf8a44d895233dbc0feb3d, type: 3}
       propertyPath: m_TagString
@@ -178,6 +178,7 @@ MonoBehaviour:
   fireRate: 2.5
   bulletSpeed: 15
   chaseDistance: 15
+  stopDistance: 8
   health: 27
   healthBar: {fileID: 0}
 --- !u!135 &7685825006675516261
