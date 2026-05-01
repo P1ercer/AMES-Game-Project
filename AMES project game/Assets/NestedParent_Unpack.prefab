@@ -140,7 +140,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_TargetDisplay: 0
 --- !u!114 &7437842998012432386
 MonoBehaviour:
@@ -558,7 +558,7 @@ Transform:
   m_GameObject: {fileID: 9022774333485098004}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25, y: 1.31, z: 1.08}
+  m_LocalPosition: {x: -1.25, y: 1.31, z: 2.4}
   m_LocalScale: {x: 0.0823785, y: 0.0823785, z: 0.0823785}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -627,7 +627,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.419998
+      value: -10.42
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.w
@@ -693,7 +693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.419998
+      value: -10.42
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -749,6 +749,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0.304
       objectReference: {fileID: 0}
+    - target: {fileID: 318910216328259246, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: aef944c52f7c609459eeb6e8b3ddd22b, type: 3}
     - target: {fileID: 712959463097788356, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: icon
       value: 
@@ -764,7 +768,7 @@ PrefabInstance:
     - target: {fileID: 2260816399841212083, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: 940784170, guid: ca61f95bb4c13ed4f83a04e195c994c5, type: 3}
+      objectReference: {fileID: 21300000, guid: b1e7a3564e2c2ee4792a1d807a3329f5, type: 3}
     - target: {fileID: 3088967800093855351, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -776,11 +780,15 @@ PrefabInstance:
     - target: {fileID: 3148922913024111240, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: icon
       value: 
-      objectReference: {fileID: -1460765877, guid: ca61f95bb4c13ed4f83a04e195c994c5, type: 3}
+      objectReference: {fileID: 21300000, guid: 77cc75563463dde40995184bbaac1260, type: 3}
     - target: {fileID: 3431051184357736916, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: icon
       value: 
       objectReference: {fileID: -506701460, guid: 2e45cbb42adc9f4438c4ebe4ba5b11c7, type: 3}
+    - target: {fileID: 4775559684780266924, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 732474a97a0628d4985f63c1998b7806, type: 3}
     - target: {fileID: 5044748645915417003, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: icon
       value: 
@@ -806,9 +814,21 @@ PrefabInstance:
       value: DeathScreen
       objectReference: {fileID: 0}
     - target: {fileID: 6253754220497477460, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 2eb6cda4a65d8584ab0b4a6f1c597942, type: 3}
+    - target: {fileID: 6253754220497477460, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: selfDamageAmount
-      value: 10
+      value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6457496004420881353, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 43f5d8c9cf0dff443a5368bc3751e525, type: 3}
+    - target: {fileID: 6897191217817052472, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ae406ad7a2208e45b6e6f239a350d77, type: 3}
     - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: damage
       value: 3
@@ -821,10 +841,18 @@ PrefabInstance:
       propertyPath: spawnPosition
       value: 
       objectReference: {fileID: 8379748878025739318}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: bulletSpeedMultiplier
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8308199975299357363, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: spawnPoint
       value: 
       objectReference: {fileID: 8379748878025739318}
+    - target: {fileID: 8308199975299357363, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 5453440855263512590, guid: 90a348a46d9b2974ba7e3d67045a6e5b, type: 3}
     - target: {fileID: 8459480160129199587, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: spawnPoint
       value: 
@@ -837,10 +865,18 @@ PrefabInstance:
       propertyPath: explosionRadius
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 8459480160129199587, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 3120353964073649286, guid: 6e510003814806b4b899c8564674565d, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8890715998229267294, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 649ca8f1de7349e42b2538b9ac02cd65, type: 3}
     - target: {fileID: 8996698412037461615, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: perkSlots.Array.data[1].chosen
       value: 0
