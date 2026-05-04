@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7999813041393350228}
   - component: {fileID: 4930713722583546330}
   - component: {fileID: 751145192056586489}
+  - component: {fileID: 1860733235864298699}
   m_Layer: 0
   m_Name: DiscModNerd
   m_TagString: Enemy
@@ -73,10 +74,13 @@ MonoBehaviour:
   firePoint: {fileID: 5697289722183319135}
   fireRate: 5
   bulletSpeed: 19
+  shootSound: {fileID: 0}
+  deathSound: {fileID: 0}
   chaseDistance: 20
   stopDistance: 10
   health: 51
   healthBar: {fileID: 0}
+  givesKeyOnDeath: 1
   hasSlam: 0
   hasHandCannon: 0
   hasForceField: 1
@@ -84,8 +88,6 @@ MonoBehaviour:
   slamDamage: 3
   slamKnockback: 15
   slamCooldown: 5
-  slamJumpChance: 0.5
-  slamJumpForce: 4
   handCannonProjectile: {fileID: 3120353964073649286, guid: 5668d77c099bbe44c8d8e1f8fc66f1c4, type: 3}
   handCannonSpawn: {fileID: 5697289722183319135}
   handCannonProjectileSpeed: 12.7
@@ -93,10 +95,6 @@ MonoBehaviour:
   handCannonRecoil: 5
   forceFieldDuration: 5
   forceFieldCooldown: 10
-  usePerksAtRange: 1
-  perkRange: 20
-  forceFieldOnPerkChance: 0.15
-  forceFieldRadius: 3
 --- !u!136 &751145192056586489
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -120,6 +118,19 @@ CapsuleCollider:
   m_Height: 5.1117005
   m_Direction: 1
   m_Center: {x: 0.07593799, y: 0.973768, z: 0.15156269}
+--- !u!114 &1860733235864298699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156438838508221117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5685c32365828794cab631b5d52c4538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasKey: 1
 --- !u!1 &2238164887281686409
 GameObject:
   m_ObjectHideFlags: 0

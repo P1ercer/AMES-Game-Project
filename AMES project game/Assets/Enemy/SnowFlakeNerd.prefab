@@ -74,6 +74,7 @@ GameObject:
   - component: {fileID: 6089922737805243250}
   - component: {fileID: 5973838927998749326}
   - component: {fileID: 1339188133579564174}
+  - component: {fileID: 8877729115436875395}
   m_Layer: 0
   m_Name: SnowFlakeNerd
   m_TagString: Enemy
@@ -141,6 +142,7 @@ MonoBehaviour:
   stopDistance: 10
   health: 102
   healthBar: {fileID: 0}
+  givesKeyOnDeath: 1
   hasSlam: 1
   hasHandCannon: 1
   hasForceField: 1
@@ -148,10 +150,6 @@ MonoBehaviour:
   slamDamage: 3
   slamKnockback: 15
   slamCooldown: 5
-  slamJumpChance: 100
-  slamJumpForce: 10
-  impactSpeedFactor: 0.05
-  maxImpactScale: 3
   handCannonProjectile: {fileID: 3120353964073649286, guid: 5668d77c099bbe44c8d8e1f8fc66f1c4, type: 3}
   handCannonSpawn: {fileID: 7768813340850542208}
   handCannonProjectileSpeed: 12.7
@@ -159,14 +157,6 @@ MonoBehaviour:
   handCannonRecoil: 10
   forceFieldDuration: 5
   forceFieldCooldown: 10
-  usePerksAtRange: 1
-  perkRange: 20
-  forceFieldOnPerkChance: 0.15
-  forceFieldRadius: 3
-  slamSound: {fileID: 8300000, guid: 9f380a0881bf613449bd095b26c27dfa, type: 3}
-  handCannonSound: {fileID: 8300000, guid: 6e952b592ccf868429754409ca9abb06, type: 3}
-  forceFieldActivateSound: {fileID: 8300000, guid: e77e324095ae4de4c8659271c76fefe7, type: 3}
-  forceFieldDeactivateSound: {fileID: 8300000, guid: f69a75be1aa948a4eb9bfd5fe8c7d7d9, type: 3}
 --- !u!65 &1339188133579564174
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -188,6 +178,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.9623404, y: 7.2689323, z: 2.2244847}
   m_Center: {x: 0.41776845, y: 2.430521, z: -0.04436326}
+--- !u!114 &8877729115436875395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2544487143198925318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5685c32365828794cab631b5d52c4538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HasKey: 0
 --- !u!1001 &7811007822843215009
 PrefabInstance:
   m_ObjectHideFlags: 0
