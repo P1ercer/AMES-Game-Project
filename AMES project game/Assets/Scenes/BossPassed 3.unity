@@ -172,8 +172,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6198764858609608652, guid: af35aefedb6f3904d921d480b199ad47, type: 3}
+      propertyPath: requireKey
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198764858609608652, guid: af35aefedb6f3904d921d480b199ad47, type: 3}
       propertyPath: nextSceneName
       value: WinEnd
+      objectReference: {fileID: 0}
+    - target: {fileID: 6198764858609608652, guid: af35aefedb6f3904d921d480b199ad47, type: 3}
+      propertyPath: consumeKeyOnUse
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

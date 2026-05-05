@@ -6,11 +6,50 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/DeathScreen.unity
-    guid: 9c91ca3492b2bd84cafbb4d34af3e16e
-  - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: c9f44fe273c917240893f32a8ff8f88b
+  - enabled: 1
+    path: Assets/Scenes/Bosspassed 1.unity
+    guid: 38173b5cdc808ee4da31bcf23f80559f
+  - enabled: 1
+    path: Assets/Scenes/Bosspassed 2.unity
+    guid: 966735cd98d8b4e45be21d983ba70f06
+  - enabled: 1
+    path: Assets/Scenes/BossPassed 3.unity
+    guid: c4c4765ca5efa894695fbe9386427fe8
+  - enabled: 1
+    path: Assets/Scenes/bossroom.unity
+    guid: ff9973ef806155544b55d7d3bb4ceb90
+  - enabled: 1
+    path: Assets/Scenes/Bossroom 2.unity
+    guid: 024b80924d1045c4e95cabf83be3d489
+  - enabled: 1
+    path: Assets/Scenes/Bossroom 3.unity
+    guid: adcf481c3c4340546ac7efc5d9efcd14
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 86fefccba69ec43439b9f257d5c3f3bc
+  - enabled: 1
+    path: Assets/Scenes/Level 1.unity
+    guid: 10686134565b65347a11c8c7e500bd22
+  - enabled: 1
+    path: Assets/Scenes/Level 2.unity
+    guid: 16c905284e4d4c84898aba0085027f93
+  - enabled: 1
+    path: Assets/Scenes/Level 3.unity
+    guid: 1ecc95682fc46ca4896e58fa30512cbb
+  - enabled: 1
+    path: Assets/Scenes/LevelPassed1.unity
+    guid: f9bd985b42ec1524593c7c3b3df3d673
+  - enabled: 1
+    path: Assets/Scenes/LevelPassed2.unity
+    guid: 7927b4f3bffee434d8869aa52bac31cc
+  - enabled: 1
+    path: Assets/Scenes/LevelPassed3.unity
+    guid: 5a8979566cd257f419c6ac747ce47f5b
+  - enabled: 1
+    path: Assets/Scenes/WinEnd.unity
+    guid: 75bf0f122fb9f7342bf0d278155098b2
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9e7be553448fa2546aea5752021cbcf7, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
