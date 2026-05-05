@@ -27,6 +27,25 @@ public class EnemyController : MonoBehaviour
     public AudioClip deathSound;
     private AudioSource audioSource;
 
+    // Simple ambient SFX (lightweight)
+    [Header("Ambient SFX (simple)")]
+    [Tooltip("Clips that can be played at random intervals")]
+    public AudioClip[] ambientClips;
+    [Tooltip("Minimum interval between ambient clips (seconds)")]
+    public float sfxMinInterval = 8f;
+    [Tooltip("Maximum interval between ambient clips (seconds)")]
+    public float sfxMaxInterval = 18f;
+    [Tooltip("Min volume for ambient clips")]
+    [Range(0f, 1f)]
+    public float sfxMinVolume = 0.8f;
+    [Tooltip("Max volume for ambient clips")]
+    [Range(0f, 1f)]
+    public float sfxMaxVolume = 1f;
+    [Tooltip("Start ambient SFX automatically")]
+    public bool sfxPlayOnStart = true;
+
+    private Coroutine sfxCoroutine;
+
     // Movement
     private GameObject player;
     private NavMeshAgent agent;
@@ -67,6 +86,28 @@ public class EnemyController : MonoBehaviour
         {
             healthBar.fillAmount = health / maxHealth;
         }
+
+        // Start simple ambient SFX if requested
+        if (sfxPlayOnStart && ambientClips != null && ambientClips.Length > 0)
+        {
+            StartAmbientSfx();
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (sfxPlayOnStart && ambientClips != null && ambientClips.Length > 0 && sfxCoroutine == null)
+            StartAmbientSfx();
+    }
+
+    private void OnDisable()
+    {
+        StopAmbientSfx();
+    }
+
+    private void OnDestroy()
+    {
+        StopAmbientSfx();
     }
 
     protected virtual void Update()
@@ -154,6 +195,9 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
+            // stop ambient sfx before destruction
+            StopAmbientSfx();
+
             // play death sound at position so it continues even after object is destroyed
             if (deathSound != null)
             {
@@ -179,6 +223,47 @@ public class EnemyController : MonoBehaviour
             int dmg = pd != null ? pd.damage : 1;
             TakeDamage(dmg);
             Destroy(other.gameObject);
+        }
+    }
+
+    // --- Simple ambient SFX helpers ---
+
+    public void StartAmbientSfx()
+    {
+        if (sfxCoroutine != null) return;
+        sfxCoroutine = StartCoroutine(AmbientSfxLoop());
+    }
+
+    public void StopAmbientSfx()
+    {
+        if (sfxCoroutine != null)
+        {
+            StopCoroutine(sfxCoroutine);
+            sfxCoroutine = null;
+        }
+    }
+
+    private System.Collections.IEnumerator AmbientSfxLoop()
+    {
+        while (true)
+        {
+            float wait = Mathf.Max(0f, UnityEngine.Random.Range(sfxMinInterval, sfxMaxInterval));
+            yield return new WaitForSeconds(wait);
+
+            if (ambientClips == null || ambientClips.Length == 0) continue;
+
+            var clip = ambientClips[UnityEngine.Random.Range(0, ambientClips.Length)];
+            if (clip == null) continue;
+
+            float vol = Mathf.Clamp01(UnityEngine.Random.Range(sfxMinVolume, sfxMaxVolume));
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(clip, vol);
+            }
+            else
+            {
+                AudioSource.PlayClipAtPoint(clip, transform.position, vol);
+            }
         }
     }
 }
