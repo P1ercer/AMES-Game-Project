@@ -71,6 +71,9 @@ public class RaycastShoot : MonoBehaviour
             var enemy = hit.collider?.GetComponent<EnemyController>();
             if (enemy != null)
                 enemy.TakeDamage(damage);
+            var enemyBoss = hit.collider?.GetComponent<EnemyBoss>();
+            if (enemyBoss != null)
+                enemyBoss.TakeDamage(damage);
         }
         else
         {

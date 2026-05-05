@@ -142,8 +142,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5153432ba3fe7fd468c07b33a9a03b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  winSceneName: MainMenu
-  playerTag: Player
+  nextSceneName: Mainmenu
+  requireKey: 1
+  consumeKeyOnUse: 1
 --- !u!4 &3352540728809323471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 15128903285719229, guid: cad5086ed9b820c4fb3098666f2c70d4, type: 3}

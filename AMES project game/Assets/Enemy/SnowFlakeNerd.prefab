@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 6089922737805243250}
   - component: {fileID: 5973838927998749326}
   - component: {fileID: 1339188133579564174}
-  - component: {fileID: 8877729115436875395}
+  - component: {fileID: 3795923844876200353}
   m_Layer: 0
   m_Name: SnowFlakeNerd
   m_TagString: Enemy
@@ -136,8 +136,18 @@ MonoBehaviour:
   firePoint: {fileID: 5385756054286987296}
   fireRate: 3
   bulletSpeed: 19
-  shootSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  shootSound: {fileID: 8300000, guid: 996e3e67c6d059744981cb13057cd148, type: 3}
+  deathSound: {fileID: 8300000, guid: 44f1612c66513d3429ad7ca49bc30e9a, type: 3}
+  ambientClips:
+  - {fileID: 8300000, guid: 8687c7ae11b8679428fb73d7b6ae6714, type: 3}
+  - {fileID: 8300000, guid: e2f95df9d6f3b7d42a000c90ad3cc1ed, type: 3}
+  - {fileID: 8300000, guid: 263377ca4513cd44f983f67e336b971e, type: 3}
+  - {fileID: 8300000, guid: 7783038ce1f07864d9da721f5e58e616, type: 3}
+  sfxMinInterval: 3
+  sfxMaxInterval: 18
+  sfxMinVolume: 1
+  sfxMaxVolume: 1
+  sfxPlayOnStart: 1
   chaseDistance: 20
   stopDistance: 10
   health: 102
@@ -178,19 +188,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 7.9623404, y: 7.2689323, z: 2.2244847}
   m_Center: {x: 0.41776845, y: 2.430521, z: -0.04436326}
---- !u!114 &8877729115436875395
-MonoBehaviour:
+--- !u!82 &3795923844876200353
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2544487143198925318}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5685c32365828794cab631b5d52c4538, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HasKey: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 129
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &7811007822843215009
 PrefabInstance:
   m_ObjectHideFlags: 0
