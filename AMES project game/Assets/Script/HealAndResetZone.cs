@@ -13,7 +13,7 @@ namespace AmesGame
             PlayerController player = other.GetComponent<PlayerController>();
             if (player == null) return;
 
-            //  HEAL TO MAX 
+            // Heal to max
             player.Heal(player.MaxHealth);
             // Reset perks
             PerkController perkController = player.GetComponent<PerkController>();

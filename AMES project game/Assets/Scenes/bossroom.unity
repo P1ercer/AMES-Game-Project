@@ -285,6 +285,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4930713722583546330, guid: abe4023f640d9fc489c4b3b2c403816c, type: 3}
+      propertyPath: health
+      value: 33
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -503,7 +507,7 @@ PrefabInstance:
     - target: {fileID: 6930419211136170096, guid: 8b8bdceed736c2544a3fbe7563ee88a6, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 5820c9cbe18ec9d49b7766417ca0c347, type: 2}
+      objectReference: {fileID: 23800000, guid: 88fa2dd163491b943b498df89cd0bbd4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -646,6 +650,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[0].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[1].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[4].chosen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[10].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[13].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[19].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[1].activateClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e952b592ccf868429754409ca9abb06, type: 3}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[4].activateClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e77e324095ae4de4c8659271c76fefe7, type: 3}
     - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.47951126

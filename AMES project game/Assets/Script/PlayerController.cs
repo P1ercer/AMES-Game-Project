@@ -142,7 +142,7 @@ namespace AmesGame
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
 
-            // Initialize BG music (resource-based): create internal AudioSource and only play if no enemy is in fight range
+            // Initialize BG music
             if (BGMusicSource == null)
             {
                 AudioSource src = GetComponent<AudioSource>();

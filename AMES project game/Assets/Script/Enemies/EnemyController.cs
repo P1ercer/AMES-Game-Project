@@ -247,16 +247,15 @@ public class EnemyController : MonoBehaviour
             // stop ambient sfx before destruction
             StopAmbientSfx();
 
-            // play death sound at position so it continues even after object is destroyed
+            // play death sound
             if (deathSound != null)
             {
                 AudioSource.PlayClipAtPoint(deathSound, transform.position);
             }
 
-            // Fire perk-wide kill event BEFORE destroying
+
             OnEnemyKilled?.Invoke(gameObject);
 
-            // Fire local death event
             OnEnemyDied?.Invoke();
 
             Destroy(gameObject);
@@ -267,7 +266,7 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-            // Try to get damage from a ProjectileDamage component if present
+
             var pd = other.gameObject.GetComponent<ProjectileDamage>();
             int dmg = pd != null ? pd.damage : 1;
             TakeDamage(dmg);
@@ -275,7 +274,7 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // --- Simple ambient SFX helpers ---
+    // sound effects and stuff
 
     public void StartAmbientSfx()
     {
@@ -316,12 +315,10 @@ public class EnemyController : MonoBehaviour
         }
     }
 
-    // --- Shared fight music helpers ---
     private void StartSharedFightMusicIfNeeded()
     {
         if (fightMusicClip == null) return;
 
-        // increment refcount and pause player BG only when first enemy enters
         s_fightMusicRefCount++;
         if (s_fightMusicRefCount == 1)
             PlayerController.PauseBgMusic();
@@ -360,7 +357,6 @@ public class EnemyController : MonoBehaviour
                 s_fightMusicSource = null;
             }
 
-            // resume the player's BG music when no enemies remain in fight range
             PlayerController.ResumeBgMusic();
         }
     }

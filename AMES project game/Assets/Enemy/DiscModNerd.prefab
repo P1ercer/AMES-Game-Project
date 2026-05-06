@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 105574189068876138}
   m_Layer: 0
   m_Name: DiscModNerd
-  m_TagString: Enemy
+  m_TagString: enemyBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -75,14 +75,20 @@ MonoBehaviour:
   firePoint: {fileID: 5697289722183319135}
   fireRate: 5
   bulletSpeed: 19
-  shootSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  ambientClips: []
-  sfxMinInterval: 8
+  shootSound: {fileID: 8300000, guid: 996e3e67c6d059744981cb13057cd148, type: 3}
+  deathSound: {fileID: 8300000, guid: 44f1612c66513d3429ad7ca49bc30e9a, type: 3}
+  ambientClips:
+  - {fileID: 8300000, guid: e2f95df9d6f3b7d42a000c90ad3cc1ed, type: 3}
+  - {fileID: 8300000, guid: 263377ca4513cd44f983f67e336b971e, type: 3}
+  - {fileID: 8300000, guid: 0bc3c388c82fb454192cdf65fa4c658f, type: 3}
+  - {fileID: 8300000, guid: efdf170cee0d3994d863086c00711b86, type: 3}
+  sfxMinInterval: 5
   sfxMaxInterval: 18
-  sfxMinVolume: 0.8
+  sfxMinVolume: 1
   sfxMaxVolume: 1
   sfxPlayOnStart: 1
+  fightMusicClip: {fileID: 0}
+  fightMusicDistance: 20
   chaseDistance: 20
   stopDistance: 10
   health: 51

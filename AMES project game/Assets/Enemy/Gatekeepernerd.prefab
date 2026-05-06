@@ -83,19 +83,25 @@ MonoBehaviour:
   firePoint: {fileID: 8188611557655456178}
   fireRate: 4
   bulletSpeed: 15
-  shootSound: {fileID: 0}
-  deathSound: {fileID: 0}
-  ambientClips: []
-  sfxMinInterval: 8
+  shootSound: {fileID: 8300000, guid: 3bd6f33edacdf9648b0725d6211cb124, type: 3}
+  deathSound: {fileID: 8300000, guid: ef2d9c2276e30e34eb8d552a68deef09, type: 3}
+  ambientClips:
+  - {fileID: 8300000, guid: 7783038ce1f07864d9da721f5e58e616, type: 3}
+  - {fileID: 8300000, guid: e2f95df9d6f3b7d42a000c90ad3cc1ed, type: 3}
+  - {fileID: 8300000, guid: 263377ca4513cd44f983f67e336b971e, type: 3}
+  - {fileID: 8300000, guid: 06b752c2267960046977980b1cdd4038, type: 3}
+  sfxMinInterval: 4
   sfxMaxInterval: 18
   sfxMinVolume: 0.8
   sfxMaxVolume: 1
   sfxPlayOnStart: 1
+  fightMusicClip: {fileID: 0}
+  fightMusicDistance: 0
   chaseDistance: 17
   stopDistance: 9
   health: 30
   healthBar: {fileID: 0}
-  giveKeySound: {fileID: 0}
+  giveKeySound: {fileID: 8300000, guid: 27e23cbb5c7386a4ebe23cb3424e5d59, type: 3}
 --- !u!195 &7756289795251309231
 NavMeshAgent:
   m_ObjectHideFlags: 0

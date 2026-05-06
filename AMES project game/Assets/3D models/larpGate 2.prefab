@@ -63,31 +63,31 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 69.22
+      value: 322.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0
+      value: 0.019029839
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.1299973
+      value: 105.52
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -95,7 +95,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 92ed0548a93704d4ea58a3866c42e16c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -201,7 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requireKey: 1
-  openSound: {fileID: 0}
+  openSound: {fileID: 8300000, guid: e7c353e305ba9bb40b88bca60e34859a, type: 3}
   fadeDuration: 0.5
 --- !u!1 &8411287832716943140 stripped
 GameObject:
