@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using System;
+using AmesGame;
 
 public class EnemyController : MonoBehaviour
 {
@@ -46,6 +48,21 @@ public class EnemyController : MonoBehaviour
 
     private Coroutine sfxCoroutine;
 
+    // Fight music (shared)
+    [Header("Music")]
+    [Tooltip("Optional fight music clip played when player is within this distance")]
+    public AudioClip fightMusicClip;
+    [Tooltip("Distance at which fight music should start (0 = use chaseDistance)")]
+    public float fightMusicDistance = 0f;
+
+    // Shared fight-music audio source and refcount so only one source plays globally
+    private static AudioSource s_fightMusicSource;
+    private static int s_fightMusicRefCount = 0;
+    private bool _isInFightRange = false;
+
+    // Expose whether any enemy currently has the player in fight range
+    public static bool AnyEnemyInFightRange => s_fightMusicRefCount > 0;
+
     // Movement
     private GameObject player;
     private NavMeshAgent agent;
@@ -78,6 +95,9 @@ public class EnemyController : MonoBehaviour
             audioSource.playOnAwake = false;
         }
 
+        // Ensure ambient audio uses 2D playback by default so it is audible regardless of distance.
+        audioSource.spatialBlend = 0f;
+
         home = transform.position;
 
         // Health setup
@@ -92,6 +112,10 @@ public class EnemyController : MonoBehaviour
         {
             StartAmbientSfx();
         }
+
+        // default fight music distance
+        if (fightMusicDistance <= 0f)
+            fightMusicDistance = chaseDistance;
     }
 
     private void OnEnable()
@@ -102,11 +126,23 @@ public class EnemyController : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_isInFightRange)
+        {
+            _isInFightRange = false;
+            StopSharedFightMusicIfNeeded();
+        }
+
         StopAmbientSfx();
     }
 
     private void OnDestroy()
     {
+        if (_isInFightRange)
+        {
+            _isInFightRange = false;
+            StopSharedFightMusicIfNeeded();
+        }
+
         StopAmbientSfx();
     }
 
@@ -115,6 +151,19 @@ public class EnemyController : MonoBehaviour
         if (player == null || agent == null) return;
 
         float distance = Vector3.Distance(transform.position, player.transform.position);
+
+        // fight music handling (per-enemy detection, shared audio)
+        bool nowInRange = distance < Mathf.Max(0.0001f, fightMusicDistance);
+        if (nowInRange && !_isInFightRange)
+        {
+            _isInFightRange = true;
+            StartSharedFightMusicIfNeeded();
+        }
+        else if (!nowInRange && _isInFightRange)
+        {
+            _isInFightRange = false;
+            StopSharedFightMusicIfNeeded();
+        }
 
         if (distance < chaseDistance)
         {
@@ -264,6 +313,55 @@ public class EnemyController : MonoBehaviour
             {
                 AudioSource.PlayClipAtPoint(clip, transform.position, vol);
             }
+        }
+    }
+
+    // --- Shared fight music helpers ---
+    private void StartSharedFightMusicIfNeeded()
+    {
+        if (fightMusicClip == null) return;
+
+        // increment refcount and pause player BG only when first enemy enters
+        s_fightMusicRefCount++;
+        if (s_fightMusicRefCount == 1)
+            PlayerController.PauseBgMusic();
+
+        if (s_fightMusicSource == null)
+        {
+            GameObject go = new GameObject("FightMusicSource");
+            DontDestroyOnLoad(go);
+            s_fightMusicSource = go.AddComponent<AudioSource>();
+            s_fightMusicSource.loop = true;
+            s_fightMusicSource.playOnAwake = false;
+            s_fightMusicSource.clip = fightMusicClip;
+            s_fightMusicSource.spatialBlend = 0f;
+            s_fightMusicSource.volume = 1f;
+            s_fightMusicSource.ignoreListenerPause = true;
+        }
+
+        if (s_fightMusicSource.clip == null)
+            s_fightMusicSource.clip = fightMusicClip;
+
+        if (!s_fightMusicSource.isPlaying)
+            s_fightMusicSource.Play();
+    }
+
+    private void StopSharedFightMusicIfNeeded()
+    {   
+        if (s_fightMusicRefCount <= 0) return;
+
+        s_fightMusicRefCount = Mathf.Max(0, s_fightMusicRefCount - 1);
+        if (s_fightMusicRefCount == 0)
+        {
+            if (s_fightMusicSource != null)
+            {
+                s_fightMusicSource.Stop();
+                Destroy(s_fightMusicSource.gameObject);
+                s_fightMusicSource = null;
+            }
+
+            // resume the player's BG music when no enemies remain in fight range
+            PlayerController.ResumeBgMusic();
         }
     }
 }
