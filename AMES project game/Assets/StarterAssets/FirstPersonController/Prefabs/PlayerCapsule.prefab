@@ -31,6 +31,83 @@ Transform:
   m_Children: []
   m_Father: {fileID: 8997996947095583982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4772014251095996684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1091268298621025289}
+  - component: {fileID: 5983439936359679071}
+  m_Layer: 0
+  m_Name: Bulletspawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1091268298621025289
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772014251095996684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.25, y: 1.31, z: 2.4}
+  m_LocalScale: {x: 0.0823785, y: 0.0823785, z: 0.0823785}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 198186345902473516}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &5983439936359679071
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4772014251095996684}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &5393215578589016642
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +210,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -141,37 +218,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &6677990709317936587
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2813700173029841776}
-  m_Layer: 0
-  m_Name: BulletSpawn
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2813700173029841776
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6677990709317936587}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.03, y: 0.31, z: 0.402}
-  m_LocalScale: {x: 1.3443425, y: 1.3443425, z: 4.0075393}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 198186345902473516}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8616685848737228372
 GameObject:
   m_ObjectHideFlags: 0
@@ -211,6 +257,7 @@ GameObject:
   - component: {fileID: 6897191217817052472}
   - component: {fileID: 6253754220497477460}
   - component: {fileID: 826724922179452317}
+  - component: {fileID: 7239935555707170067}
   m_Layer: 8
   m_Name: PlayerCapsule
   m_TagString: Player
@@ -373,14 +420,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shootAction: {fileID: -6407636032385626233, guid: 8fa0da0a614921849bf2b1bc739baa96, type: 3}
   projectileShoot: 1
-  prefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
-  spawnPosition: {fileID: 2813700173029841776}
+  prefab: {fileID: 3120353964073649286, guid: 6e510003814806b4b899c8564674565d, type: 3}
+  spawnPosition: {fileID: 1091268298621025289}
   shootSpeed: 5
   bulletLifetime: 10
   shotCooldown: 0.3
-  damage: 5
+  damage: 3
   canShoot: 1
-  bulletSpeedMultiplier: 2
+  bulletSpeedMultiplier: 7
 --- !u!114 &5993849807399994567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,7 +462,9 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   bulletDamage: 10
   isImmune: 0
+  deathScreen: {fileID: 0}
   _verticalVelocity: 0
+  bgMusicClip: {fileID: 0}
 --- !u!114 &343816163321300600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -466,128 +515,171 @@ MonoBehaviour:
     chosen: 0
     weight: 15
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: f69a75be1aa948a4eb9bfd5fe8c7d7d9, type: 3}
+    clipVolume: 1
   - perk: {fileID: 3088967800093855351}
     mode: 0
     activationKey: 1
-    chosen: 1
+    chosen: 0
     weight: 2.5
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: 6e952b592ccf868429754409ca9abb06, type: 3}
+    clipVolume: 1
   - perk: {fileID: 8890715998229267294}
     mode: 0
     activationKey: 0
     chosen: 0
     weight: 25
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: 996e3e67c6d059744981cb13057cd148, type: 3}
+    clipVolume: 1
   - perk: {fileID: 3431051184357736916}
     mode: 0
     activationKey: 0
     chosen: 0
     weight: 5
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: 9f380a0881bf613449bd095b26c27dfa, type: 3}
+    clipVolume: 1
   - perk: {fileID: 318910216328259246}
     mode: 0
     activationKey: 1
     chosen: 0
     weight: 10
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: e77e324095ae4de4c8659271c76fefe7, type: 3}
+    clipVolume: 1
   - perk: {fileID: 5044748645915417003}
     mode: 0
     activationKey: 2
     chosen: 0
     weight: 15
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: 27e23cbb5c7386a4ebe23cb3424e5d59, type: 3}
+    clipVolume: 1
   - perk: {fileID: 8459480160129199587}
     mode: 0
     activationKey: 0
     chosen: 0
     weight: 5
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: e7c353e305ba9bb40b88bca60e34859a, type: 3}
+    clipVolume: 1
   - perk: {fileID: 8308199975299357363}
     mode: 0
     activationKey: 1
     chosen: 0
     weight: 20
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: e7c353e305ba9bb40b88bca60e34859a, type: 3}
+    clipVolume: 1
   - perk: {fileID: 1769258014363537002}
     mode: 0
     activationKey: 2
     chosen: 0
     weight: 15
     includeInRandom: 1
+    activateClip: {fileID: 8300000, guid: 6e952b592ccf868429754409ca9abb06, type: 3}
+    clipVolume: 1
   - perk: {fileID: 6457496004420881353}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 30
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 8011034820631674792}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 30
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 3148922913024111240}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 35
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 3389705206272370906}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 45
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 5434958352530736516}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 30
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 712959463097788356}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 30
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 2034943618386049878}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 30
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 6455196858527201254}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 0.5
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 857237484190834002}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 0.5
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 4775559684780266924}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 2.5
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 6253754220497477460}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 2.5
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   - perk: {fileID: 6897191217817052472}
     mode: 1
     activationKey: 2
     chosen: 0
     weight: 2.5
     includeInRandom: 1
+    activateClip: {fileID: 0}
+    clipVolume: 1
   maxActivePerks: 3
   maxPassivePerks: 4
+  activePerkActivateSound: {fileID: 8300000, guid: 5b35adc75983ae84890e0545fb23cadf, type: 3}
 --- !u!114 &318910216328259246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -603,7 +695,7 @@ MonoBehaviour:
   perkName: Force Shield
   description: Summon a forcefield around you that blocks all damage towards you
     for a bit, activated via the CTRL Key
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: aef944c52f7c609459eeb6e8b3ddd22b, type: 3}
   duration: 15
   cooldown: 30
   forcefieldVfx: {fileID: 0}
@@ -621,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Higher Caliber Bullets
   description: Doubles your damage for a while. activated by the Q key
-  icon: {fileID: 0}
+  icon: {fileID: 458023206, guid: 72334ab4d64249245b378dd2ce9a9461, type: 3}
   duration: 20
   cooldown: 30
 --- !u!114 &3431051184357736916
@@ -639,7 +731,7 @@ MonoBehaviour:
   perkName: Slam Dunk
   description: Slam unto your enemies, dealing high damage to all enemies within
     range. activated by the SHIFT key
-  icon: {fileID: 0}
+  icon: {fileID: -506701460, guid: 2e45cbb42adc9f4438c4ebe4ba5b11c7, type: 3}
   damage: 15
   radius: 5
   cooldown: 8
@@ -664,7 +756,7 @@ MonoBehaviour:
   perkName: Grappler
   description: Grapple onto an enemy and pull them towards you. activated by the
     SHIFT key
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 649ca8f1de7349e42b2538b9ac02cd65, type: 3}
   range: 20
   pullDuration: 1.5
   pullSpeed: 45
@@ -685,8 +777,8 @@ MonoBehaviour:
   description: Shoot a single powerful bullet at an enemy, bound to instantly kill
     any weak enemy. activated by the CTRL key
   icon: {fileID: 21300000, guid: 999e9ba8760052044b9dfebb2dd0e032, type: 3}
-  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
-  spawnPoint: {fileID: 2813700173029841776}
+  projectilePrefab: {fileID: 3120353964073649286, guid: 6e510003814806b4b899c8564674565d, type: 3}
+  spawnPoint: {fileID: 1091268298621025289}
   projectileSpeed: 20
   projectileLifetime: 5
   damage: 25
@@ -710,12 +802,12 @@ MonoBehaviour:
     in its range, does extra damage with a direct hit to an enemy. activated by the
     SHIFT key
   icon: {fileID: 21300000, guid: cca16e2fcf8f5b84a804931c93a04287, type: 3}
-  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
-  spawnPoint: {fileID: 2813700173029841776}
+  projectilePrefab: {fileID: 3120353964073649286, guid: 6e510003814806b4b899c8564674565d, type: 3}
+  spawnPoint: {fileID: 1091268298621025289}
   projectileSpeed: 25
   projectileLifetime: 10
-  explosionRadius: 6
-  explosionDamage: 1
+  explosionRadius: 12
+  explosionDamage: 15
   explosionVfx: {fileID: 0}
   cooldown: 3
 --- !u!114 &8308199975299357363
@@ -734,8 +826,8 @@ MonoBehaviour:
   description: Shoot a Fireball at an enemy of which it deals damage over time to
     that enemy activated by the CTRL key
   icon: {fileID: 21300000, guid: d42985fc7f999134680f6aca3459976b, type: 3}
-  projectilePrefab: {fileID: 6196129155192697868, guid: ca83db8b778a3274687534e3953975fc, type: 3}
-  spawnPoint: {fileID: 2813700173029841776}
+  projectilePrefab: {fileID: 5453440855263512590, guid: 90a348a46d9b2974ba7e3d67045a6e5b, type: 3}
+  spawnPoint: {fileID: 1091268298621025289}
   projectileSpeed: 18
   projectileLifetime: 6
   dotDamagePerTick: 1
@@ -756,7 +848,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Need for Speed
   description: Boosts movement speed for a while. activated by the Q key
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: b1e7a3564e2c2ee4792a1d807a3329f5, type: 3}
   speedMultiplier: 3
   duration: 5
   cooldown: 10
@@ -774,7 +866,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Loose Trigger finger
   description: Boosts your firerate for a while. activated by the Q key.
-  icon: {fileID: 0}
+  icon: {fileID: 361897563, guid: 53b1176c13d199a4898885f7442de14f, type: 3}
   fireSpeedMultiplier: 4
   duration: 7
   cooldown: 12
@@ -793,7 +885,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Tiny
   description: Raises your movement speed but decreases your health
-  icon: {fileID: 21300000, guid: 6234d5c54474b6242b4028b8a55a05b7, type: 3}
+  icon: {fileID: 21300000, guid: 43f5d8c9cf0dff443a5368bc3751e525, type: 3}
   speedMultiplier: 1.3
   healthMultiplier: 0.7
 --- !u!114 &8011034820631674792
@@ -827,7 +919,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: The Flash
   description: boosts your movement speed but decreases your firerate
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 77cc75563463dde40995184bbaac1260, type: 3}
   speedMultiplier: 1.6
   fireRateMultiplier: 1.5
 --- !u!114 &3389705206272370906
@@ -859,9 +951,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b4af749aa0b51f49910c166b0185f2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkName: Mario
+  perkName: The jumper
   description: Increases jump height but increases your weight (faster falling)
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 189c684766627bb4b8ddd2d475efa4ae, type: 3}
   jumpMultiplier: 1.5
   gravityMultiplier: 1.4
 --- !u!114 &712959463097788356
@@ -876,10 +968,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d05a630e6ae2c7c40a3e30d9ad77383a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perkName: Luigi
+  perkName: The cooler Jumper
   description: Increases jump height and decreases weight (floatier falling) but
     decreases your Max health and Damage. increases your jump cooldown
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4af2c0a447862504d855d032223c43a6, type: 3}
   jumpMultiplier: 1.5
   gravityMultiplier: 0.6
   healthMultiplier: 0.75
@@ -900,7 +992,7 @@ MonoBehaviour:
   perkName: Heavy hitting
   description: Boosts your bullet damage but decreases your movement speed and rate
     of fire
-  icon: {fileID: 21300000, guid: 851892a4d4b212847bfd8ef14d9ff34f, type: 3}
+  icon: {fileID: 21300000, guid: 5abbde2140a1dc142a5e43ffa06ba216, type: 3}
   damageMultiplier: 1.8
   speedMultiplier: 0.7
   fireRateMultiplier: 1.5
@@ -981,7 +1073,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   perkName: Going Nuclear
   description: Increases damage, might do a little back to you.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 732474a97a0628d4985f63c1998b7806, type: 3}
   damageMultiplier: 2
   radiusMultiplier: 1.75
   projectileSpeedMultiplier: 1.7
@@ -1001,7 +1093,7 @@ MonoBehaviour:
   perkName: GroundPound
   description: Increases your slam stats and adds DOT (damage over time) to you and
     the enemy.
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 6ae406ad7a2208e45b6e6f239a350d77, type: 3}
   damageMultiplier: 1.5
   radiusMultiplier: 1.25
   cooldownMultiplier: 0.8
@@ -1025,12 +1117,12 @@ MonoBehaviour:
   perkName: Hand Destroyer
   description: Increase your handcannon stats but it will do a little bit of damage
     back to you
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 2eb6cda4a65d8584ab0b4a6f1c597942, type: 3}
   cannonSpeedMultiplier: 1.5
   cannonDamageMultiplier: 1.5
   cannonCooldownMultiplier: 0.75
   reflectDamageToPlayer: 1
-  selfDamageAmount: 5
+  selfDamageAmount: 3
 --- !u!114 &826724922179452317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1136,103 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HasKey: 0
+--- !u!82 &7239935555707170067
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616685848737228372}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1001 &381293122004772551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1066,7 +1255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.602
+      value: 0.304
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1113,11 +1302,71 @@ PrefabInstance:
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2813700173029841776}
-    m_AddedComponents: []
+      addedObject: {fileID: 1091268298621025289}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2238677713323292255}
   m_SourcePrefab: {fileID: 100100000, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
 --- !u!4 &198186345902473516 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
   m_PrefabInstance: {fileID: 381293122004772551}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &687865206930004886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6d7e17e9bda52b746a84a6450997682d, type: 3}
+  m_PrefabInstance: {fileID: 381293122004772551}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &2238677713323292255
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 687865206930004886}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: 1}
+      - {x: -0.95105654, y: 0.30901697}
+      - {x: -0.5877852, y: -0.80901706}
+      - {x: 0.58778536, y: -0.80901694}
+      - {x: 0.9510565, y: 0.30901712}
+  m_UseDelaunayMesh: 0
