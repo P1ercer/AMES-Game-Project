@@ -2,7 +2,6 @@ using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.XR;
@@ -74,14 +73,9 @@ namespace AmesGame
         }
 
         // Apply a knockback impulse to the player.
-        // horizontalImpulse is in world units (meters per second) to add to the player's horizontal velocity.
-        // verticalImpulse is an upward velocity to set (will not reduce an existing larger upward velocity).
         public void ApplyKnockback(Vector3 horizontalImpulse, float verticalImpulse)
         {
-            // add horizontal impulse
             _horizontalVelocity += new Vector3(horizontalImpulse.x, 0f, horizontalImpulse.z);
-
-            // set vertical velocity to at least the requested upward impulse
             _verticalVelocity = Mathf.Max(_verticalVelocity, verticalImpulse);
         }
 
@@ -93,15 +87,12 @@ namespace AmesGame
         }
 
         private float _cinemachineTargetPitch;
-
         private float _speed;
         private float _rotationVelocity;
         public float _verticalVelocity;
         private float _terminalVelocity = 53.0f;
-
         private float _jumpTimeoutDelta;
         private float _fallTimeoutDelta;
-
         private Vector3 _horizontalVelocity;
 
 #if ENABLE_INPUT_SYSTEM
@@ -110,7 +101,6 @@ namespace AmesGame
         private CharacterController _controller;
         private AmesGameInputs _input;
         private GameObject _mainCamera;
-
         private const float _threshold = 0.01f;
 
         private bool IsCurrentDeviceMouse
@@ -140,7 +130,7 @@ namespace AmesGame
 #if ENABLE_INPUT_SYSTEM
             _playerInput = GetComponent<PlayerInput>();
 #else
-    Debug.LogError("Starter Assets package is missing dependencies.");
+            Debug.LogError("Starter Assets package is missing dependencies.");
 #endif
 
             _jumpTimeoutDelta = JumpTimeout;
@@ -151,6 +141,59 @@ namespace AmesGame
 
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            // Initialize BG music (resource-based): create internal AudioSource and only play if no enemy is in fight range
+            if (BGMusicSource == null)
+            {
+                AudioSource src = GetComponent<AudioSource>();
+                if (src == null) src = gameObject.AddComponent<AudioSource>();
+
+                src.loop = true;
+                src.playOnAwake = false;
+                src.spatialBlend = 0f; // 2D music
+
+                if (bgMusicClip != null)
+                {
+                    src.clip = bgMusicClip;
+                    // Only start player BG if no enemy currently in fight range
+                    if (!EnemyController.AnyEnemyInFightRange && !src.isPlaying)
+                        src.Play();
+                }
+
+                BGMusicSource = src;
+            }
+        }
+
+        // --- Background music control (resource on player) ---
+        [Header("Audio")]
+        [Tooltip("Optional audio clip used for player background music. Assign an AudioClip (resource).")]
+        public AudioClip bgMusicClip;
+
+        // Static reference to the player's internal bg music AudioSource so enemies can pause/resume it.
+        public static AudioSource BGMusicSource { get; private set; }
+
+        // Pause the player's BG music (called by Enemy when fight music starts)
+        public static void PauseBgMusic()
+        {
+            if (BGMusicSource == null) return;
+            try
+            {
+                if (BGMusicSource.isPlaying) BGMusicSource.Pause();
+            }
+            catch { }
+        }
+
+        // Resume/unpause the player's BG music (called by Enemy when fight music ends)
+        public static void ResumeBgMusic()
+        {
+            if (BGMusicSource == null) return;
+            try
+            {
+                BGMusicSource.UnPause();
+                if (!BGMusicSource.isPlaying && BGMusicSource.clip != null)
+                    BGMusicSource.Play();
+            }
+            catch { }
         }
 
         private bool _wasJumpPressedLastFrame = false;
@@ -158,7 +201,6 @@ namespace AmesGame
         private void Update()
         {
             if (_isDead) return;
-            // detect jump press rising edge and notify subscribers before jump logic runs
             bool jumpState = _input != null && _input.jump;
             if (jumpState && !_wasJumpPressedLastFrame)
             {
@@ -174,7 +216,6 @@ namespace AmesGame
         private void LateUpdate()
         {
             if (_isDead) return;
-
             CameraRotation();
         }
 
@@ -204,13 +245,9 @@ namespace AmesGame
         private void Move()
         {
             float targetSpeed = MoveSpeed;
-
             if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
             float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
             float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
 
             float target = targetSpeed * inputMagnitude;
             float rate = (_input.move == Vector2.zero) ? DecelerationRate : AccelerationRate;
@@ -218,39 +255,24 @@ namespace AmesGame
             _speed = Mathf.MoveTowards(currentHorizontalSpeed, target, rate * Time.deltaTime);
             _speed = Mathf.Round(_speed * 1000f) / 1000f;
 
-
             Vector3 inputDirection = Vector3.zero;
-
             if (_input.move != Vector2.zero)
             {
                 inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
                 inputDirection.Normalize();
             }
 
-            // If there's input → push velocity toward target direction
             if (_input.move != Vector2.zero)
             {
                 Vector3 targetVelocity = inputDirection * _speed;
-
-                _horizontalVelocity = Vector3.MoveTowards(
-                    _horizontalVelocity,
-                    targetVelocity,
-                    AccelerationRate * Time.deltaTime
-                );
+                _horizontalVelocity = Vector3.MoveTowards(_horizontalVelocity, targetVelocity, AccelerationRate * Time.deltaTime);
             }
             else
             {
-                // No input → gradually slow down (this is your momentum carry)
-                _horizontalVelocity = Vector3.MoveTowards(
-                    _horizontalVelocity,
-                    Vector3.zero,
-                    DecelerationRate * Time.deltaTime
-                );
+                _horizontalVelocity = Vector3.MoveTowards(_horizontalVelocity, Vector3.zero, DecelerationRate * Time.deltaTime);
             }
 
-            // Move using stored velocity instead of input directly
-            _controller.Move(_horizontalVelocity * Time.deltaTime +
-                             new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            _controller.Move(_horizontalVelocity * Time.deltaTime + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
         }
 
         private void JumpAndGravity()
@@ -258,38 +280,23 @@ namespace AmesGame
             if (Grounded)
             {
                 _fallTimeoutDelta = FallTimeout;
-
-                if (_verticalVelocity < 0.0f)
-                {
-                    _verticalVelocity = -2f;
-                }
+                if (_verticalVelocity < 0.0f) _verticalVelocity = -2f;
 
                 if (_input.jump && _jumpTimeoutDelta <= 0.0f)
                 {
                     _verticalVelocity = Mathf.Sqrt(JumpHeight * -2f * Gravity);
                 }
 
-                if (_jumpTimeoutDelta >= 0.0f)
-                {
-                    _jumpTimeoutDelta -= Time.deltaTime;
-                }
+                if (_jumpTimeoutDelta >= 0.0f) _jumpTimeoutDelta -= Time.deltaTime;
             }
             else
             {
                 _jumpTimeoutDelta = JumpTimeout;
-
-                if (_fallTimeoutDelta >= 0.0f)
-                {
-                    _fallTimeoutDelta -= Time.deltaTime;
-                }
-
+                if (_fallTimeoutDelta >= 0.0f) _fallTimeoutDelta -= Time.deltaTime;
                 _input.jump = false;
             }
 
-            if (_verticalVelocity < _terminalVelocity)
-            {
-                _verticalVelocity += Gravity * Time.deltaTime;
-            }
+            if (_verticalVelocity < _terminalVelocity) _verticalVelocity += Gravity * Time.deltaTime;
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -305,7 +312,6 @@ namespace AmesGame
             Color transparentRed = new Color(1, 0, 0, 0.35f);
 
             Gizmos.color = Grounded ? transparentGreen : transparentRed;
-
             Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
         }
 
@@ -327,10 +333,7 @@ namespace AmesGame
 
             UpdateHealthUI();
 
-            if (CurrentHealth == 0)
-            {
-                Die();
-            }
+            if (CurrentHealth == 0) Die();
         }
 
         public void Heal(int amount)
@@ -345,33 +348,23 @@ namespace AmesGame
 
         private void UpdateHealthUI()
         {
-            if (healthBar != null)
-            {
-                healthBar.fillAmount = (float)CurrentHealth / MaxHealth;
-            }
+            if (healthBar != null) healthBar.fillAmount = (float)CurrentHealth / MaxHealth;
         }
 
         private void Die()
         {
             _isDead = true;
-
-            // Stop all motion so no sliding/drifting
             _horizontalVelocity = Vector3.zero;
             _verticalVelocity = 0f;
 
 #if ENABLE_INPUT_SYSTEM
-            if (_playerInput != null)
-            {
-                _playerInput.enabled = false;
-            }
+            if (_playerInput != null) _playerInput.enabled = false;
 #endif
 
-            // Unlock cursor for UI
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
             deathScreen.ShowDeathScreen();
         }
-
     }
 }

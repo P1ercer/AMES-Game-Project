@@ -251,7 +251,9 @@ PrefabInstance:
       value: Maze
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 65702495048144492, guid: 4649bd6c4a484c94f83c40ca4a6d0077, type: 3}
+    - {fileID: -8700617353114198275, guid: 4649bd6c4a484c94f83c40ca4a6d0077, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4649bd6c4a484c94f83c40ca4a6d0077, type: 3}
@@ -2119,6 +2121,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 937451010987979973, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
   m_PrefabInstance: {fileID: 2021814196}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &1730339880 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 3284283797436519387, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+  m_PrefabInstance: {fileID: 2021814196}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742919863
 GameObject:
   m_ObjectHideFlags: 0
@@ -2411,9 +2418,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bgMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90167e4857fec8347b1d7f6380ac7105, type: 3}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: deathScreen
       value: 
       objectReference: {fileID: 1885454938}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bgMusicSource
+      value: 
+      objectReference: {fileID: 1730339880}
+    - target: {fileID: 3284283797436519387, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3284283797436519387, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.5
@@ -3577,6 +3600,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: enemyBoss
       objectReference: {fileID: 0}
+    - target: {fileID: 3795923844876200353, guid: 16814a3462b2c504bbb9c2170c0dbfa8, type: 3}
+      propertyPath: m_PlayOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5973838927998749326, guid: 16814a3462b2c504bbb9c2170c0dbfa8, type: 3}
+      propertyPath: fightMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90167e4857fec8347b1d7f6380ac7105, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
