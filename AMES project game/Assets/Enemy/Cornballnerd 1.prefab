@@ -70,6 +70,7 @@ MonoBehaviour:
   stopDistance: 9
   health: 1
   healthBar: {fileID: 0}
+  attackDamage: 16
 --- !u!114 &471168362557122642
 MonoBehaviour:
   m_ObjectHideFlags: 0

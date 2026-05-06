@@ -154,6 +154,7 @@ MonoBehaviour:
   stopDistance: 10
   health: 102
   healthBar: {fileID: 0}
+  attackDamage: 25
   givesKeyOnDeath: 1
   hasSlam: 1
   hasHandCannon: 1

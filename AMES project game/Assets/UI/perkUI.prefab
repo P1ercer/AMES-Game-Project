@@ -1787,9 +1787,9 @@ MonoBehaviour:
     label: {fileID: 4621419506171193178}
     descriptionText: {fileID: 4118628544407066560}
     iconImage: {fileID: 3577139411833494351}
-  rollSound: {fileID: 0}
-  selectSound: {fileID: 0}
-  closeSound: {fileID: 0}
+  rollSound: {fileID: 8300000, guid: fb554a734b1946443874fd189cc8cc9f, type: 3}
+  selectSound: {fileID: 8300000, guid: ae0fbdcd54b611a40a7bb1a65196d6e9, type: 3}
+  closeSound: {fileID: 8300000, guid: 27e23cbb5c7386a4ebe23cb3424e5d59, type: 3}
 --- !u!1 &7137182500937486004
 GameObject:
   m_ObjectHideFlags: 0

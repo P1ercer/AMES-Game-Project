@@ -1,10 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 using System;
 using AmesGame;
-
 public class EnemyController : MonoBehaviour
 {
     // Global multiplier applied to incoming damage. Perks can modify this.
@@ -74,6 +72,36 @@ public class EnemyController : MonoBehaviour
     public float health = 3;
     public Image healthBar;
     protected float maxHealth;
+
+    // Attack / contact damage (editable per-enemy)
+    [Header("Combat")]
+    [Tooltip("Damage this enemy deals to the player (contact/attack)")]
+    public int attackDamage = 1;
+
+    /// <summary>
+    /// Set the attack/contact damage for this enemy at runtime.
+    /// </summary>
+    public void SetAttackDamage(int damage)
+    {
+        attackDamage = damage;
+    }
+
+    /// <summary>
+    /// Get the current attack/contact damage for this enemy.
+    /// </summary>
+    public int GetAttackDamage()
+    {
+        return attackDamage;
+    }
+
+    /// <summary>
+    /// Modify attack damage by a signed delta (can be negative).
+    /// </summary>
+    public void ModifyAttackDamage(int delta)
+    {
+        attackDamage += delta;
+        if (attackDamage < 0) attackDamage = 0;
+    }
 
     void Start()
     {
@@ -167,7 +195,6 @@ public class EnemyController : MonoBehaviour
 
         if (distance < chaseDistance)
         {
-            // If farther than stopDistance -> approach, otherwise stop moving but keep facing/shooting
             if (distance > stopDistance)
             {
                 agent.isStopped = false;
@@ -175,20 +202,13 @@ public class EnemyController : MonoBehaviour
             }
             else
             {
-                // Stop agent movement while remaining oriented toward player
                 agent.isStopped = true;
-
-                // snap velocity to zero to avoid sliding
                 if (agent.velocity.sqrMagnitude > 0f)
-                {
                     agent.velocity = Vector3.zero;
-                }
             }
 
-            // Face the player (optional if agent updates rotation)
             transform.LookAt(player.transform);
 
-            // Shooting
             if (Time.time >= nextFireTime)
             {
                 Shoot();
@@ -216,7 +236,6 @@ public class EnemyController : MonoBehaviour
             rb.linearVelocity = direction * bulletSpeed;
         }
 
-        // play shooting sound
         if (shootSound != null)
         {
             if (audioSource != null)
@@ -244,18 +263,14 @@ public class EnemyController : MonoBehaviour
 
         if (health <= 0)
         {
-            // stop ambient sfx before destruction
             StopAmbientSfx();
 
-            // play death sound
             if (deathSound != null)
             {
                 AudioSource.PlayClipAtPoint(deathSound, transform.position);
             }
 
-
             OnEnemyKilled?.Invoke(gameObject);
-
             OnEnemyDied?.Invoke();
 
             Destroy(gameObject);
@@ -266,15 +281,24 @@ public class EnemyController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PlayerBullet"))
         {
-
             var pd = other.gameObject.GetComponent<ProjectileDamage>();
             int dmg = pd != null ? pd.damage : 1;
             TakeDamage(dmg);
             Destroy(other.gameObject);
         }
+
+        // Optional: contact damage to player on collision — call player's TakeDamage using attackDamage
+        if (other.gameObject.CompareTag("Player"))
+        {
+            var playerController = other.gameObject.GetComponent<PlayerController>();
+            if (playerController != null)
+            {
+                playerController.TakeDamage(attackDamage);
+            }
+        }
     }
 
-    // sound effects and stuff
+    // --- Simple ambient SFX helpers ---
 
     public void StartAmbientSfx()
     {
@@ -300,6 +324,17 @@ public class EnemyController : MonoBehaviour
 
             if (ambientClips == null || ambientClips.Length == 0) continue;
 
+            // Ensure we have a player reference
+            if (player == null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player");
+                if (player == null) continue;
+            }
+
+            // Only play ambient SFX when the player is within the enemy's chase range
+            float distToPlayer = Vector3.Distance(transform.position, player.transform.position);
+            if (distToPlayer > chaseDistance) continue;
+
             var clip = ambientClips[UnityEngine.Random.Range(0, ambientClips.Length)];
             if (clip == null) continue;
 
@@ -315,10 +350,12 @@ public class EnemyController : MonoBehaviour
         }
     }
 
+    // --- Shared fight music helpers ---
     private void StartSharedFightMusicIfNeeded()
     {
         if (fightMusicClip == null) return;
 
+        // increment refcount and pause player BG only when first enemy enters
         s_fightMusicRefCount++;
         if (s_fightMusicRefCount == 1)
             PlayerController.PauseBgMusic();
@@ -344,7 +381,7 @@ public class EnemyController : MonoBehaviour
     }
 
     private void StopSharedFightMusicIfNeeded()
-    {   
+    {
         if (s_fightMusicRefCount <= 0) return;
 
         s_fightMusicRefCount = Mathf.Max(0, s_fightMusicRefCount - 1);
@@ -357,6 +394,7 @@ public class EnemyController : MonoBehaviour
                 s_fightMusicSource = null;
             }
 
+            // resume the player's BG music when no enemies remain in fight range
             PlayerController.ResumeBgMusic();
         }
     }

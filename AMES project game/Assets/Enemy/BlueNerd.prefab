@@ -69,6 +69,7 @@ MonoBehaviour:
   stopDistance: 6
   health: 12
   healthBar: {fileID: 0}
+  attackDamage: 10
 --- !u!195 &6898595929686759321
 NavMeshAgent:
   m_ObjectHideFlags: 0

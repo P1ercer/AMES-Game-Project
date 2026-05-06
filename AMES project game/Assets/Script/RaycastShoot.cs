@@ -28,6 +28,14 @@ public class RaycastShoot : MonoBehaviour
 
     public float bulletSpeedMultiplier = 1f;
 
+    // -- Shoot SFX --
+    [Header("Audio")]
+    [Tooltip("Optional one-shot shoot SFX played when firing")]
+    public AudioClip shootSfx;
+    [Range(0f, 1f)]
+    public float shootSfxVolume = 1f;
+    private AudioSource _audioSource;
+
     private void OnEnable()
     {
         shootAction.action.Enable();
@@ -36,6 +44,20 @@ public class RaycastShoot : MonoBehaviour
     private void OnDisable()
     {
         shootAction.action.Disable();
+    }
+
+    private void Start()
+    {
+        // prefer an existing AudioSource on the player object; otherwise add one
+        _audioSource = GetComponent<AudioSource>();
+        if (_audioSource == null)
+        {
+            _audioSource = gameObject.AddComponent<AudioSource>();
+            _audioSource.playOnAwake = false;
+        }
+
+        // play SFX as 2D by default so it's audible regardless of listener position
+        _audioSource.spatialBlend = 0f;
     }
 
     private void Update()
@@ -57,6 +79,15 @@ public class RaycastShoot : MonoBehaviour
 
     private void ShootOnce()
     {
+        if (shootSfx != null && _audioSource != null)
+        {
+            _audioSource.PlayOneShot(shootSfx, Mathf.Clamp01(shootSfxVolume));
+        }
+        else if (shootSfx != null)
+        {
+            AudioSource.PlayClipAtPoint(shootSfx, transform.position, Mathf.Clamp01(shootSfxVolume));
+        }
+
         RaycastHit hit;
 
         Vector2 screenPoint = Vector2.zero;

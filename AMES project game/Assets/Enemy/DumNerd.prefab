@@ -197,6 +197,7 @@ MonoBehaviour:
   stopDistance: 8
   health: 27
   healthBar: {fileID: 0}
+  attackDamage: 20
 --- !u!135 &7685825006675516261
 SphereCollider:
   m_ObjectHideFlags: 0

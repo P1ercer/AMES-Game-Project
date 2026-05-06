@@ -542,15 +542,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 422.05386
+      value: 12.76
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 10.301256
+      value: 1.515
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 692.0218
+      value: -10.42
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.w
@@ -669,9 +669,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 6556307555316582679}
     m_Modifications:
     - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: MaxHealth
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: healthBar
       value: 
       objectReference: {fileID: 3653962399901560629}
+    - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: bulletDamage
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5993849807399994567, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: CurrentHealth
+      value: 175
+      objectReference: {fileID: 0}
+    - target: {fileID: 7278673725361762578, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: shootSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 5b35adc75983ae84890e0545fb23cadf, type: 3}
     - target: {fileID: 8616685848737228372, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_Name
       value: PlayerCapsule

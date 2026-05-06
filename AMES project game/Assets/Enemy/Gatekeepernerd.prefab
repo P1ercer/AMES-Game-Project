@@ -101,6 +101,7 @@ MonoBehaviour:
   stopDistance: 9
   health: 30
   healthBar: {fileID: 0}
+  attackDamage: 15
   giveKeySound: {fileID: 8300000, guid: 27e23cbb5c7386a4ebe23cb3424e5d59, type: 3}
 --- !u!195 &7756289795251309231
 NavMeshAgent:
