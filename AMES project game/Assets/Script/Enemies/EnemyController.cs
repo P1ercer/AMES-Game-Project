@@ -13,6 +13,19 @@ public class EnemyController : MonoBehaviour
 
     public event Action OnEnemyDied;
 
+    // UI pause refcount: when > 0 enemies should stop moving/shooting
+    private static int s_uiPauseRefCount = 0;
+
+    public static void AddUiPause()
+    {
+        s_uiPauseRefCount++;
+    }
+
+    public static void RemoveUiPause()
+    {
+        s_uiPauseRefCount = Mathf.Max(0, s_uiPauseRefCount - 1);
+    }
+
     // Shooting
     public GameObject bulletPrefab;
     public Transform firePoint;
@@ -176,6 +189,18 @@ public class EnemyController : MonoBehaviour
 
     protected virtual void Update()
     {
+        // If any UI has requested a pause, stop movement and shooting logic here.
+        if (s_uiPauseRefCount > 0)
+        {
+            if (agent != null)
+            {
+                agent.isStopped = true;
+                if (agent.velocity.sqrMagnitude > 0f)
+                    agent.velocity = Vector3.zero;
+            }
+            return;
+        }
+
         if (player == null || agent == null) return;
 
         float distance = Vector3.Distance(transform.position, player.transform.position);

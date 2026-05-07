@@ -137,8 +137,8 @@ namespace AmesGame
             if (closeRollButton != null)
                 closeRollButton.gameObject.SetActive(true);
 
-            Time.timeScale = 0f;
-
+            // DO NOT pause game time here to keep UI input (clicks) working.
+            // Only disable player movement and look so the player can't move while choosing.
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
 
@@ -150,6 +150,9 @@ namespace AmesGame
 
             if (playerUI != null)
                 playerUI.SetCrosshairVisible(false);
+
+            // Pause enemy movement/shooting while chooser is open
+            EnemyController.AddUiPause();
 
             isChoosing = true;
         }
@@ -373,11 +376,7 @@ namespace AmesGame
             if (closeRollButton != null)
                 closeRollButton.gameObject.SetActive(false);
 
-            Time.timeScale = 1f;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
+            // restore player control without changing Time.timeScale
             if (playerShooter != null)
                 playerShooter.canShoot = true;
 
@@ -386,6 +385,12 @@ namespace AmesGame
 
             if (playerUI != null)
                 playerUI.SetCrosshairVisible(true);
+
+            // restore enemy movement/shooting
+            EnemyController.RemoveUiPause();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             isChoosing = false;
         }
@@ -421,11 +426,7 @@ namespace AmesGame
 
             gameObject.SetActive(false);
 
-            Time.timeScale = 1f;
-
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
-
+            // restore player control without changing Time.timeScale
             if (playerShooter != null)
                 playerShooter.canShoot = true;
 
@@ -434,6 +435,12 @@ namespace AmesGame
 
             if (playerUI != null)
                 playerUI.SetCrosshairVisible(true);
+
+            // restore enemy movement/shooting
+            EnemyController.RemoveUiPause();
+
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
 
             isChoosing = false;
         }

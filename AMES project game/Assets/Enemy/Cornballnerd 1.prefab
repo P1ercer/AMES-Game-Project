@@ -68,7 +68,7 @@ MonoBehaviour:
   fightMusicDistance: 0
   chaseDistance: 36
   stopDistance: 9
-  health: 1
+  health: 24
   healthBar: {fileID: 0}
   attackDamage: 16
 --- !u!114 &471168362557122642

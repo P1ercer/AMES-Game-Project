@@ -6,12 +6,6 @@ using TMPro;
 
 namespace AmesGame
 {
-    /// <summary>
-    /// Pause menu that pauses time, stops player rotation, shows resume/main menu,
-    /// and displays currently equipped perks (only those on the player).
-    /// Uses inspector-assigned preset slots for UI authoring (drag Image/TMP fields).
-    /// If a preset slot has no perk assigned, its image will be hidden.
-    /// </summary>
     public class PauseMenu : MonoBehaviour
     {
         [Header("UI")]
@@ -123,6 +117,9 @@ namespace AmesGame
             if (playerLook != null) playerLook.enabled = false;
             if (playerController != null) playerController.enabled = false;
 
+            // Pause enemy movement/shooting while pause menu is open
+            EnemyController.AddUiPause();
+
             PopulatePerkList();
         }
 
@@ -153,6 +150,9 @@ namespace AmesGame
             if (playerLook != null) playerLook.enabled = true;
             if (playerController != null) playerController.enabled = true;
 
+            // Restore enemy movement/shooting
+            EnemyController.RemoveUiPause();
+
             ClearPerkList();
         }
 
@@ -168,7 +168,7 @@ namespace AmesGame
                 Debug.LogWarning("PauseMenu: mainMenuSceneName not set.");
         }
 
-        private void PopulatePerkList()
+        public void PopulatePerkList()
         {
             // Only support preset authored slots now. If none provided, do nothing.
             if (presetSlots == null || presetSlots.Count == 0) return;
@@ -183,7 +183,8 @@ namespace AmesGame
 
                 if (perkController == null)
                 {
-                    perkController = FindObjectOfType<PerkController>();
+                    // Use the newer API to find a PerkController instance in the scene
+                    perkController = UnityEngine.Object.FindFirstObjectByType<PerkController>();
                 }
             }
 
