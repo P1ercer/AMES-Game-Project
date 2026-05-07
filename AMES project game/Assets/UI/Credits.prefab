@@ -396,6 +396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playSceneName: MainMenu
   creditsSceneName: 
+  playHowToPlay: 
 --- !u!1 &2951835740377166484
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +829,7 @@ RectTransform:
   m_GameObject: {fileID: 6416794804143563929}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 13.795462, y: 7.352654, z: 6.9039}
+  m_LocalScale: {x: 2.93, y: 2.585, z: 6.9039}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7072532299005274713}

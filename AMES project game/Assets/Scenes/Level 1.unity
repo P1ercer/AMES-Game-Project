@@ -827,11 +827,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.76001
+      value: 6.3599854
       objectReference: {fileID: 0}
     - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -116.150024
+      value: -116.099976
       objectReference: {fileID: 0}
     - target: {fileID: 3251401399517541646, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -839,11 +839,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.76001
+      value: 6.3599854
       objectReference: {fileID: 0}
     - target: {fileID: 5126527961139664760, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -116.150024
+      value: -116.099976
       objectReference: {fileID: 0}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -962,17 +962,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 597525305}
     - target: {fileID: 4336003766738375831, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
-      propertyPath: closeSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 27e23cbb5c7386a4ebe23cb3424e5d59, type: 3}
-    - target: {fileID: 4336003766738375831, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
       propertyPath: playerLook
       value: 
       objectReference: {fileID: 597525307}
-    - target: {fileID: 4336003766738375831, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
-      propertyPath: selectSound
-      value: 
-      objectReference: {fileID: 8300000, guid: ae0fbdcd54b611a40a7bb1a65196d6e9, type: 3}
     - target: {fileID: 4336003766738375831, guid: cd45ba6f12e5f0d4cbd5137a4daf1020, type: 3}
       propertyPath: playerShooter
       value: 
