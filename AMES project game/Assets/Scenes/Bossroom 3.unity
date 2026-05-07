@@ -334,6 +334,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+--- !u!114 &255295928 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8535543752754732694, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+  m_PrefabInstance: {fileID: 255295927}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fc11ace7c265d40a3733bddfbcb479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &332733451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -374,6 +385,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[5].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[6].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[7].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[16].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[17].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 938861694086209092, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: perkSlots.Array.data[18].chosen
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bgMusicClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 255295928}
     - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.47951126
@@ -548,6 +591,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowFlakeNerd
       objectReference: {fileID: 0}
+    - target: {fileID: 5973838927998749326, guid: 16814a3462b2c504bbb9c2170c0dbfa8, type: 3}
+      propertyPath: fightMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90167e4857fec8347b1d7f6380ac7105, type: 3}
     - target: {fileID: 7776871339199077194, guid: 16814a3462b2c504bbb9c2170c0dbfa8, type: 3}
       propertyPath: m_LocalScale.x
       value: 282.33777

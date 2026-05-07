@@ -277,6 +277,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+--- !u!114 &242949683 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8535543752754732694, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+  m_PrefabInstance: {fileID: 242949682}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fc11ace7c265d40a3733bddfbcb479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &547595716
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -686,6 +697,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bgMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 46ff3e50fc5313942845afdd5ca01e94, type: 3}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 242949683}
     - target: {fileID: 6556307555316582679, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 61.753483

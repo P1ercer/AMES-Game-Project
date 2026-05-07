@@ -229,6 +229,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 105574189068876138, guid: abe4023f640d9fc489c4b3b2c403816c, type: 3}
+      propertyPath: m_Resource
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 105574189068876138, guid: abe4023f640d9fc489c4b3b2c403816c, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1156438838508221117, guid: abe4023f640d9fc489c4b3b2c403816c, type: 3}
       propertyPath: m_Name
       value: DiscModNerd
@@ -289,6 +297,10 @@ PrefabInstance:
       propertyPath: health
       value: 33
       objectReference: {fileID: 0}
+    - target: {fileID: 4930713722583546330, guid: abe4023f640d9fc489c4b3b2c403816c, type: 3}
+      propertyPath: fightMusicClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90167e4857fec8347b1d7f6380ac7105, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -391,6 +403,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+--- !u!114 &604181472 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8535543752754732694, guid: e3e701f7437a0ab4b97e5c3837648394, type: 3}
+  m_PrefabInstance: {fileID: 604181471}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45fc11ace7c265d40a3733bddfbcb479, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &845367268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -698,6 +721,14 @@ PrefabInstance:
       propertyPath: perkSlots.Array.data[4].activateClip
       value: 
       objectReference: {fileID: 8300000, guid: e77e324095ae4de4c8659271c76fefe7, type: 3}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: bgMusicClip
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2518460598307802348, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
+      propertyPath: deathScreen
+      value: 
+      objectReference: {fileID: 604181472}
     - target: {fileID: 2862278905927072855, guid: 035bf1ba97d19214580cfe6f5a29fdc3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.47951126
