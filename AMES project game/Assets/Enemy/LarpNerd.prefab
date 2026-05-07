@@ -96,7 +96,7 @@ MonoBehaviour:
   sfxPlayOnStart: 1
   fightMusicClip: {fileID: 0}
   fightMusicDistance: 0
-  chaseDistance: 15
+  chaseDistance: 30
   stopDistance: 8
   health: 18
   healthBar: {fileID: 0}
