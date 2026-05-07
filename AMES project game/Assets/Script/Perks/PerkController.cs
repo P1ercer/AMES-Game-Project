@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace AmesGame
 {
@@ -25,6 +25,10 @@ namespace AmesGame
         public string description;
 
         public Sprite icon;
+
+        [Header("Cooldown")]
+        [Tooltip("Cooldown time in seconds after Activate is used (0 = no cooldown)")]
+        public float cooldown = 0f;
 
         public virtual void Activate() { }
 
@@ -62,6 +66,10 @@ namespace AmesGame
             public AudioClip activateClip;
             [Range(0f, 1f)]
             public float clipVolume = 1f;
+
+            // runtime cooldown remaining in seconds (0 = ready)
+            [HideInInspector]
+            public float cooldownRemaining = 0f;
         }
 
         public List<PerkSlot> perkSlots = new List<PerkSlot>();
@@ -107,15 +115,26 @@ namespace AmesGame
                 {
                     slot.perk.OnEquip();
                 }
+
+                // ensure cooldownRemaining initialized
+                slot.cooldownRemaining = 0f;
             }
         }
 
         private void Update()
         {
+            float dt = Time.deltaTime;
+
             foreach (var slot in perkSlots)
             {
                 if (slot == null || slot.perk == null || !slot.chosen)
                     continue;
+
+                // decrement cooldown timer (works for active and passive, but only used for active)
+                if (slot.cooldownRemaining > 0f)
+                {
+                    slot.cooldownRemaining = Mathf.Max(0f, slot.cooldownRemaining - dt);
+                }
 
                 if (slot.mode == PerkMode.Passive)
                 {
@@ -123,6 +142,10 @@ namespace AmesGame
                 }
                 else if (IsKeyPressed(slot.activationKey))
                 {
+                    // If slot has cooldown remaining, ignore activation
+                    if (slot.cooldownRemaining > 0f)
+                        continue;
+
                     // Play slot-specific activation clip if provided, otherwise use fallback
                     if (slot.activateClip != null)
                     {
@@ -141,6 +164,9 @@ namespace AmesGame
 
                     // invoke the active perk
                     slot.perk.Activate();
+
+                    // set cooldown based on perk's configured cooldown
+                    slot.cooldownRemaining = Mathf.Max(0f, slot.perk.cooldown);
                 }
             }
         }
@@ -251,6 +277,15 @@ namespace AmesGame
                     break;
                 }
             }
+        }
+
+        // Expose a safe accessor for UI to read cooldown remaining for a slot index.
+        public float GetCooldownRemainingForSlot(int slotIndex)
+        {
+            if (slotIndex < 0 || slotIndex >= perkSlots.Count) return 0f;
+            var s = perkSlots[slotIndex];
+            if (s == null || s.perk == null) return 0f;
+            return s.cooldownRemaining;
         }
     }
 }
