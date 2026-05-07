@@ -6,6 +6,8 @@ public class MainMenu : MonoBehaviour
     [Header("Scene Names")]
     [SerializeField] private string playSceneName;
     [SerializeField] private string creditsSceneName;
+    [SerializeField] private string playHowToPlay;
+
 
     // Play button
     public void PlayGame()
@@ -39,5 +41,16 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Quit Game");
 
         Application.Quit();
+    }
+    public void HowToPlay()
+    {
+        if (!string.IsNullOrEmpty(playHowToPlay))
+        {
+            SceneManager.LoadScene(playHowToPlay);
+        }
+        else
+        {
+            Debug.LogWarning("How To Play scene not assigned!");
+        }
     }
 }
